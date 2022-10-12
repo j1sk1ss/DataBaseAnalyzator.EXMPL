@@ -3,7 +3,6 @@ using System.Windows;
 using Microsoft.Win32;
 using OfficeOpenXml;
 using Path = System.IO.Path;
-
 namespace FRAUD_UI_ANALIZATOR
 {
     public partial class MainWindow

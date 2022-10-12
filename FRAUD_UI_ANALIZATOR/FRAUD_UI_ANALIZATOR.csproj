@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <PackageReference Include="EPPlus" Version="6.0.8" />
+      <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.2-beta2" />
     </ItemGroup>
 

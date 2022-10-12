@@ -3,20 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FRAUD_UI_ANALIZATOR"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="Fraud Validator" Height="450" Width="800">
+        Title="Fraud Validator" Height="450" Width="800"
+        ResizeMode="NoResize">
     <Grid>
         <StackPanel Margin="0,20,0,0">
             <Label x:Name="PathLabel"> Путь: </Label>
             <Button x:Name="JsonLoadButton" Height="20px" Width="700px" Margin="0,-22,10,10" Cursor="Hand" 
                Click="LoadJson"
             ></Button>
-            <Button x:Name="PatternGetting" Height="20px" Width="100px" Margin="-670,365,10,10" Cursor="Hand"
+            <Button x:Name="PatternGetting" Height="20px" Width="100px" Margin="-655,300,10,10" Cursor="Hand"
                     Click="PatternGet">
                 Применить
             </Button>
-            <StackPanel Margin="0,-350,0,0">
+            <StackPanel Margin="20,-300,0,0">
                 <CheckBox x:Name="TP" Margin="0,0,0,0"> Add time pattern</CheckBox>
                 <CheckBox x:Name="SAP" Margin="0,5,0,0"> Add time pattern</CheckBox>
             </StackPanel>
