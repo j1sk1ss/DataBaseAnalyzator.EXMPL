@@ -6,4 +6,9 @@
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="EPPlus" Version="6.0.8" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.2-beta2" />
+    </ItemGroup>
+
 </Project>
