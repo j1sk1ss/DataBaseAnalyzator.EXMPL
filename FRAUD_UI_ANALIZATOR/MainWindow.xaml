@@ -7,10 +7,7 @@
         Title="Fraud Validator" Height="450" Width="800"
         ResizeMode="NoResize">
         <StackPanel Margin="0,20,0,0">
-            <Label x:Name="PathLabel"> Путь: </Label>
-            <Button x:Name="JsonLoadButton" Height="20px" Width="700px" Margin="0,-22,10,10" Cursor="Hand" 
-               Click="LoadJson"
-            ></Button>
+            <Label x:Name="PathLabel" FontSize="20"> Исходные данные: </Label> 
             <StackPanel x:Name="PatternGetterButton">
                 <Image x:Name="GetPatternsButton" MouseDown="PatternGet" Cursor="Hand" Source="/IMG/Web-Blue-Button-PNG-Photos.png" Width="100" Margin="-650,300,0 ,0">
                 </Image>
@@ -20,9 +17,9 @@
                 <StackPanel x:Name="PatternTemplate">
                     <CheckBox x:Name="Tp" Margin="0,0,0,0"> Add time pattern</CheckBox>
                     <Image x:Name = "PatternImage1" Source="/IMG/I-Letter-PNG-File.png"  Width="30" Height="25" Margin="-520,-20,0,0" ToolTip="Паттерн 1">
-                    </Image>
+                    </Image><TextBox x:Name="TPP1" Height="20" Width="60" Margin="0,-25,0,0"></TextBox>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-
+        
 </Window>
