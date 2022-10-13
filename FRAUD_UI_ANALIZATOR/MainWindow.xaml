@@ -4,22 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Fraud Validator" Height="450" Width="800"
+        Title="Fraud Validator" Height="944" Width="1240"
         ResizeMode="NoResize">
-        <StackPanel Margin="0,20,0,0">
-            <Label x:Name="PathLabel" FontSize="20"> Исходные данные: </Label> 
-            <StackPanel x:Name="PatternGetterButton">
-                <Image x:Name="GetPatternsButton" MouseDown="PatternGet" Cursor="Hand" Source="/IMG/Web-Blue-Button-PNG-Photos.png" Width="100" Margin="-650,300,0 ,0">
-                </Image>
-                <Label Margin="48,-37,0,0"> Test </Label>
-            </StackPanel>
-            <StackPanel x:Name = "PatternsList" Margin="20,-300,0,0">
-                <StackPanel x:Name="PatternTemplate">
-                    <CheckBox x:Name="Tp" Margin="0,0,0,0"> Add time pattern</CheckBox>
-                    <Image x:Name = "PatternImage1" Source="/IMG/I-Letter-PNG-File.png"  Width="30" Height="25" Margin="-520,-20,0,0" ToolTip="Паттерн 1">
-                    </Image><TextBox x:Name="TPP1" Height="20" Width="60" Margin="0,-25,0,0"></TextBox>
-                </StackPanel>
-            </StackPanel>
-        </StackPanel>
-        
+    <Grid Margin="0,20,0,0">
+        <Image Height="80" Source="/IMG/gray_bg.png" Stretch="Fill" Width="1188" Margin="26,10,26,818"/>
+        <Label x:Name="PathLabel" FontSize="20" Content="Исходные данные:" Margin="967,858,79,10"/>
+        <Image x:Name="GetPatternsButton" MouseDown="PatternGet" Cursor="Hand" Source="/IMG/review_button.png" Width="100" Margin="862,431,278,-431"/>
+        <Label Margin="190,267,967,613" Content="Test"/>
+        <CheckBox x:Name="Tp" Margin="245,140,868,750" Content="Add time pattern"/>
+        <Image x:Name = "PatternImage1000" Source="/IMG/info_logo.png"  Width="30" Height="25" Margin="373,140,837,743" ToolTip="Паттерн 1"/>
+        <TextBox x:Name="TPP1" Margin="308,267,384,593"/>
+        <Image x:Name = "PatternImage1" Margin="41,26,885,834" Source="/IMG/data_text.png" Stretch="Fill"/>
+                <Image x:Name = "PatternImage2" Margin="388,21,268,829" Source="/IMG/path_pic.png" Stretch="Fill"/>
+                <Image x:Name = "PatternImage3" Margin="990,21,44,831" Source="/IMG/review_button.png" Stretch="Fill"/>
+                <Image x:Name = "PatternImage4" Margin="41,794,931,33" Source="/IMG/search_button.png" Stretch="Fill"/>
+                <Image x:Name = "PatternImage5" Margin="44,95,868,780" Source="/IMG/choosepatterns_text.png" Stretch="Fill"/>
+                <Image x:Name = "PatternImage6" Margin="41,140,869,709" Source="/IMG/pattern_button.png" Stretch="Fill"/>
+                <Image x:Name = "PatternImage7" Margin="41,209,869,640" Source="/IMG/pattern_button.png" Stretch="Fill"/>
+                <Image x:Name = "PatternImage8" Margin="41,278,869,569" Source="/IMG/pattern_button.png" Stretch="Fill"/>
+        <Image x:Name = "PatternImage9" Margin="41,352,869,495" Source="/IMG/pattern_button.png" Stretch="Fill"/>
+    </Grid>
+
 </Window>

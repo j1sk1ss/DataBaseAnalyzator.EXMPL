@@ -13,11 +13,20 @@
     </ItemGroup>
 
     <ItemGroup>
+      <None Remove="IMG\gray_bg.png" />
       <None Remove="IMG\I-Letter-PNG-File.png" />
+      <None Remove="IMG\info_logo.png" />
+      <None Remove="IMG\pattern_button.png" />
+      <Resource Include="IMG\gray_bg.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
       <Resource Include="IMG\I-Letter-PNG-File.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <None Remove="IMG\Web-Blue-Button-PNG-Photos.png" />
+      <Resource Include="IMG\pattern_button.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
       <Resource Include="IMG\Web-Blue-Button-PNG-Photos.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
@@ -28,6 +37,10 @@
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
       </ApplicationDefinition>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="IMG\info_logo.png" />
     </ItemGroup>
 
 </Project>

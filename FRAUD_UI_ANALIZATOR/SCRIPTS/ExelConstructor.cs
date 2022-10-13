@@ -26,7 +26,7 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
             }
             var infoSheet = excelPackage.Workbook.Worksheets.Add("Фрод паттерны");
             infoSheet.Cells[1, 1].Value = "Выявленные фрод паттерны";
-            infoSheet.Cells[2, 1].Value = "№ паттерна";
+            infoSheet.Cells[2, 1].Value = "№ паттерна"; 
             infoSheet.Cells[2, 3].Value = "Описание";
             infoSheet.Cells["A1:D1"].Merge = true;
             for (var j = 2; j < countOfPatterns + 3; j++)
