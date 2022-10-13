@@ -61,7 +61,7 @@ namespace FRAUD_UI_ANALIZATOR
 
         private void PatternInit(ICollection<string> lst)
         {
-            if (Tp.IsChecked == true) lst.Add(PatternGetter.GetTimePattern(_transactionsData, _jsonParser.KeyList, 6, 1));
+            //if (Tp.IsChecked == true) lst.Add(PatternGetter.GetTimePattern(_transactionsData, _jsonParser.KeyList, 6, 1));
         }
     }
 }

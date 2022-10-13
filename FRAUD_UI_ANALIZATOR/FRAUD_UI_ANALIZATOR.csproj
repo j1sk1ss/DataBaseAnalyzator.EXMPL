@@ -30,6 +30,18 @@
       <Resource Include="IMG\Web-Blue-Button-PNG-Photos.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
+      <None Remove="IMG\path_pic.png" />
+      <Resource Include="IMG\path_pic.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\review_button.png" />
+      <Resource Include="IMG\review_button.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\search_button.png" />
+      <Resource Include="IMG\search_button.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
     <ItemGroup>
@@ -40,7 +52,20 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Resource Include="IMG\info_logo.png" />
+      <Resource Include="IMG\info_logo.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="IMG\choosepatterns_text.png" />
+      <Resource Include="IMG\choosepatterns_text.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\data_text.png" />
+      <Resource Include="IMG\data_text.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
 </Project>
