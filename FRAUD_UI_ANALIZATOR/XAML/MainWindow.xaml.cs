@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using FRAUD_UI_ANALIZATOR.SCRIPTS;
 using Microsoft.Win32;
 using OfficeOpenXml;
 using Path = System.IO.Path;
-namespace FRAUD_UI_ANALIZATOR
+namespace FRAUD_UI_ANALIZATOR.XAML
 {
     public partial class MainWindow
     {

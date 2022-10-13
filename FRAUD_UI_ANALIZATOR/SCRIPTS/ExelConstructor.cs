@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using OfficeOpenXml;
 
-namespace FRAUD_UI_ANALIZATOR
+namespace FRAUD_UI_ANALIZATOR.SCRIPTS
 {
-    public class ExelConstructor
+    public static class ExelConstructor
     {
         public static List<string> InitList(Dictionary<string, TransactiondData> data, List<string> keys)
         {

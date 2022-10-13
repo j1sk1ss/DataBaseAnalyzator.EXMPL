@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
-namespace FRAUD_UI_ANALIZATOR
+namespace FRAUD_UI_ANALIZATOR.SCRIPTS
 {
-    public class PatternGetter
+    public class PatternGetter : PatternHandler
     {
         public static string GetTimePattern(Dictionary<string, TransactiondData> data,List<string> keys, int endTime, int startTime)
         { 
@@ -49,7 +50,7 @@ namespace FRAUD_UI_ANALIZATOR
             for (var i = 0; i < data.Count; i++) {
                 times = data.Where((t, j) => i != j && (data[$"{keys[i]}"].Card == data[$"{keys[j]}"].Card 
                                                         && data[$"{keys[i]}"].Date == data[$"{keys[j]}"].Date)).Aggregate(times,
-                    (current, t) => Add(current, data[$"{keys[i]}"].Date.Hour));
+                    (current, t) => AddInt(current, data[$"{keys[i]}"].Date.Hour));
                 if (times.Length == 0) break;
                     var check = new int[times.Length - 1];
                     for (var j = 0; j < check.Length; j++) if (j + 1 < times.Length) check[j] = Math.Abs(times[j + 1] - times[j]);
@@ -146,21 +147,24 @@ namespace FRAUD_UI_ANALIZATOR
             return answer;
             
         }
-        public  string PatternMultiply(string firstPattern, string secondPattern) 
-        {
-            var ar1 = firstPattern.Split(" ");
-            var ar2 = secondPattern.Split(" ");
-            const string answer = "";
-            return (ar1.Length > ar2.Length) switch
-            { true => ar1.Where(t => ar2.Any(t1 => t == t1)).Aggregate(answer, (current, t) => current + (t + " ")),
-                false => ar2.Where(t => ar1.Any(t1 => t == t1)).Aggregate(answer, (current, t) => current + (t + " ")) };
-        }
-        private  int[] Add(IReadOnlyList<int> ar, int elem)
-        {
-            var array = new int[ar.Count + 1];
-                for (var j = 0; j < ar.Count; j++) array[j] = ar[j];
-            array[^1] = elem;
-            return array;
-        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 }

@@ -23,4 +23,11 @@
       </Resource>
     </ItemGroup>
 
+    <ItemGroup>
+      <ApplicationDefinition Include="XAML\App.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+      </ApplicationDefinition>
+    </ItemGroup>
+
 </Project>

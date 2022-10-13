@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Windows;
 using Newtonsoft.Json;
 
-namespace FRAUD_UI_ANALIZATOR
+namespace FRAUD_UI_ANALIZATOR.SCRIPTS
 {
     public class JsonParser
     {
