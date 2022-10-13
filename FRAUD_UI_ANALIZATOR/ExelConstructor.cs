@@ -5,12 +5,12 @@ namespace FRAUD_UI_ANALIZATOR
 {
     public class ExelConstructor
     {
-        public List<string> InitList(Dictionary<string, TransactiondData> data, List<string> keys)
+        public static List<string> InitList(Dictionary<string, TransactiondData> data, List<string> keys)
         {
             var patternsGetter = new List<string>();
             return patternsGetter;
         }
-        public void ExcelWrite(ExcelPackage excelPackage, Dictionary<string, TransactiondData> data,
+        public static void ExcelWrite(ExcelPackage excelPackage, Dictionary<string, TransactiondData> data,
             IList<string> patterns)
         {
             var fraudSheet = excelPackage.Workbook.Worksheets.Add("Транзакции");

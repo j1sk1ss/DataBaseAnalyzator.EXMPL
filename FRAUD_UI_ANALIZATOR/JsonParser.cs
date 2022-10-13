@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows;
 using Newtonsoft.Json;
 
 namespace FRAUD_UI_ANALIZATOR
@@ -11,11 +12,11 @@ namespace FRAUD_UI_ANALIZATOR
         public Dictionary<string, TransactiondData> StartParse(string path)
         {
             var datalist = JsonConvert.DeserializeObject
-                <Dictionary<string, Dictionary<string, TransactiondData>>>(File.ReadAllText(path));
-            if (datalist == null) return null;
-            var trn = datalist["transactions"];
-            KeyList = new List<string>(trn.Keys);
-            return trn;
+                    <Dictionary<string, Dictionary<string, TransactiondData>>>(File.ReadAllText(path));
+                    if (datalist == null) return null;
+                var trn = datalist["transactions"];
+                KeyList = new List<string>(trn.Keys);
+                return trn;
         }
     }
     public class TransactiondData

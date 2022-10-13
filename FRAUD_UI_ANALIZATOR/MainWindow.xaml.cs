@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using Microsoft.Win32;
 using OfficeOpenXml;
@@ -13,21 +14,28 @@ namespace FRAUD_UI_ANALIZATOR
         }
         private readonly JsonParser _jsonParser = new();
         private Dictionary<string, TransactiondData> _transactionsData = new();
-        private readonly ExelConstructor _constructor = new();
-        private readonly PatternGetter _patternGetter = new();
         private void LoadJson(object sender, RoutedEventArgs e)
-        {
-            var childhood = new OpenFileDialog
-            { Filter = "JSON Files (*.json)|*.json",
-                FilterIndex = 1,
-                Multiselect = true };
-            if (childhood.ShowDialog() != true) return;
-            var path = childhood.FileName;
+        { try
+            { var childhood = new OpenFileDialog
+                { Filter = "JSON Files (*.json)|*.json",
+                    FilterIndex = 1,
+                    Multiselect = true };
+                if (childhood.ShowDialog() != true) return;
+                var path = childhood.FileName;
                 JsonLoadButton.Content = path;
-                _transactionsData = _jsonParser.StartParse(path);
+                _transactionsData = _jsonParser.StartParse(path); }
+            catch (Exception exception) {
+                JsonLoadButton.Content = "";
+                MessageBox.Show($"Error with: {exception}", "Error with Parsing!", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
         private void PatternGet(object sender, RoutedEventArgs routedEventArgs)
         {
+            if (_transactionsData.Count < 1)
+            {
+                MessageBox.Show("Load Json before start!", "Pattern getting error!", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                return;
+            }
             var folderBrowser = new OpenFileDialog
             {
                 ValidateNames = false,
@@ -35,17 +43,24 @@ namespace FRAUD_UI_ANALIZATOR
                 CheckPathExists = true,
                 FileName = "Report"
             };
-            var path = string.Empty;
-            if (folderBrowser.ShowDialog() == true)
-            {
-                path = Path.GetDirectoryName(folderBrowser.FileName);
-            }
-            var lst = _constructor.InitList(_transactionsData, _jsonParser.KeyList);
-                if (TP.IsChecked == true) lst.Add(_patternGetter.GetTimePattern(_transactionsData, _jsonParser.KeyList, 6, 1));
-                    if (SAP.IsChecked == true) lst.Add(_patternGetter.GetSmallAmountPattern(_transactionsData, _jsonParser.KeyList, 10000));
-                using var excelPackage = new ExcelPackage();
-            _constructor.ExcelWrite(excelPackage, _transactionsData, lst);
-            excelPackage.SaveAs(path+@"\Report.xlsx");
+                var path = string.Empty;
+                    if (folderBrowser.ShowDialog() == true) {
+                        path = Path.GetDirectoryName(folderBrowser.FileName); }
+                try {
+                    var lst = ExelConstructor.InitList(_transactionsData, _jsonParser.KeyList);
+                    PatternInit(lst);
+                    using var excelPackage = new ExcelPackage();
+                    ExelConstructor.ExcelWrite(excelPackage, _transactionsData, lst);
+                    excelPackage.SaveAs(path + @"\Report.xlsx"); }
+                catch (Exception e)
+                { MessageBox.Show($"Error with: {e}", "Error with Parsing!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    throw;
+                }
+        }
+
+        private void PatternInit(ICollection<string> lst)
+        {
+            if (Tp.IsChecked == true) lst.Add(PatternGetter.GetTimePattern(_transactionsData, _jsonParser.KeyList, 6, 1));
         }
     }
 }

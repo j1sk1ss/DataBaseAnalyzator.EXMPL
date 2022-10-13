@@ -6,7 +6,7 @@ namespace FRAUD_UI_ANALIZATOR
 {
     public class PatternGetter
     {
-        public string GetTimePattern(Dictionary<string, TransactiondData> data,List<string> keys, int endTime, int startTime)
+        public static string GetTimePattern(Dictionary<string, TransactiondData> data,List<string> keys, int endTime, int startTime)
         { 
             var answer = string.Empty; 
             for (var i = 0; i < data.Count; i++)

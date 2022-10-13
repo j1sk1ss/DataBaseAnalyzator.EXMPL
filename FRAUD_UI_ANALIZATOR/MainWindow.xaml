@@ -3,24 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="Fraud Validator" Height="450" Width="800"
         ResizeMode="NoResize">
-    <Grid>
         <StackPanel Margin="0,20,0,0">
             <Label x:Name="PathLabel"> Путь: </Label>
             <Button x:Name="JsonLoadButton" Height="20px" Width="700px" Margin="0,-22,10,10" Cursor="Hand" 
                Click="LoadJson"
             ></Button>
-            <Button x:Name="PatternGetting" Height="20px" Width="100px" Margin="-655,300,10,10" Cursor="Hand"
-                    Click="PatternGet">
-                Применить
-            </Button>
-            <StackPanel Margin="20,-300,0,0">
-                <CheckBox x:Name="TP" Margin="0,0,0,0"> Add time pattern</CheckBox>
-                <CheckBox x:Name="SAP" Margin="0,5,0,0"> Add time pattern</CheckBox>
+            <StackPanel x:Name="JsonLoader">
+                
+            </StackPanel>
+            <Image x:Name="GetPatternsButton" MouseDown="PatternGet" Cursor="Hand" Source="IMG/Web-Blue-Button-PNG-Photos.png" Width="100" Margin="-650,300,0 ,0">
+            </Image>
+            <StackPanel x:Name = "PatternsList" Margin="20,-300,0,0">
+                <StackPanel x:Name="PatternTemplate">
+                    <CheckBox x:Name="Tp" Margin="0,0,0,0"> Add time pattern</CheckBox>
+                    <Image x:Name = "PatternImage1" Source="/IMG/I-Letter-PNG-File.png"  Width="30" Height="25" Margin="-520,-20,0,0" ToolTip="Паттерн 1">
+                    </Image>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
-    </Grid>
+
 </Window>
