@@ -13,9 +13,9 @@
             <Image Margin="61,51,865,1141" Source="/IMG/data_text.png" HorizontalAlignment="Left"/>
             <Image Margin="402,46,254,1136" Source="/IMG/path_pic.png" HorizontalAlignment="Center"/>
             <Label x:Name = "DbPathLabel" FontSize = "25" Margin="410,50,0,0" Content=""></Label>
-            <Image Margin="997,47,37,1137" Source="/IMG/review_button.png" HorizontalAlignment="Right" Cursor="Hand" MouseDown="LoadJson"/>
+            <Image x:Name = "LoadJsonButton" Margin="997,47,37,1137" Source="/IMG/review_button.png" HorizontalAlignment="Right" Cursor="Hand" MouseDown="LoadJson"/>
             <Image Margin="62,160,850,1047" Source="/IMG/choosepatterns_text.png" HorizontalAlignment="Left"/>
-            <Image Margin="61,208,849,973" Source="/IMG/patterninactive_button.png" HorizontalAlignment="Left"/>
+            <Image Margin="61,208,849,973" Source="/IMG/patterninactive_button.png" HorizontalAlignment="Left" />
             <Image Margin="61,272,849,909" Source="/IMG/patterninactive_button.png" HorizontalAlignment="Left"/>
             <Image Margin="61,336,849,845" Source="/IMG/patterninactive_button.png" HorizontalAlignment="Left"/>
             <Image Margin="61,400,849,781" Source="/IMG/patterninactive_button.png" HorizontalAlignment="Left"/>

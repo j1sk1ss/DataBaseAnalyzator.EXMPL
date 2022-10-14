@@ -16,7 +16,10 @@ namespace FRAUD_UI_ANALIZATOR
         private readonly JsonParser _jsonParser = new();
         private Dictionary<string, TransactiondData> _transactionsData = new();
         private void LoadJson(object sender, RoutedEventArgs e)
-        { try
+        {
+            Animations _animations = new Animations();
+            Animations.ShakeAnimation(37, LoadJsonButton);
+            try
             { var childhood = new OpenFileDialog
                 { Filter = "JSON Files (*.json)|*.json",
                     FilterIndex = 1,
