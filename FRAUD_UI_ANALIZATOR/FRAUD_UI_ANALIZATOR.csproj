@@ -42,6 +42,70 @@
       <Resource Include="IMG\search_button.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
+      <None Remove="IMG\begtime_text.png" />
+      <Resource Include="IMG\begtime_text.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\endtime_text.png" />
+      <Resource Include="IMG\endtime_text.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\gray_textbox.png" />
+      <Resource Include="IMG\gray_textbox.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\pattern1_text.png" />
+      <Resource Include="IMG\pattern1_text.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\pattern2_text.png" />
+      <Resource Include="IMG\pattern2_text.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\pattern3_text.png" />
+      <Resource Include="IMG\pattern3_text.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\pattern4_text.png" />
+      <Resource Include="IMG\pattern4_text.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\pattern5_text.png" />
+      <Resource Include="IMG\pattern5_text.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\pattern6_text.png" />
+      <Resource Include="IMG\pattern6_text.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\pattern7_text.png" />
+      <Resource Include="IMG\pattern7_text.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\pattern8_text.png" />
+      <Resource Include="IMG\pattern8_text.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\pattern9_text.png" />
+      <Resource Include="IMG\pattern9_text.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\pattern10_text.png" />
+      <Resource Include="IMG\pattern10_text.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\pattern11_text.png" />
+      <Resource Include="IMG\pattern11_text.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\pattern12_text.png" />
+      <Resource Include="IMG\pattern12_text.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\patterninactive_button.png" />
+      <Resource Include="IMG\patterninactive_button.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
     <ItemGroup>

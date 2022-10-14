@@ -23,10 +23,10 @@ namespace FRAUD_UI_ANALIZATOR
                     Multiselect = true };
                 if (childhood.ShowDialog() != true) return;
                 var path = childhood.FileName;
-                //JsonLoadButton.Content = path;
+                DbPathLabel.Content = Path.GetFileName(path);
                 _transactionsData = _jsonParser.StartParse(path); }
             catch (Exception exception) {
-                //JsonLoadButton.Content = "";
+                DbPathLabel.Content = "";
                 MessageBox.Show($"Error with: {exception}", "Error with Parsing!", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
         private void PatternGet(object sender, RoutedEventArgs routedEventArgs)
