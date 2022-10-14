@@ -7,52 +7,94 @@
         WindowStyle="SingleBorderWindow"
         Height="1240" Width="1240"
         ResizeMode="NoResize">
-    <Viewbox>
-        <Grid Margin="-100, 0, 0, 100" Height="1240" Width="1240">
-            <Image Margin="26,35,26,1125" Source="/IMG/gray_bg.png"/>
-            <Image Margin="61,51,865,1141" Source="/IMG/data_text.png" HorizontalAlignment="Left"/>
-            <Image Margin="402,46,254,1136" Source="/IMG/path_pic.png" HorizontalAlignment="Center"/>
-            <Label x:Name = "DbPathLabel" FontSize = "25" Margin="410,50,0,0" Content=""></Label>
-            <Image x:Name = "LoadJsonButton" Margin="997,47,37,1137" Source="/IMG/review_button.png" HorizontalAlignment="Right" Cursor="Hand" MouseDown="LoadJson"/>
-            <Image Margin="62,160,850,1047" Source="/IMG/choosepatterns_text.png" HorizontalAlignment="Left"/>
-            <Image Margin="61,208,849,973" Source="/IMG/patterninactive_button.png" HorizontalAlignment="Left" />
-            <Image Margin="61,272,849,909" Source="/IMG/patterninactive_button.png" HorizontalAlignment="Left"/>
-            <Image Margin="61,336,849,845" Source="/IMG/patterninactive_button.png" HorizontalAlignment="Left"/>
-            <Image Margin="61,400,849,781" Source="/IMG/patterninactive_button.png" HorizontalAlignment="Left"/>
-            <Image Margin="61,464,849,717" Source="/IMG/patterninactive_button.png" HorizontalAlignment="Left"/>
-            <Image Margin="61,528,849,653" Source="/IMG/patterninactive_button.png" HorizontalAlignment="Left"/>
-            <Image Margin="61,592,849,589" Source="/IMG/patterninactive_button.png" HorizontalAlignment="Left"/>
-            <Image Margin="61,656,849,525" Source="/IMG/patterninactive_button.png" HorizontalAlignment="Left"/>
-            <Image Margin="61,720,849,461" Source="/IMG/patterninactive_button.png" HorizontalAlignment="Left"/>
-            <Image Margin="61,784,849,397" Source="/IMG/patterninactive_button.png" HorizontalAlignment="Left"/>
-            <Image Margin="61,848,849,333" Source="/IMG/patterninactive_button.png" HorizontalAlignment="Left"/>
-            <Image Margin="61,912,849,269" Source="/IMG/patterninactive_button.png" HorizontalAlignment="Left"/>
-            <Image Margin="84,1061,888,98" Source="/IMG/search_button.png" HorizontalAlignment="Left" MouseDown="PatternGet" Cursor="Hand"/>
-            <Image Margin="110,216,898,982" Source="/IMG/pattern1_text.png" HorizontalAlignment="Left" Cursor="Hand"/>
-            <Image Margin="74,280,878,918" Source="/IMG/pattern2_text.png" HorizontalAlignment="Left" Cursor="Hand"/>
-            <Image Margin="98,344,886,854" Source="/IMG/pattern3_text.png" HorizontalAlignment="Left" Cursor="Hand"/>
-            <Image Margin="66,410,854,790" Source="/IMG/pattern4_text.png" HorizontalAlignment="Left" Cursor="Hand"/>
-            <Image Margin="65,474,853,726" Source="/IMG/pattern5_text.png" HorizontalAlignment="Left" Cursor="Hand"/>
-            <Image Margin="80,536,868,662" Source="/IMG/pattern6_text.png" HorizontalAlignment="Left" Cursor="Hand"/>
-            <Image Margin="120,599,908,599" Source="/IMG/pattern7_text.png" HorizontalAlignment="Left" Cursor="Hand"/>
-            <Image Margin="72,666,860,536" Source="/IMG/pattern8_text.png" HorizontalAlignment="Left" Cursor="Hand"/>
-            <Image Margin="94,728,882,470" Source="/IMG/pattern9_text.png" HorizontalAlignment="Left" Cursor="Hand"/>
-            <Image Margin="67,796,855,408" Source="/IMG/pattern10_text.png" HorizontalAlignment="Left" Cursor="Hand"/>
-            <Image Margin="82,856,870,342" Source="/IMG/pattern11_text.png" HorizontalAlignment="Left" Cursor="Hand"/>
-            <Image Margin="63,924,851,282" Source="/IMG/pattern12_text.png" HorizontalAlignment="Left" Cursor="Hand"/>
-            <Image Margin="402,223,812,988" Source="/IMG/info_logo.png" HorizontalAlignment="Center" ToolTip="Транзакции проведённые с и по заданный промежуток времени"/>
-            <Image Margin="402,286,812,924" Source="/IMG/info_logo.png" HorizontalAlignment="Center" ToolTip="Транзакции с заданным верхним денежным порогом"/>
-            <Image Margin="402,350,812,860" Source="/IMG/info_logo.png" HorizontalAlignment="Center" ToolTip="Транзакции с заданным нижним денежным порогом"/>
-            <Image Margin="402,415,812,795" Source="/IMG/info_logo.png" HorizontalAlignment="Center" ToolTip="Транзакции сделанные с недействительного паспорта"/>
-            <Image Margin="402,479,812,731" Source="/IMG/info_logo.png" HorizontalAlignment="Center" ToolTip="Транзакции сделанные с недействительного аккаунта"/>
-            <Image Margin="402,542,812,668" Source="/IMG/info_logo.png" HorizontalAlignment="Center" ToolTip="Транзакции сделанные из ряда с одинаковым промежутком по времени"/>
-            <Image Margin="402,605,812,605" Source="/IMG/info_logo.png" HorizontalAlignment="Center" ToolTip="Транзакции сделанные из разных городов за заданный промежуток времени"/>
-            <Image Margin="402,670,812,540" Source="/IMG/info_logo.png" HorizontalAlignment="Center" ToolTip="Транзакции сделанные с паспорта, на который привязанно больщое колличество карт"/>
-            <Image Margin="402,734,812,476" Source="/IMG/info_logo.png" HorizontalAlignment="Center" ToolTip="Транзакции сделанные с места, где находится много терминалов POS"/>
-            <Image Margin="402,799,812,411" Source="/IMG/info_logo.png" HorizontalAlignment="Center" ToolTip="Транзакции сделанные с карты, на которую привязано более одного паспорта (Не возможно)"/>
-            <Image Margin="402,862,812,348" Source="/IMG/info_logo.png" HorizontalAlignment="Center" ToolTip="Транзакции сделанные людьми с возрастом более заданного"/>
-            <Image Margin="402,926,812,284" Source="/IMG/info_logo.png" HorizontalAlignment="Center" ToolTip="Транзакции сделанные из ряда неудачных попыток транзакций"/>
-        </Grid>
-    </Viewbox>
+    <Grid Margin="0, 0, 0, 0" Height="1240" Width="1240">
+        <Image Margin="26,35,26,1125" Source="/IMG/gray_bg.png"/>
+        <Image Margin="61,51,865,1141" Source="/IMG/data_text.png"/>
+        <Image Margin="402,46,254,1136" Source="/IMG/path_pic.png"/>
+        <Label x:Name = "DbPathLabel" FontSize = "25" Margin="410,50,0,0"/>
+        <Image Height="33" Source="/IMG/pat10_1_text.png" Stretch="Fill" Width="540" Margin="443,797,257,410"/>
+        <Image x:Name = "LoadJsonButton" Margin="997,47,37,1137" Source="/IMG/review_button.png" Cursor="Hand" MouseDown="LoadJson"/>
+        <Image Margin="62,160,850,1047" Source="/IMG/choosepatterns_text.png"/>
+        <Image Margin="61,208,849,973" Source="/IMG/patterninactive_button.png"/>
+        <Image Margin="61,272,849,909" Source="/IMG/patterninactive_button.png"/>
+        <Image Margin="61,336,849,845" Source="/IMG/patterninactive_button.png"/>
+        <Image Margin="61,400,849,781" Source="/IMG/patterninactive_button.png"/>
+        <Image Margin="61,464,849,717" Source="/IMG/patterninactive_button.png"/>
+        <Image Margin="61,528,849,653" Source="/IMG/patterninactive_button.png"/>
+        <Image Margin="61,592,849,589" Source="/IMG/patterninactive_button.png"/>
+        <Image Margin="61,656,849,525" Source="/IMG/patterninactive_button.png"/>
+        <Image Margin="61,720,849,461" Source="/IMG/patterninactive_button.png"/>
+        <Image Margin="61,784,849,397" Source="/IMG/patterninactive_button.png"/>
+        <Image Margin="61,848,849,333" Source="/IMG/patterninactive_button.png"/>
+        <Image Margin="61,912,849,269" Source="/IMG/patterninactive_button.png"/>
+        <Image Margin="84,1061,888,98" Source="/IMG/search_button.png" MouseDown="PatternGet" Cursor="Hand"/>
+        <Image Margin="110,216,898,982" Source="/IMG/pattern1_text.png" Cursor="Hand"/>
+        <Image Margin="74,280,878,918" Source="/IMG/pattern2_text.png" Cursor="Hand"/>
+        <Image Margin="98,344,886,854" Source="/IMG/pattern3_text.png" Cursor="Hand"/>
+        <Image Margin="66,410,854,790" Source="/IMG/pattern4_text.png" Cursor="Hand"/>
+        <Image Margin="65,474,853,726" Source="/IMG/pattern5_text.png" Cursor="Hand"/>
+        <Image Margin="80,536,868,662" Source="/IMG/pattern6_text.png" Cursor="Hand"/>
+        <Image Margin="120,599,908,599" Source="/IMG/pattern7_text.png" Cursor="Hand"/>
+        <Image Margin="72,666,860,536" Source="/IMG/pattern8_text.png" Cursor="Hand"/>
+        <Image Margin="94,728,882,470" Source="/IMG/pattern9_text.png" Cursor="Hand"/>
+        <Image Margin="67,796,855,408" Source="/IMG/pattern10_text.png" Cursor="Hand"/>
+        <Image Margin="82,856,870,342" Source="/IMG/pattern11_text.png" Cursor="Hand"/>
+        <Image Margin="63,924,851,282" Source="/IMG/pattern12_text.png" Cursor="Hand"/>
+        <Image Margin="402,223,812,988" Source="/IMG/info_logo.png" ToolTip="Транзакции проведённые с и по заданный промежуток времени"/>
+        <Image Margin="402,286,812,924" Source="/IMG/info_logo.png" ToolTip="Транзакции с заданным верхним денежным порогом"/>
+        <Image Margin="402,350,812,860" Source="/IMG/info_logo.png" ToolTip="Транзакции с заданным нижним денежным порогом"/>
+        <Image Margin="402,415,812,795" Source="/IMG/info_logo.png" ToolTip="Транзакции сделанные с недействительного паспорта"/>
+        <Image Margin="402,479,812,731" Source="/IMG/info_logo.png" ToolTip="Транзакции сделанные с недействительного аккаунта"/>
+        <Image Margin="402,542,812,668" Source="/IMG/info_logo.png" ToolTip="Транзакции сделанные из ряда с одинаковым промежутком по времени"/>
+        <Image Margin="402,605,812,605" Source="/IMG/info_logo.png" ToolTip="Транзакции сделанные из разных городов за заданный промежуток времени"/>
+        <Image Margin="402,670,812,540" Source="/IMG/info_logo.png" ToolTip="Транзакции сделанные с паспорта, на который привязанно больщое колличество карт"/>
+        <Image Margin="402,734,812,476" Source="/IMG/info_logo.png" ToolTip="Транзакции сделанные с места, где находится много терминалов POS"/>
+        <Image Margin="402,799,812,411" Source="/IMG/info_logo.png" ToolTip="Транзакции сделанные с карты, на которую привязано более одного паспорта (Не возможно)"/>
+        <Image Margin="402,862,812,348" Source="/IMG/info_logo.png" ToolTip="Транзакции сделанные людьми с возрастом более заданного"/>
+        <Image Margin="402,926,812,284" Source="/IMG/info_logo.png" ToolTip="Транзакции сделанные из ряда неудачных попыток транзакций"/>
+        <Image Margin="722,208,362,973" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
+        <Image Margin="443,220,596,988" Source="/IMG/pat1_1_text.png" Stretch="Fill"/>
+        <Image Margin="443,862,441,346" Source="/IMG/pat11_1_text.png" Stretch="Fill"/>
+        <Image Margin="911,862,95,346" Source="/IMG/pat11_2_text.png" Stretch="Fill"/>
+        <Image Margin="1156,848,26,334" Source="/IMG/unchecked_checkbox.png" Stretch="Fill"/>
+        <Image Margin="443,923,289,284" Source="/IMG/pat12_1_text.png" Stretch="Fill"/>
+        <Image Margin="443,733,239,474" Source="/IMG/pat9_1_text.png" Stretch="Fill"/>
+        <Image Margin="443,668,322,538" Source="/IMG/pat8_1_text.png" Stretch="Fill"/>
+        <Image Margin="443,348,540,858" Source="/IMG/pat3_1_text.png" Stretch="Fill"/>
+        <Image Margin="443,284,550,922" Source="/IMG/pat2_1_text.png" Stretch="Fill"/>
+        <Image Margin="443,414,195,794" Source="/IMG/pat4_1_text.png" Stretch="Fill"/>
+        <Image Margin="443,478,195,730" Source="/IMG/pat5_1_text.png" Stretch="Fill"/>
+        <Image Margin="722,272,362,909" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
+        <Image Margin="722,336,362,845" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
+        <Image Margin="1058,400,26,781" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
+        <Image Margin="1058,464,26,717" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
+        <Image Margin="975,912,109,269" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
+        <Image Margin="1058,784,26,397" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
+        <Image Margin="1058,720,26,461" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
+        <Image Margin="1058,657,26,525" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
+        <Image Margin="446,539,576,669" Source="/IMG/pat7_1_text.png" Stretch="Fill"/>
+        <Image Margin="758,543,192,664" Source="/IMG/pat7_2_text.png" Stretch="Fill"/>
+        <Image Margin="1058,528,26,653" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
+        <Image Margin="669,525,493,655" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
+        <Image Margin="809,848,353,332" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
+        <TextBox HorizontalAlignment="Left" Margin="728,216,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+        <TextBox HorizontalAlignment="Left" Margin="728,280,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+        <TextBox HorizontalAlignment="Left" Margin="728,344,0,0" TextWrapping="Wrap" Text="20000" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+        <TextBox HorizontalAlignment="Left" Margin="1064,409,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+        <TextBox HorizontalAlignment="Left" Margin="1064,472,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+        <TextBox HorizontalAlignment="Left" Margin="1064,472,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+        <Image Margin="446,541,576,666" Source="/IMG/pat6_1_text.png" Stretch="Fill"/>
+        <Image Margin="758,541,192,666" Source="/IMG/pat6_2_text.png" Stretch="Fill"/>
+        <Image Margin="446,604,373,604" Source="/IMG/pat7_1_text.png" Stretch="Fill"/>
+        <Image Margin="1058,592,26,588" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
+        <TextBox HorizontalAlignment="Left" Margin="1064,538,0,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+        <TextBox HorizontalAlignment="Left" Margin="675,532,0,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="66" Background="{x:Null}" Height="46" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" TextChanged="TextBox_TextChanged"/>
+        <TextBox HorizontalAlignment="Left" Margin="1064,601,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" TextChanged="TextBox_TextChanged_1"/>
+        <TextBox HorizontalAlignment="Left" Margin="1064,664,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" TextChanged="TextBox_TextChanged_1"/>
+        <TextBox HorizontalAlignment="Left" Margin="1064,728,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" TextChanged="TextBox_TextChanged_1"/>
+        <TextBox HorizontalAlignment="Left" Margin="1064,792,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" TextChanged="TextBox_TextChanged_1"/>
+        <TextBox HorizontalAlignment="Left" Margin="815,855,0,0" TextWrapping="Wrap" Text="75" VerticalAlignment="Top" Width="66" Background="{x:Null}" Height="46" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" TextChanged="TextBox_TextChanged"/>
+        <TextBox HorizontalAlignment="Left" Margin="981,920,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" TextChanged="TextBox_TextChanged_1"/>
+    </Grid>
 
 </Window>
