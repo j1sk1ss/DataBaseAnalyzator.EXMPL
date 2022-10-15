@@ -82,39 +82,31 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
             return answer; 
         }
         public static string GetMultiPosPatter(Dictionary<string, TransactiondData> data, List<string> keys, int copyCount)
-        {
-            var answer = string.Empty; 
+        { var answer = string.Empty; 
             var posCount = 0;
             for (var i = 0; i < data.Count; i++)
-            {
-                if (!data.Where((t, j) => i != j && (data[$"{keys[i]}"].Address ==
-                                                     data[$"{keys[j]}"].Address && data[$"{keys[i]}"].Terminal != data[$"" +
-                                                         $"{keys[j]}"].Terminal &&
-                                                     data[$"{keys[i]}"].TerminalType == "POS" && data[$"{keys[i]}"].Passport
-                                                     != data[$"{keys[j]}"].Passport))
-                        .Any(t => ++posCount >= copyCount)) continue;
+            { if (!data.Where((t, j) => i != j && (data[$"{keys[i]}"].Address ==
+                                                   data[$"{keys[j]}"].Address && data[$"{keys[i]}"].Terminal != data[$"" +
+                                                       $"{keys[j]}"].Terminal &&
+                                                   data[$"{keys[i]}"].TerminalType == "POS" && data[$"{keys[i]}"].Passport
+                                                   != data[$"{keys[j]}"].Passport))
+                      .Any(t => ++posCount >= copyCount)) continue;
                 answer += keys[i] + " ";
-                posCount = 0;
-            }
+                posCount = 0; }
             return answer; 
         }
         public static string GetMultiPassportCard(Dictionary<string, TransactiondData> data, List<string> keys, int copyCount)
-        {
-            var answer = string.Empty;
-            for (var i = 0; i < data.Count; i++)
-            {
+        { var answer = string.Empty;
+            for (var i = 0; i < data.Count; i++) {
                 var count = 0;
                 answer = data.Where((t, j) => i != j && (data[$"{keys[i]}"].Card == 
                         data[$"{keys[j]}"].Card && data[$"{keys[i]}"].Passport != data[$"{keys[j]}"].Passport)).
                     Where(t => ++count > copyCount).Aggregate(answer, (current, 
                         t) => current + (keys[i] + " "));
-                count = 0;
-            }
-            return answer; 
-        }
+                count = 0; }
+            return answer; }
         public static string GetOldersPattern(Dictionary<string, TransactiondData> data, List<string> keys, int age, bool type)
-        {
-            var answer = string.Empty; 
+        { var answer = string.Empty; 
             for (var i = 0; i < data.Count; i++)
                 switch (type)
                 { case false:
@@ -125,8 +117,7 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
                         if (data[$"{keys[i]}"].Date.Year - data[$"{keys[i]}"].DateOfBirth.Year > age)
                             answer += keys[i] + " ";
                         break; }
-            return answer; 
-        }
+            return answer; }
         public static string GetYoungerPattern(Dictionary<string, TransactiondData> data, List<string> keys, int age)
         { var answer = string.Empty; 
             for (var i = 0; i < data.Count; i++)
@@ -142,20 +133,15 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
                 for (var j = 0; j < data.Count; j++)
                     if (data[$"{keys[i]}"].Card == data[$"{keys[j]}"].Card &&
                         data[$"{keys[j]}"].OperResult != "Успешно")
-                    {
-                        count++;
+                    { count++;
                         if (count <= cancelledLimit) continue;
                         answer += keys[i] + " ";
-                        break;
-                    }
+                        break; }
                     else if (data[$"{keys[i]}"].Card == data[$"{keys[j]}"].Card && data[$"{keys[j]}"].OperResult == "Успешно") count = 0; }
-            return answer;
-            
-        }
+            return answer; }
         [SuppressMessage("ReSharper.DPA", "DPA0003: Excessive memory allocations in LOH", MessageId = "type: System.String")]
         public static string GetManyTransactionsPattern(Dictionary<string, TransactiondData> data, List<string> keys, int time, TimeSpan duration)
-        {
-            var answer = string.Empty;
+        { var answer = string.Empty;
             var count = 0;
             for (var i = 0; i < data.Count; i++) {
                 if (data.Where((t, j) => data[$"{keys[i]}"].Passport == 

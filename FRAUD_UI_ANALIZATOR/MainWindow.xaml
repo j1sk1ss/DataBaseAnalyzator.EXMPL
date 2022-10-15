@@ -21,18 +21,18 @@
         <Image x:Name = "TooManyPassports" Margin="61,784,849,397" Source="/IMG/patterninactive_button.png"/>
         <Image x:Name = "Older" Margin="61,848,849,333" Source="/IMG/patterninactive_button.png"/>
         <Image x:Name = "CancelledStreak" Margin="61,912,849,269" Source="/IMG/patterninactive_button.png"/>
-        <Image Margin="110,216,898,982" Source="/IMG/pattern1_text.png" Cursor="Hand" MouseDown="StrangeTimeCheck"/>
-        <Image Margin="74,280,878,918" Source="/IMG/pattern2_text.png" Cursor="Hand" MouseDown="SmallTrn"/>
-        <Image Margin="98,344,886,854" Source="/IMG/pattern3_text.png" Cursor="Hand" MouseDown="BigTrn"/>
-        <Image Margin="66,410,854,790" Source="/IMG/pattern4_text.png" Cursor="Hand" MouseDown="NotValidPas"/>
-        <Image Margin="65,474,853,726" Source="/IMG/pattern5_text.png" Cursor="Hand" MouseDown="NotValidAcc"/>
-        <Image Margin="80,536,868,662" Source="/IMG/pattern6_text.png" Cursor="Hand" MouseDown="Duration"/>
-        <Image Margin="120,599,908,599" Source="/IMG/pattern7_text.png" Cursor="Hand" MouseDown="DifCities"/>
-        <Image Margin="72,666,860,536" Source="/IMG/pattern8_text.png" Cursor="Hand" MouseDown="ManyCards"/>
-        <Image Margin="94,728,882,470" Source="/IMG/pattern9_text.png" Cursor="Hand" MouseDown="ManyPos"/>
-        <Image Margin="67,796,855,408" Source="/IMG/pattern10_text.png" Cursor="Hand" MouseDown="ManyPassports"/>
-        <Image Margin="82,856,870,342" Source="/IMG/pattern11_text.png" Cursor="Hand" MouseDown="OlderPattern"/>
-        <Image Margin="63,924,851,282" Source="/IMG/pattern12_text.png" Cursor="Hand" MouseDown="Cancelled"/>
+        <Image x:Name= "b_1" Margin="110,216,898,982" Source="/IMG/pattern1_text.png" Cursor="Hand" MouseDown="ValueChanger"/>
+        <Image x:Name= "b_2" Margin="74,280,878,918" Source="/IMG/pattern2_text.png" Cursor="Hand" MouseDown="ValueChanger"/>
+        <Image x:Name= "b_3" Margin="98,344,886,854" Source="/IMG/pattern3_text.png" Cursor="Hand" MouseDown="ValueChanger"/>
+        <Image x:Name= "b_4" Margin="66,410,854,790" Source="/IMG/pattern4_text.png" Cursor="Hand" MouseDown="ValueChanger"/>
+        <Image x:Name= "b_5" Margin="65,474,853,726" Source="/IMG/pattern5_text.png" Cursor="Hand" MouseDown="ValueChanger"/>
+        <Image x:Name="b_6" Margin="80,536,868,662" Source="/IMG/pattern6_text.png" Cursor="Hand" MouseDown="ValueChanger"/>
+        <Image x:Name="b_7" Margin="120,599,908,599" Source="/IMG/pattern7_text.png" Cursor="Hand" MouseDown="ValueChanger"/>
+        <Image x:Name="b_8" Margin="72,666,860,536" Source="/IMG/pattern8_text.png" Cursor="Hand" MouseDown="ValueChanger"/>
+        <Image x:Name="b_9" Margin="94,728,882,470" Source="/IMG/pattern9_text.png" Cursor="Hand" MouseDown="ValueChanger"/>
+        <Image x:Name="b_10" Margin="67,796,855,408" Source="/IMG/pattern10_text.png" Cursor="Hand" MouseDown="ValueChanger"/>
+        <Image x:Name="b_11" Margin="82,856,870,342" Source="/IMG/pattern11_text.png" Cursor="Hand" MouseDown="ValueChanger"/>
+        <Image x:Name="b_12" Margin="63,924,851,282" Source="/IMG/pattern12_text.png" Cursor="Hand" MouseDown="ValueChanger"/>
         <Image Margin="402,223,812,988" Source="/IMG/info_logo.png" ToolTip="Транзакции проведённые с и по заданный промежуток времени"/>
         <Image Margin="402,286,812,924" Source="/IMG/info_logo.png" ToolTip="Транзакции с заданным верхним денежным порогом"/>
         <Image Margin="402,350,812,860" Source="/IMG/info_logo.png" ToolTip="Транзакции с заданным нижним денежным порогом"/>

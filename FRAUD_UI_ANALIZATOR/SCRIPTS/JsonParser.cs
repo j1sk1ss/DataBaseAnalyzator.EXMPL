@@ -4,23 +4,18 @@ using System.IO;
 using Newtonsoft.Json;
 
 namespace FRAUD_UI_ANALIZATOR.SCRIPTS
-{
-    public class JsonParser
-    {
-        public List<string> KeyList = new List<string>();
+{ public class JsonParser
+    { public List<string> KeyList = new List<string>();
         public Dictionary<string, TransactiondData> StartParse(string path)
-        {
-            var datalist = JsonConvert.DeserializeObject
+        { var datalist = JsonConvert.DeserializeObject
                     <Dictionary<string, Dictionary<string, TransactiondData>>>(File.ReadAllText(path));
                     if (datalist == null) return null;
                 var trn = datalist["transactions"];
                 KeyList = new List<string>(trn.Keys);
-                return trn;
-        }
+                return trn; }
     }
     public class TransactiondData
-    {
-        [JsonProperty("date")]
+    { [JsonProperty("date")]
         public DateTime Date { get; set; }
         [JsonProperty("card")]
         public string Card { get; set; }
