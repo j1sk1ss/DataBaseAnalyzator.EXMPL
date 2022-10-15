@@ -205,7 +205,7 @@ namespace FRAUD_UI_ANALIZATOR
                     lst.Add("GOP " + PatternGetter.GetOldersPattern(_transactionsData, _jsonParser.KeyList, 
                         int.Parse(Age.Text), Type.Source.ToString() == $"{path}/IMG/unchecked_checkbox.png"));
                 if (CancelledStreak.Source.ToString() == $"{path}/IMG/pattern_button.png") 
-                    lst.Add("GCP " + PatternGetter.GetCancelledPattern(_transactionsData, _jsonParser.KeyList, 
+                    lst.Add("GCP " + PatternGetter.GetCancelledStreakPattern(_transactionsData, _jsonParser.KeyList, 
                         int.Parse(StreakCount.Text)));
             }
             catch (Exception e)

@@ -9,13 +9,6 @@
         Height="1240" Width="1240"
         ResizeMode="NoResize">
     <Grid Margin="-50, -30, 0, 45" Height="1240" Width="1240">
-        <Image Margin="26,35,26,1125" Source="/IMG/gray_bg.png"/>
-        <Image Margin="61,51,865,1141" Source="/IMG/data_text.png"/>
-        <Image Margin="402,46,254,1136" Source="/IMG/path_pic.png"/>
-        <Label x:Name = "DbPathLabel" FontSize = "25" Margin="410,50,0,0"/>
-        <Image Height="33" Source="/IMG/pat10_1_text.png" Stretch="Fill" Width="540" Margin="443,797,257,410"/>
-        <Image x:Name = "LoadJsonButton" Margin="997,47,37,1137" Source="/IMG/review_button.png" Cursor="Hand" MouseDown="LoadJson"/>
-        <Image Margin="62,160,850,1047" Source="/IMG/choosepatterns_text.png"/>
         <Image x:Name = "StrangeTime" Margin="61,208,849,973" Source="/IMG/patterninactive_button.png"/>
         <Image x:Name = "SmallTransaction" Margin="61,272,849,909" Source="/IMG/patterninactive_button.png"/>
         <Image x:Name = "BigTransaction" Margin="61,336,849,845" Source="/IMG/patterninactive_button.png"/>
@@ -52,7 +45,8 @@
         <Image Margin="402,799,812,411" Source="/IMG/info_logo.png" ToolTip="Транзакции сделанные с карты, на которую привязано более одного паспорта (Не возможно)"/>
         <Image Margin="402,862,812,348" Source="/IMG/info_logo.png" ToolTip="Транзакции сделанные людьми с возрастом более заданного"/>
         <Image Margin="402,926,812,284" Source="/IMG/info_logo.png" ToolTip="Транзакции сделанные из ряда неудачных попыток транзакций"/>
-        <Image Margin="722,208,362,973" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
+        <Image Margin="672,208,412,973" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
+        <Image Margin="1090,208,-10,973" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
         <Image Margin="443,220,596,988" Source="/IMG/pat1_1_text.png" Stretch="Fill"/>
         <Image Margin="443,862,441,346" Source="/IMG/pat11_1_text.png" Stretch="Fill"/>
         <Image Margin="911,862,95,346" Source="/IMG/pat11_2_text.png" Stretch="Fill"/>
@@ -75,8 +69,8 @@
         <Image Margin="1058,528,26,653" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
         <Image Margin="669,525,493,655" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
         <Image Margin="809,848,353,332" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
-            <TextBox x:Name = "StartTimeTp" HorizontalAlignment="Left" Margin="728,216,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
-            <TextBox x:Name = "EndTimeTp" HorizontalAlignment="Left" Margin="928,216,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+            <TextBox x:Name = "StartTimeTp" HorizontalAlignment="Left" Margin="678,216,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+            <TextBox x:Name = "EndTimeTp" HorizontalAlignment="Left" Margin="1100,216,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
             <TextBox x:Name = "SmallAmount" HorizontalAlignment="Left" Margin="728,280,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
             <TextBox x:Name = "BigAmount" HorizontalAlignment="Left" Margin="728,344,0,0" TextWrapping="Wrap" Text="20000" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
             <TextBox x:Name = "PassportDays" HorizontalAlignment="Left" Margin="1064,409,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
@@ -94,6 +88,8 @@
             <TextBox x:Name="Age" HorizontalAlignment="Left" Margin="815,855,0,0" TextWrapping="Wrap" Text="75" VerticalAlignment="Top" Width="66" Background="{x:Null}" Height="46" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
             <TextBox x:Name = "StreakCount" HorizontalAlignment="Left" Margin="981,920,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" />
         <Image Margin="-900,780,0,0" Height="45" Source="/IMG/search_button.png" MouseDown="PatternGet" Cursor="Hand" />
+        <Image Height="33" Source="/IMG/pat10_1_text.png" Stretch="Fill" Width="540" Margin="443,797,257,410"/>
+        <Image Margin="62,160,850,1047" Source="/IMG/choosepatterns_text.png"/>
         <Canvas x:Name = "Charts" Background="Azure" Visibility="Hidden">
             <Grid>
                 <lvc:PieChart x:Name="Chart" LegendLocation="Bottom" Height="700" Width="700" Hoverable="True" InnerRadius="390" Margin="275">
@@ -106,8 +102,12 @@
                 </lvc:PieChart>
             </Grid>
         </Canvas>
-        <Button Height="25" Width="300" Margin="-790,-960,0,0" Click="OpenMenu"></Button>
-        <Button x:Name = "OpenChartsBut" Height="25" Width="300" Margin="-90,-960,0,0" Click="OpenCharts" Visibility="Hidden"></Button>
+        <Button Height="25" Width="300" Margin="-790,-960,0,0" Click="OpenMenu"> МЕНЮ </Button>
+        <Button x:Name = "OpenChartsBut" Height="25" Width="300" Margin="-90,-960,0,0" Click="OpenCharts" Visibility="Hidden"> ИНФОГРАФИКА </Button>
+            <Image Margin="26,35,26,1125" Source="/IMG/gray_bg.png"/>
+            <Image Margin="61,51,865,1141" Source="/IMG/data_text.png"/>
+            <Image Margin="402,46,254,1136" Source="/IMG/path_pic.png"/>
+        <Label x:Name = "DbPathLabel" FontSize = "25" Margin="410,50,0,1150"> JSON DATA </Label>
+        <Image x:Name = "LoadJsonButton" Margin="997,47,37,1137" Source="/IMG/review_button.png" Cursor="Hand" MouseDown="LoadJson"/>
     </Grid>
-
 </Window>
