@@ -71,7 +71,6 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
             var answer = string.Empty; 
             for (var i = 0; i < data.Count; i++) {
                 var count = 0;
-                answer += keys[i] + " ";
                 for (var j = 0; j < data.Count; j++) {
                     if (i == j) continue;
                     if (data[$"{keys[i]}"].Passport == data[$"{keys[j]}"].Passport && data[$"{keys[i]}"].Card != data
