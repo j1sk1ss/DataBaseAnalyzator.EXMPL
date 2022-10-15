@@ -15,31 +15,31 @@
         <Image Height="33" Source="/IMG/pat10_1_text.png" Stretch="Fill" Width="540" Margin="443,797,257,410"/>
         <Image x:Name = "LoadJsonButton" Margin="997,47,37,1137" Source="/IMG/review_button.png" Cursor="Hand" MouseDown="LoadJson"/>
         <Image Margin="62,160,850,1047" Source="/IMG/choosepatterns_text.png"/>
-        <Image Margin="61,208,849,973" Source="/IMG/patterninactive_button.png"/>
-        <Image Margin="61,272,849,909" Source="/IMG/patterninactive_button.png"/>
-        <Image Margin="61,336,849,845" Source="/IMG/patterninactive_button.png"/>
-        <Image Margin="61,400,849,781" Source="/IMG/patterninactive_button.png"/>
-        <Image Margin="61,464,849,717" Source="/IMG/patterninactive_button.png"/>
-        <Image Margin="61,528,849,653" Source="/IMG/patterninactive_button.png"/>
-        <Image Margin="61,592,849,589" Source="/IMG/patterninactive_button.png"/>
-        <Image Margin="61,656,849,525" Source="/IMG/patterninactive_button.png"/>
-        <Image Margin="61,720,849,461" Source="/IMG/patterninactive_button.png"/>
-        <Image Margin="61,784,849,397" Source="/IMG/patterninactive_button.png"/>
-        <Image Margin="61,848,849,333" Source="/IMG/patterninactive_button.png"/>
-        <Image Margin="61,912,849,269" Source="/IMG/patterninactive_button.png"/>
-        <Image Margin="84,1061,888,98" Source="/IMG/search_button.png" MouseDown="PatternGet" Cursor="Hand"/>
-        <Image Margin="110,216,898,982" Source="/IMG/pattern1_text.png" Cursor="Hand"/>
-        <Image Margin="74,280,878,918" Source="/IMG/pattern2_text.png" Cursor="Hand"/>
-        <Image Margin="98,344,886,854" Source="/IMG/pattern3_text.png" Cursor="Hand"/>
-        <Image Margin="66,410,854,790" Source="/IMG/pattern4_text.png" Cursor="Hand"/>
-        <Image Margin="65,474,853,726" Source="/IMG/pattern5_text.png" Cursor="Hand"/>
-        <Image Margin="80,536,868,662" Source="/IMG/pattern6_text.png" Cursor="Hand"/>
-        <Image Margin="120,599,908,599" Source="/IMG/pattern7_text.png" Cursor="Hand"/>
-        <Image Margin="72,666,860,536" Source="/IMG/pattern8_text.png" Cursor="Hand"/>
-        <Image Margin="94,728,882,470" Source="/IMG/pattern9_text.png" Cursor="Hand"/>
-        <Image Margin="67,796,855,408" Source="/IMG/pattern10_text.png" Cursor="Hand"/>
-        <Image Margin="82,856,870,342" Source="/IMG/pattern11_text.png" Cursor="Hand"/>
-        <Image Margin="63,924,851,282" Source="/IMG/pattern12_text.png" Cursor="Hand"/>
+        <Image x:Name = "StrangeTime" Margin="61,208,849,973" Source="/IMG/patterninactive_button.png"/>
+        <Image x:Name = "SmallTransaction" Margin="61,272,849,909" Source="/IMG/patterninactive_button.png"/>
+        <Image x:Name = "BigTransaction" Margin="61,336,849,845" Source="/IMG/patterninactive_button.png"/>
+        <Image x:Name = "NotValidPassport" Margin="61,400,849,781" Source="/IMG/patterninactive_button.png"/>
+        <Image x:Name = "NotValidAccount" Margin="61,464,849,717" Source="/IMG/patterninactive_button.png"/>
+        <Image x:Name = "DurationPattern" Margin="61,528,849,653" Source="/IMG/patterninactive_button.png"/>
+        <Image x:Name = "DifferentCities" Margin="61,592,849,589" Source="/IMG/patterninactive_button.png"/>
+        <Image x:Name = "TooManyCards" Margin="61,656,849,525" Source="/IMG/patterninactive_button.png"/>
+        <Image x:Name = "TooManyPos" Margin="61,720,849,461" Source="/IMG/patterninactive_button.png"/>
+        <Image x:Name = "TooManyPassports" Margin="61,784,849,397" Source="/IMG/patterninactive_button.png"/>
+        <Image x:Name = "Older" Margin="61,848,849,333" Source="/IMG/patterninactive_button.png"/>
+        <Image x:Name = "CancelledStreak" Margin="61,912,849,269" Source="/IMG/patterninactive_button.png"/>
+        <Image Margin="84,941,888,98" Source="/IMG/search_button.png" MouseDown="PatternGet" Cursor="Hand"/>
+        <Image Margin="110,216,898,982" Source="/IMG/pattern1_text.png" Cursor="Hand" MouseDown="StrangeTimeCheck"/>
+        <Image Margin="74,280,878,918" Source="/IMG/pattern2_text.png" Cursor="Hand" MouseDown="SmallTrn"/>
+        <Image Margin="98,344,886,854" Source="/IMG/pattern3_text.png" Cursor="Hand" MouseDown="BigTrn"/>
+        <Image Margin="66,410,854,790" Source="/IMG/pattern4_text.png" Cursor="Hand" MouseDown="NotValidPas"/>
+        <Image Margin="65,474,853,726" Source="/IMG/pattern5_text.png" Cursor="Hand" MouseDown="NotValidAcc"/>
+        <Image Margin="80,536,868,662" Source="/IMG/pattern6_text.png" Cursor="Hand" MouseDown="Duration"/>
+        <Image Margin="120,599,908,599" Source="/IMG/pattern7_text.png" Cursor="Hand" MouseDown="DifCities"/>
+        <Image Margin="72,666,860,536" Source="/IMG/pattern8_text.png" Cursor="Hand" MouseDown="ManyCards"/>
+        <Image Margin="94,728,882,470" Source="/IMG/pattern9_text.png" Cursor="Hand" MouseDown="ManyPos"/>
+        <Image Margin="67,796,855,408" Source="/IMG/pattern10_text.png" Cursor="Hand" MouseDown="ManyPassports"/>
+        <Image Margin="82,856,870,342" Source="/IMG/pattern11_text.png" Cursor="Hand" MouseDown="OlderPattern"/>
+        <Image Margin="63,924,851,282" Source="/IMG/pattern12_text.png" Cursor="Hand" MouseDown="Cancelled"/>
         <Image Margin="402,223,812,988" Source="/IMG/info_logo.png" ToolTip="Транзакции проведённые с и по заданный промежуток времени"/>
         <Image Margin="402,286,812,924" Source="/IMG/info_logo.png" ToolTip="Транзакции с заданным верхним денежным порогом"/>
         <Image Margin="402,350,812,860" Source="/IMG/info_logo.png" ToolTip="Транзакции с заданным нижним денежным порогом"/>
@@ -56,7 +56,7 @@
         <Image Margin="443,220,596,988" Source="/IMG/pat1_1_text.png" Stretch="Fill"/>
         <Image Margin="443,862,441,346" Source="/IMG/pat11_1_text.png" Stretch="Fill"/>
         <Image Margin="911,862,95,346" Source="/IMG/pat11_2_text.png" Stretch="Fill"/>
-        <Image Margin="1156,848,26,334" Source="/IMG/unchecked_checkbox.png" Stretch="Fill"/>
+        <Image x:Name = "Type" Margin="1156,848,26,334" Source="/IMG/unchecked_checkbox.png"  Cursor="Hand" MouseDown="TransactionType"/>
         <Image Margin="443,923,289,284" Source="/IMG/pat12_1_text.png" Stretch="Fill"/>
         <Image Margin="443,733,239,474" Source="/IMG/pat9_1_text.png" Stretch="Fill"/>
         <Image Margin="443,668,322,538" Source="/IMG/pat8_1_text.png" Stretch="Fill"/>
@@ -72,29 +72,28 @@
         <Image Margin="1058,784,26,397" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
         <Image Margin="1058,720,26,461" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
         <Image Margin="1058,657,26,525" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
-        <Image Margin="446,539,576,669" Source="/IMG/pat7_1_text.png" Stretch="Fill"/>
-        <Image Margin="758,543,192,664" Source="/IMG/pat7_2_text.png" Stretch="Fill"/>
+       
         <Image Margin="1058,528,26,653" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
         <Image Margin="669,525,493,655" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
         <Image Margin="809,848,353,332" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
-        <TextBox HorizontalAlignment="Left" Margin="728,216,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
-        <TextBox HorizontalAlignment="Left" Margin="728,280,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
-        <TextBox HorizontalAlignment="Left" Margin="728,344,0,0" TextWrapping="Wrap" Text="20000" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
-        <TextBox HorizontalAlignment="Left" Margin="1064,409,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
-        <TextBox HorizontalAlignment="Left" Margin="1064,472,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
-        <TextBox HorizontalAlignment="Left" Margin="1064,472,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+            <TextBox x:Name = "StartTimeTp" HorizontalAlignment="Left" Margin="728,216,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+            <TextBox x:Name = "EndTimeTp" HorizontalAlignment="Left" Margin="928,216,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+            <TextBox x:Name = "SmallAmount" HorizontalAlignment="Left" Margin="728,280,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+            <TextBox x:Name = "BigAmount" HorizontalAlignment="Left" Margin="728,344,0,0" TextWrapping="Wrap" Text="20000" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+            <TextBox x:Name = "PassportDays" HorizontalAlignment="Left" Margin="1064,409,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+            <TextBox x:Name = "AccountDays" HorizontalAlignment="Left" Margin="1064,472,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
         <Image Margin="446,541,576,666" Source="/IMG/pat6_1_text.png" Stretch="Fill"/>
         <Image Margin="758,541,192,666" Source="/IMG/pat6_2_text.png" Stretch="Fill"/>
         <Image Margin="446,604,373,604" Source="/IMG/pat7_1_text.png" Stretch="Fill"/>
         <Image Margin="1058,592,26,588" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
-        <TextBox HorizontalAlignment="Left" Margin="1064,538,0,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
-        <TextBox HorizontalAlignment="Left" Margin="675,532,0,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="66" Background="{x:Null}" Height="46" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" TextChanged="TextBox_TextChanged"/>
-        <TextBox HorizontalAlignment="Left" Margin="1064,601,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" TextChanged="TextBox_TextChanged_1"/>
-        <TextBox HorizontalAlignment="Left" Margin="1064,664,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" TextChanged="TextBox_TextChanged_1"/>
-        <TextBox HorizontalAlignment="Left" Margin="1064,728,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" TextChanged="TextBox_TextChanged_1"/>
-        <TextBox HorizontalAlignment="Left" Margin="1064,792,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" TextChanged="TextBox_TextChanged_1"/>
-        <TextBox HorizontalAlignment="Left" Margin="815,855,0,0" TextWrapping="Wrap" Text="75" VerticalAlignment="Top" Width="66" Background="{x:Null}" Height="46" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" TextChanged="TextBox_TextChanged"/>
-        <TextBox HorizontalAlignment="Left" Margin="981,920,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" TextChanged="TextBox_TextChanged_1"/>
+            <TextBox x:Name = "DurationInterval" HorizontalAlignment="Left" Margin="1064,538,0,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+            <TextBox x:Name = "DurationStreak" HorizontalAlignment="Left" Margin="675,532,0,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="66" Background="{x:Null}" Height="46" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+            <TextBox x:Name="CitiesCount" HorizontalAlignment="Left" Margin="1064,601,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+            <TextBox x:Name = "CardCount" HorizontalAlignment="Left" Margin="1064,664,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+            <TextBox x:Name = "PosCount" HorizontalAlignment="Left" Margin="1064,728,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+            <TextBox x:Name = "PassportCount" HorizontalAlignment="Left" Margin="1064,792,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+            <TextBox x:Name="Age" HorizontalAlignment="Left" Margin="815,855,0,0" TextWrapping="Wrap" Text="75" VerticalAlignment="Top" Width="66" Background="{x:Null}" Height="46" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
+            <TextBox x:Name = "StreakCount" HorizontalAlignment="Left" Margin="981,920,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" />
     </Grid>
 
 </Window>
