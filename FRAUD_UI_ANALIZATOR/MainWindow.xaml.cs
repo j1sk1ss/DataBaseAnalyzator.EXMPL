@@ -41,23 +41,30 @@ namespace FRAUD_UI_ANALIZATOR
                 FileName = "Report" };
                 var directoryName = string.Empty;
                     if (folderBrowser.ShowDialog() == true) {
-                        directoryName = Path.GetDirectoryName(folderBrowser.FileName); }
-                    try
-                    { var lst = ExelConstructor.InitList(_transactionsData, _jsonParser.KeyList);
-                        PatternInit(lst);
-                        using var excelPackage = new ExcelPackage();
-                        ExelConstructor.ExcelWrite(excelPackage, _transactionsData, lst);
-                        excelPackage.SaveAs(directoryName + @"\Report.xlsx");
-                        OpenChartsBut.Visibility = Visibility.Visible;
-                        Chart.Series.Clear();
-                        foreach (var t in lst)
-                            Chart.Series.Add(new PieSeries
-                            { Title = $"{t.Split(" ")[0]}",
-                                Values = new ChartValues<int> { t.Split(" ").Length - 1} });
-                        DataContext = this; }
+                        directoryName = Path.GetDirectoryName(folderBrowser.FileName);
+                try
+                {
+                    var lst = ExelConstructor.InitList(_transactionsData, _jsonParser.KeyList);
+                    PatternInit(lst);
+                    using var excelPackage = new ExcelPackage();
+                    ExelConstructor.ExcelWrite(excelPackage, _transactionsData, lst);
+                    excelPackage.SaveAs(directoryName + @"\Report.xlsx");
+                    OpenChartsBut.Visibility = Visibility.Visible;
+                    Chart.Series.Clear();
+                    foreach (var t in lst)
+                        Chart.Series.Add(new PieSeries
+                        {
+                            Title = $"{t.Split(" ")[0]}",
+                            Values = new ChartValues<int> { t.Split(" ").Length - 1 }
+                        });
+                    DataContext = this;
+                }
                 catch (Exception e)
-                { MessageBox.Show($"Error with: {e}", "Error with analysing!", MessageBoxButton.OK, MessageBoxImage.Error);
-                    throw; }
+                {
+                    MessageBox.Show($"Error with: {e}", "Error with analysing!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    throw;
+                }
+            }
         }
 
         private const string path = "pack://application:,,,";
