@@ -22,7 +22,7 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
             for (var i = 3; i < countOfPatterns + 3; i++)
             {
                 fraudSheet.Cells[i, 1].Value = i - 2;
-                fraudSheet.Cells[i, 2].Value = "[" + patterns[i - 3].Replace(" ", ", ") + "]";
+                fraudSheet.Cells[i, 2].Value = "[" + patterns[i - 3].Replace(" ", ", ")[3..] + "]";
             }
             var infoSheet = excelPackage.Workbook.Worksheets.Add("Фрод паттерны");
             infoSheet.Cells[1, 1].Value = "Выявленные фрод паттерны";
