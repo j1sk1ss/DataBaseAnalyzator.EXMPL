@@ -26,9 +26,9 @@ namespace FRAUD_UI_ANALIZATOR
                     FilterIndex = 1,
                     Multiselect = true };
                 if (childhood.ShowDialog() != true) return;
-                var path = childhood.FileName;
-                DbPathLabel.Content = Path.GetFileName(path);
-                _transactionsData = _jsonParser.StartParse(path); }
+                var fileName = childhood.FileName;
+                DbPathLabel.Content = Path.GetFileName(fileName);
+                _transactionsData = _jsonParser.StartParse(fileName); }
             catch (Exception exception) {
                 DbPathLabel.Content = "";
                 MessageBox.Show($"Error with: {exception}", "Error with Parsing!", MessageBoxButton.OK, MessageBoxImage.Error); }
@@ -56,7 +56,9 @@ namespace FRAUD_UI_ANALIZATOR
                     PatternInit(lst);
                     using var excelPackage = new ExcelPackage();
                     ExelConstructor.ExcelWrite(excelPackage, _transactionsData, lst);
-                    excelPackage.SaveAs(directoryName + @"\Report.xlsx"); }
+                    excelPackage.SaveAs(directoryName + @"\Report.xlsx");
+                    OpenChartsBut.Visibility = Visibility.Visible;
+                }
                 catch (Exception e)
                 { MessageBox.Show($"Error with: {e}", "Error with Parsing!", MessageBoxButton.OK, MessageBoxImage.Error);
                     throw;
@@ -142,44 +144,61 @@ namespace FRAUD_UI_ANALIZATOR
                 new BitmapImage(new Uri(@"/IMG/checked_checkbox_1.png", UriKind.Relative)) : 
                 new BitmapImage(new Uri(@"/IMG/unchecked_checkbox.png", UriKind.Relative));
         }
+
+        private void OpenCharts(object sender, RoutedEventArgs routedEventArgs)
+        {
+            Charts.Visibility = Visibility.Visible;
+        }
+
+        private void OpenMenu(object sender, RoutedEventArgs routedEventArgs)
+        {
+            Charts.Visibility = Visibility.Hidden;
+        }
         private void PatternInit(ICollection<string> lst)
         {
-            if (StrangeTime.Source.ToString() == $"{path}/IMG/pattern_button.png") 
-                lst.Add(PatternGetter.GetTimePattern(_transactionsData, _jsonParser.KeyList, 
-                    TimeSpan.Parse(EndTimeTp.Text), TimeSpan.Parse(StartTimeTp.Text)));
-            if (SmallTransaction.Source.ToString() == $"{path}/IMG/pattern_button.png") 
-                lst.Add(PatternGetter.GetSmallAmountPattern(_transactionsData, _jsonParser.KeyList, 
-                    int.Parse(SmallAmount.Text)));
-            if (BigTransaction.Source.ToString() == $"{path}/IMG/pattern_button.png") 
-                lst.Add(PatternGetter.GetBigAmountPattern(_transactionsData, _jsonParser.KeyList, 
-                    int.Parse(BigAmount.Text)));
-            if (NotValidPassport.Source.ToString() == $"{path}/IMG/pattern_button.png") 
-                lst.Add(PatternGetter.GetPassportValidPattern(_transactionsData, _jsonParser.KeyList, 
-                    int.Parse(PassportDays.Text)));
-            if (NotValidAccount.Source.ToString() == $"{path}/IMG/pattern_button.png") 
-                lst.Add(PatternGetter.GetAccountValidPattern(_transactionsData, _jsonParser.KeyList, 
-                    int.Parse(AccountDays.Text)));
-            if (DurationPattern.Source.ToString() == $"{path}/IMG/pattern_button.png") 
-                lst.Add(PatternGetter.GetTimeDurationPattern(_transactionsData, _jsonParser.KeyList, 
-                    int.Parse(DurationStreak.Text), TimeSpan.Parse(DurationInterval.Text)));
-            if (DifferentCities.Source.ToString() == $"{path}/IMG/pattern_button.png") 
-                lst.Add(PatternGetter.GetDifferentCityPattern(_transactionsData, _jsonParser.KeyList, 
-                    int.Parse(CitiesCount.Text)));
-            if (TooManyCards.Source.ToString() == $"{path}/IMG/pattern_button.png") 
-                lst.Add(PatternGetter.GetDifferentCityPattern(_transactionsData, _jsonParser.KeyList, 
-                    int.Parse(CardCount.Text)));
-            if (TooManyPos.Source.ToString() == $"{path}/IMG/pattern_button.png") 
-                lst.Add(PatternGetter.GetDifferentCityPattern(_transactionsData, _jsonParser.KeyList, 
-                    int.Parse(PosCount.Text)));
-            if (TooManyPassports.Source.ToString() == $"{path}/IMG/pattern_button.png") 
-                lst.Add(PatternGetter.GetDifferentCityPattern(_transactionsData, _jsonParser.KeyList, 
-                    int.Parse(PassportCount.Text)));
-            if (Older.Source.ToString() == $"{path}/IMG/pattern_button.png") 
-                lst.Add(PatternGetter.GetOldersPattern(_transactionsData, _jsonParser.KeyList, 
-                    int.Parse(Age.Text), Type.Source.ToString() == $"{path}/IMG/unchecked_checkbox.png"));
-            if (CancelledStreak.Source.ToString() == $"{path}/IMG/pattern_button.png") 
-                lst.Add(PatternGetter.GetCancelledPattern(_transactionsData, _jsonParser.KeyList, 
-                    int.Parse(StreakCount.Text)));
+            try
+            { 
+                if (StrangeTime.Source.ToString() == $"{path}/IMG/pattern_button.png") 
+                    lst.Add(PatternGetter.GetTimePattern(_transactionsData, _jsonParser.KeyList, 
+                        TimeSpan.Parse(EndTimeTp.Text), TimeSpan.Parse(StartTimeTp.Text)));
+                if (SmallTransaction.Source.ToString() == $"{path}/IMG/pattern_button.png") 
+                    lst.Add(PatternGetter.GetSmallAmountPattern(_transactionsData, _jsonParser.KeyList, 
+                        int.Parse(SmallAmount.Text)));
+                if (BigTransaction.Source.ToString() == $"{path}/IMG/pattern_button.png") 
+                    lst.Add(PatternGetter.GetBigAmountPattern(_transactionsData, _jsonParser.KeyList, 
+                        int.Parse(BigAmount.Text)));
+                if (NotValidPassport.Source.ToString() == $"{path}/IMG/pattern_button.png") 
+                    lst.Add(PatternGetter.GetPassportValidPattern(_transactionsData, _jsonParser.KeyList, 
+                        int.Parse(PassportDays.Text)));
+                if (NotValidAccount.Source.ToString() == $"{path}/IMG/pattern_button.png") 
+                    lst.Add(PatternGetter.GetAccountValidPattern(_transactionsData, _jsonParser.KeyList, 
+                        int.Parse(AccountDays.Text)));
+                if (DurationPattern.Source.ToString() == $"{path}/IMG/pattern_button.png") 
+                    lst.Add(PatternGetter.GetTimeDurationPattern(_transactionsData, _jsonParser.KeyList, 
+                        int.Parse(DurationStreak.Text), TimeSpan.Parse(DurationInterval.Text)));
+                if (DifferentCities.Source.ToString() == $"{path}/IMG/pattern_button.png") 
+                    lst.Add(PatternGetter.GetDifferentCityPattern(_transactionsData, _jsonParser.KeyList, 
+                        int.Parse(CitiesCount.Text)));
+                if (TooManyCards.Source.ToString() == $"{path}/IMG/pattern_button.png") 
+                    lst.Add(PatternGetter.GetMultiCardPattern(_transactionsData, _jsonParser.KeyList, 
+                        int.Parse(CardCount.Text)));
+                if (TooManyPos.Source.ToString() == $"{path}/IMG/pattern_button.png") 
+                    lst.Add(PatternGetter.GetMultiPosPatter(_transactionsData, _jsonParser.KeyList, 
+                        int.Parse(PosCount.Text)));
+                if (TooManyPassports.Source.ToString() == $"{path}/IMG/pattern_button.png") 
+                    lst.Add(PatternGetter.GetMultiPassportCard(_transactionsData, _jsonParser.KeyList, 
+                        int.Parse(PassportCount.Text)));
+                if (Older.Source.ToString() == $"{path}/IMG/pattern_button.png") 
+                    lst.Add(PatternGetter.GetOldersPattern(_transactionsData, _jsonParser.KeyList, 
+                        int.Parse(Age.Text), Type.Source.ToString() == $"{path}/IMG/unchecked_checkbox.png"));
+                if (CancelledStreak.Source.ToString() == $"{path}/IMG/pattern_button.png") 
+                    lst.Add(PatternGetter.GetCancelledPattern(_transactionsData, _jsonParser.KeyList, 
+                        int.Parse(StreakCount.Text)));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Error with: {e}", "Pattern getting error!", MessageBoxButton.OK);
+            }
         }
     }
 }

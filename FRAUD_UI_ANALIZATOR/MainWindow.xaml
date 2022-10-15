@@ -7,7 +7,7 @@
         WindowStyle="SingleBorderWindow"
         Height="1240" Width="1240"
         ResizeMode="NoResize">
-    <Grid Margin="0, 0, 0, 0" Height="1240" Width="1240">
+    <Grid Margin="-50, -30, 0, 45" Height="1240" Width="1240">
         <Image Margin="26,35,26,1125" Source="/IMG/gray_bg.png"/>
         <Image Margin="61,51,865,1141" Source="/IMG/data_text.png"/>
         <Image Margin="402,46,254,1136" Source="/IMG/path_pic.png"/>
@@ -27,7 +27,7 @@
         <Image x:Name = "TooManyPassports" Margin="61,784,849,397" Source="/IMG/patterninactive_button.png"/>
         <Image x:Name = "Older" Margin="61,848,849,333" Source="/IMG/patterninactive_button.png"/>
         <Image x:Name = "CancelledStreak" Margin="61,912,849,269" Source="/IMG/patterninactive_button.png"/>
-        <Image Margin="84,941,888,98" Source="/IMG/search_button.png" MouseDown="PatternGet" Cursor="Hand"/>
+
         <Image Margin="110,216,898,982" Source="/IMG/pattern1_text.png" Cursor="Hand" MouseDown="StrangeTimeCheck"/>
         <Image Margin="74,280,878,918" Source="/IMG/pattern2_text.png" Cursor="Hand" MouseDown="SmallTrn"/>
         <Image Margin="98,344,886,854" Source="/IMG/pattern3_text.png" Cursor="Hand" MouseDown="BigTrn"/>
@@ -94,6 +94,10 @@
             <TextBox x:Name = "PassportCount" HorizontalAlignment="Left" Margin="1064,792,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
             <TextBox x:Name="Age" HorizontalAlignment="Left" Margin="815,855,0,0" TextWrapping="Wrap" Text="75" VerticalAlignment="Top" Width="66" Background="{x:Null}" Height="46" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
             <TextBox x:Name = "StreakCount" HorizontalAlignment="Left" Margin="981,920,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" />
+        <Image Margin="-900,780,0,0" Height="45" Source="/IMG/search_button.png" MouseDown="PatternGet" Cursor="Hand" />
+        <Canvas x:Name = "Charts" Background="Azure" Visibility="Hidden"></Canvas>
+        <Button Height="25" Width="300" Margin="-790,-960,0,0" Click="OpenMenu"></Button>
+        <Button x:Name = "OpenChartsBut" Height="25" Width="300" Margin="-90,-960,0,0" Click="OpenCharts" Visibility="Hidden"></Button>
     </Grid>
 
 </Window>

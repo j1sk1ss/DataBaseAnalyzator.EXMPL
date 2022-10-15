@@ -72,7 +72,7 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
                     (current, t) => current + keys[i] + " ");
                 if (tmp.Split(" ").Length >= cities) answer += keys[i] + " "; } 
             return answer; }
-        public static string GetMultiCardPattern(Dictionary<string, TransactiondData> data, List<string> keys) 
+        public static string GetMultiCardPattern(Dictionary<string, TransactiondData> data, List<string> keys, int copyCount) 
         {
             var answer = string.Empty; 
             for (var i = 0; i < data.Count; i++) {
@@ -81,41 +81,40 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
                     for (var j = 0; j < data.Count; j++) {
                         if (i == j) continue;
                         if (data[$"{keys[i]}"].Passport == data[$"{keys[j]}"].Passport && data[$"{keys[i]}"].Card != data
-                                [$"{keys[j]}"].Card) {
-                            count++;
-                            answer += keys[i] + " "; }
-                        if (count > 5) break; }
-                    answer += "\n"; }
-            return answer; 
-        }
-        public static string GetMultiPosPatter(Dictionary<string, TransactiondData> data, List<string> keys)
-        {
-            var answer = string.Empty; 
-            var posCount = 0;
-            for (var i = 0; i < data.Count; i++) {
-                for (var j = 0; j < data.Count; j++) {
-                    if (i == j) continue;
-                    if (data[$"{keys[i]}"].Address != data[$"{keys[j]}"].Address || data[$"{keys[i]}"].Terminal == data[$"" +
-                            $"{keys[j]}"].Terminal ||
-                        data[$"{keys[i]}"].TerminalType != "POS" || data[$"{keys[i]}"].Passport == data[$"{keys[j]}"].
-                            Passport) continue;
-                    posCount++;
-                    if (posCount < 5) continue;
-                    answer += keys[i] + " ";
-                    posCount = 0;
-                    break; } 
+                                [$"{keys[j]}"].Card) if (++count < copyCount) continue;
+                        answer += keys[i] + " ";
+                        break; }
             }
             return answer; 
         }
-        public static string GetMultiPassportCard(Dictionary<string, TransactiondData> data, List<string> keys)
+        public static string GetMultiPosPatter(Dictionary<string, TransactiondData> data, List<string> keys, int copyCount)
         {
             var answer = string.Empty; 
-            for (var i = 0; i < data.Count; i++) {
-                for (var j = 0; j < data.Count; j++) {
-                    if (i == j) continue;
-                    if (data[$"{keys[i]}"].Card == data[$"{keys[j]}"].Card && data[$"{keys[i]}"].Passport != data[$"{keys[j]}"].
-                            Passport) answer += keys[i] + " ";
-                    break; } 
+            var posCount = 0;
+            for (var i = 0; i < data.Count; i++)
+            {
+                if (!data.Where((t, j) => i != j && (data[$"{keys[i]}"].Address ==
+                                                     data[$"{keys[j]}"].Address && data[$"{keys[i]}"].Terminal != data[$"" +
+                                                         $"{keys[j]}"].Terminal &&
+                                                     data[$"{keys[i]}"].TerminalType == "POS" && data[$"{keys[i]}"].Passport
+                                                     != data[$"{keys[j]}"].Passport))
+                        .Any(t => ++posCount >= copyCount)) continue;
+                answer += keys[i] + " ";
+                posCount = 0;
+            }
+            return answer; 
+        }
+        public static string GetMultiPassportCard(Dictionary<string, TransactiondData> data, List<string> keys, int copyCount)
+        {
+            var answer = string.Empty;
+            for (var i = 0; i < data.Count; i++)
+            {
+                var count = 0;
+                answer = data.Where((t, j) => i != j && (data[$"{keys[i]}"].Card == 
+                    data[$"{keys[j]}"].Card && data[$"{keys[i]}"].Passport != data[$"{keys[j]}"].Passport)).
+                    Where(t => ++count > copyCount).Aggregate(answer, (current, 
+                        t) => current + (keys[i] + " "));
+                count = 0;
             }
             return answer; 
         }
