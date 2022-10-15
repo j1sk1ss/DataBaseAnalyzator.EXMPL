@@ -139,5 +139,15 @@ namespace FRAUD_UI_ANALIZATOR
             catch (Exception e) {
                 MessageBox.Show($"Error with: {e}", "Pattern getting error!", MessageBoxButton.OK); }
         }
+
+        private void StreakCount_Copy_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void StreakCount_Copy1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

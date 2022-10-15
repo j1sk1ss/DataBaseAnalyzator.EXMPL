@@ -166,10 +166,6 @@
       <Resource Include="IMG\pat12_1_text.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
-      <None Remove="IMG\pat13_1_text.png" />
-      <Resource Include="IMG\pat13_1_text.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Resource>
       <None Remove="IMG\pat13_2_text.png" />
       <Resource Include="IMG\pat13_2_text.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

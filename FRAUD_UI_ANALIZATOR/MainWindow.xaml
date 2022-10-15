@@ -117,12 +117,14 @@
             <Image x:Name = "CancelledStreak_Copy" Margin="62,865,848,170" Source="/IMG/patterninactive_button.png" Grid.Row="1"/>
             <Image Margin="875,878,187,184" Source="/IMG/pat13_2_text.png" Stretch="Fill" Grid.Row="1"/>
             <Image Margin="402,880,812,184" Source="/IMG/info_logo.png" ToolTip="Транзакции сделанные из ряда неудачных попыток транзакций" Grid.Row="1"/>
-            <Image Margin="713,865,371,170" Source="/IMG/gray_textbox.png" Stretch="Fill" Grid.Row="1"/>
-            <Image Margin="437,878,543,183" Source="/IMG/pat13_1_text.png" Stretch="Fill" Grid.Row="1"/>
-            <Image Margin="1058,865,26,170" Source="/IMG/gray_textbox.png" Stretch="Fill" Grid.Row="1"/>
-            <Image Margin="858,109,195,953" Source="/IMG/pat1_2_text.png" Stretch="Fill" Grid.Row="1"/>
-            <Image Margin="94,874,882,178" Source="/IMG/pattern13_text.png" Stretch="Fill" Grid.Row="1"/>
-            <Image Margin="66,136,482,1046" Source="/IMG/tabs.png" Stretch="Fill" Grid.RowSpan="2"/>
+            <Image Margin="94,873,882,179" Grid.Row="1" Source="/IMG/pattern13_text.png" Stretch="Fill"/>
+            <Image Margin="446,878,534,183" Grid.Row="1" Source="/IMG/pat13_1_text.png" Stretch="Fill"/>
+            <Image Margin="711,866,373,170" Source="/IMG/gray_textbox.png" Stretch="Fill" Grid.Row="1"/>
+            <Image Margin="1058,866,26,170" Source="/IMG/gray_textbox.png" Stretch="Fill" Grid.Row="1"/>
+            <Image Margin="65,138,483,1044" Source="/IMG/tabs.png" Stretch="Fill" Grid.RowSpan="2"/>
+            <TextBox x:Name = "StreakCount_Copy" HorizontalAlignment="Left" Margin="717,874,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" Grid.Row="1" TextChanged="StreakCount_Copy_TextChanged" />
+            <TextBox x:Name = "StreakCount_Copy1" HorizontalAlignment="Left" Margin="1066,873,0,0" TextWrapping="Wrap" Text="Это в часах?" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" Grid.Row="1" TextChanged="StreakCount_Copy1_TextChanged" />
+
         </Grid>
     </Viewbox>
 </Window>
