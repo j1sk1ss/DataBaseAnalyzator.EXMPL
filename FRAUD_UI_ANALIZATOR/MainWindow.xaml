@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         WindowStyle="SingleBorderWindow"
         Height="1240" Width="1240"
@@ -27,7 +28,6 @@
         <Image x:Name = "TooManyPassports" Margin="61,784,849,397" Source="/IMG/patterninactive_button.png"/>
         <Image x:Name = "Older" Margin="61,848,849,333" Source="/IMG/patterninactive_button.png"/>
         <Image x:Name = "CancelledStreak" Margin="61,912,849,269" Source="/IMG/patterninactive_button.png"/>
-
         <Image Margin="110,216,898,982" Source="/IMG/pattern1_text.png" Cursor="Hand" MouseDown="StrangeTimeCheck"/>
         <Image Margin="74,280,878,918" Source="/IMG/pattern2_text.png" Cursor="Hand" MouseDown="SmallTrn"/>
         <Image Margin="98,344,886,854" Source="/IMG/pattern3_text.png" Cursor="Hand" MouseDown="BigTrn"/>
@@ -72,7 +72,6 @@
         <Image Margin="1058,784,26,397" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
         <Image Margin="1058,720,26,461" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
         <Image Margin="1058,657,26,525" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
-       
         <Image Margin="1058,528,26,653" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
         <Image Margin="669,525,493,655" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
         <Image Margin="809,848,353,332" Source="/IMG/gray_textbox.png" Stretch="Fill"/>
@@ -95,7 +94,18 @@
             <TextBox x:Name="Age" HorizontalAlignment="Left" Margin="815,855,0,0" TextWrapping="Wrap" Text="75" VerticalAlignment="Top" Width="66" Background="{x:Null}" Height="46" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift"/>
             <TextBox x:Name = "StreakCount" HorizontalAlignment="Left" Margin="981,920,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" />
         <Image Margin="-900,780,0,0" Height="45" Source="/IMG/search_button.png" MouseDown="PatternGet" Cursor="Hand" />
-        <Canvas x:Name = "Charts" Background="Azure" Visibility="Hidden"></Canvas>
+        <Canvas x:Name = "Charts" Background="Azure" Visibility="Hidden">
+            <Grid>
+                <lvc:PieChart x:Name="Chart" LegendLocation="Bottom" Height="700" Width="700" Hoverable="True" InnerRadius="390" Margin="275">
+                    <lvc:PieChart.ChartLegend>
+                        <lvc:DefaultLegend BulletSize="15"></lvc:DefaultLegend>
+                    </lvc:PieChart.ChartLegend>
+                    <lvc:PieChart.DataTooltip>
+                        <lvc:DefaultTooltip BulletSize="20"></lvc:DefaultTooltip>
+                    </lvc:PieChart.DataTooltip>
+                </lvc:PieChart>
+            </Grid>
+        </Canvas>
         <Button Height="25" Width="300" Margin="-790,-960,0,0" Click="OpenMenu"></Button>
         <Button x:Name = "OpenChartsBut" Height="25" Width="300" Margin="-90,-960,0,0" Click="OpenCharts" Visibility="Hidden"></Button>
     </Grid>

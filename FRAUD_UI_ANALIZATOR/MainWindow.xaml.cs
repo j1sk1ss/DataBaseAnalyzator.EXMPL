@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using FRAUD_UI_ANALIZATOR.SCRIPTS;
+using LiveCharts;
+using LiveCharts.Wpf;
 using Microsoft.Win32;
 using OfficeOpenXml;
 using Path = System.IO.Path;
@@ -11,7 +14,6 @@ namespace FRAUD_UI_ANALIZATOR
 {
     public partial class MainWindow
     {
-        private Animations _animations = new();
         public MainWindow()
         {
             InitializeComponent();
@@ -51,14 +53,23 @@ namespace FRAUD_UI_ANALIZATOR
                 var directoryName = string.Empty;
                     if (folderBrowser.ShowDialog() == true) {
                         directoryName = Path.GetDirectoryName(folderBrowser.FileName); }
-                try {
-                    var lst = ExelConstructor.InitList(_transactionsData, _jsonParser.KeyList);
-                    PatternInit(lst);
-                    using var excelPackage = new ExcelPackage();
-                    ExelConstructor.ExcelWrite(excelPackage, _transactionsData, lst);
-                    excelPackage.SaveAs(directoryName + @"\Report.xlsx");
-                    OpenChartsBut.Visibility = Visibility.Visible;
-                }
+
+                    try
+                    {
+                        var lst = ExelConstructor.InitList(_transactionsData, _jsonParser.KeyList);
+                        PatternInit(lst);
+                        using var excelPackage = new ExcelPackage();
+                        ExelConstructor.ExcelWrite(excelPackage, _transactionsData, lst);
+                        excelPackage.SaveAs(directoryName + @"\Report.xlsx");
+                        OpenChartsBut.Visibility = Visibility.Visible;
+                        for (var i = 0; i < lst.Count; i++)
+                            Chart.Series.Add(new PieSeries
+                            {
+                                Title = $"{i}",
+                                Values = new ChartValues<int> { lst[i].Split(" ").Length }
+                            });
+                        DataContext = this;
+                    }
                 catch (Exception e)
                 { MessageBox.Show($"Error with: {e}", "Error with Parsing!", MessageBoxButton.OK, MessageBoxImage.Error);
                     throw;
@@ -154,6 +165,8 @@ namespace FRAUD_UI_ANALIZATOR
         {
             Charts.Visibility = Visibility.Hidden;
         }
+        [SuppressMessage("ReSharper.DPA", "DPA0003: Excessive memory allocations in LOH", MessageId = "type: System.String")]
+        [SuppressMessage("ReSharper.DPA", "DPA0002: Excessive memory allocations in SOH", MessageId = "type: System.String")]
         private void PatternInit(ICollection<string> lst)
         {
             try

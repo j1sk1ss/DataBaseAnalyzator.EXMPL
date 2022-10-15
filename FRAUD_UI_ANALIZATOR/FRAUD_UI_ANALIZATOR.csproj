@@ -204,4 +204,8 @@
       </Resource>
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="SCRIPTS\Animations.cs" />
+    </ItemGroup>
+
 </Project>
