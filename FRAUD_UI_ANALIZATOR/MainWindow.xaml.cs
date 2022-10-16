@@ -4,9 +4,11 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using FRAUD_UI_ANALIZATOR.SCRIPTS;
 using LiveCharts;
+using LiveCharts.Definitions.Charts;
 using LiveCharts.Helpers;
 using LiveCharts.Wpf;
 using Microsoft.Win32;
@@ -31,6 +33,7 @@ namespace FRAUD_UI_ANALIZATOR
                 MessageBox.Show($"Error with: {exception}", "Error with Parsing!", MessageBoxButton.OK, MessageBoxImage.Error); } 
         }
         private readonly List<string> _excel = new();
+        [SuppressMessage("ReSharper.DPA", "DPA0003: Excessive memory allocations in LOH", MessageId = "type: System.String")]
         private void PatternGet(object sender, RoutedEventArgs routedEventArgs)
         { if (_transactionsData.Count < 1)
             { MessageBox.Show("Load Json before start!", "Pattern getting error!", MessageBoxButton.OK,
@@ -48,7 +51,6 @@ namespace FRAUD_UI_ANALIZATOR
             DataContext = this;
             
         }
-        
         private void SaveToExcel(object sender, RoutedEventArgs routedEventArgs)
         {
             var folderBrowser = new OpenFileDialog
@@ -102,12 +104,14 @@ namespace FRAUD_UI_ANALIZATOR
             Tabs.Source = new BitmapImage(new Uri(@"/IMG/tabs2.png", UriKind.Relative));
             Charts.Visibility = Visibility.Visible;
             MoreAboutChart.Visibility = Visibility.Hidden;
+            SavedCharts.Visibility = Visibility.Visible;
         }
         private void OpenMenu(object sender, RoutedEventArgs routedEventArgs)
         {
             Tabs.Source = new BitmapImage(new Uri(@"/IMG/tabs.png", UriKind.Relative));
             Charts.Visibility = Visibility.Hidden;
             MoreAboutChart.Visibility = Visibility.Hidden;
+            SavedCharts.Visibility = Visibility.Hidden;
         }
         private void PatternInit(ICollection<string> lst) 
         { try
@@ -153,11 +157,14 @@ namespace FRAUD_UI_ANALIZATOR
             catch (Exception e) {
                 MessageBox.Show($"Error with: {e}", "Pattern getting error!", MessageBoxButton.OK); }
         }
-
-        [SuppressMessage("ReSharper.DPA", "DPA0003: Excessive memory allocations in LOH", MessageId = "type: System.String")]
-        [SuppressMessage("ReSharper.DPA", "DPA0002: Excessive memory allocations in SOH", MessageId = "type: System.String")]
         private void InformationAboutOnePPattern(object sender, ChartPoint chartPoint)
         {
+            if (_cartesianCharts.Keys.Contains(chartPoint.SeriesView.Title))
+            {
+                MoreAboutChart.Visibility = Visibility.Visible;
+                GetSaved(chartPoint.SeriesView.Title);
+                return;
+            }
             const string str = "SAP . BAP . PVP . AVP . DCP . MCP . MPP . MPC . CSP";
             if (!str.Contains(chartPoint.SeriesView.Title)) return;
             Dictionary<string, string> patternsByName = new()
@@ -175,7 +182,7 @@ namespace FRAUD_UI_ANALIZATOR
             try
             {
                 var array = PatternHandler.GenerateFewPatternScales(typeof(PatternGetter).GetMethod(patternsByName[chartPoint.SeriesView.Title]), 
-                    1, 5, 5, _transactionsData, _jsonParser.KeyList);
+                    int.Parse(StartValue.Text), int.Parse(StreakCount.Text), int.Parse(Step.Text), _transactionsData, _jsonParser.KeyList);
                 CartesianChart.Series = new SeriesCollection
                 {
                     new LineSeries
@@ -184,6 +191,7 @@ namespace FRAUD_UI_ANALIZATOR
                         Values = array.AsChartValues()
                     }
                 };
+                AddToCash(chartPoint.SeriesView.Title, CartesianChart);
                 DataContext = this;
             }
             catch (Exception e)
@@ -193,42 +201,71 @@ namespace FRAUD_UI_ANALIZATOR
             }
             MoreAboutChart.Visibility = Visibility.Visible;
         }
-
-        [SuppressMessage("ReSharper.DPA", "DPA0003: Excessive memory allocations in LOH", MessageId = "type: System.String; size: 3192MB")]
-        [SuppressMessage("ReSharper.DPA", "DPA0002: Excessive memory allocations in SOH", MessageId = "type: System.String; size: 1340MB")]
+        Dictionary<string, string> patternsByName = new()
+        {
+            {"SAP", "GetSmallAmountPattern"},
+            {"BAP", "GetBigAmountPattern"},
+            {"PVP", "GetPassportValidPattern"},
+            {"AVP", "GetAccountValidPattern"},
+            {"DCP", "GetDifferentCityPattern"},
+            {"MCP", "GetMultiCardPattern"},
+            {"MPP", "GetMultiPosPatter"},
+            {"MPC", "GetMultiPassportAccount"},
+            {"CSP", "GetCancelledStreakPattern"} };
         private void Regenerate(object sender, RoutedEventArgs routedEventArgs)
         {
-            Dictionary<string, string> patternsByName = new()
-            {
-                {"SAP", "GetSmallAmountPattern"},
-                {"BAP", "GetBigAmountPattern"},
-                {"PVP", "GetPassportValidPattern"},
-                {"AVP", "GetAccountValidPattern"},
-                {"DCP", "GetDifferentCityPattern"},
-                {"MCP", "GetMultiCardPattern"},
-                {"MPP", "GetMultiPosPatter"},
-                {"MPC", "GetMultiPassportAccount"},
-                {"CSP", "GetCancelledStreakPattern"}
-            };
-            try
-            {
+            try {
                 var array = PatternHandler.GenerateFewPatternScales(typeof(PatternGetter).GetMethod(patternsByName[CartesianChart.Series[0].Title]), 
                     int.Parse(StartValue.Text), int.Parse(CountStep.Text), int.Parse(Step.Text), _transactionsData, _jsonParser.KeyList);
+                CartesianChart.Series = new SeriesCollection {
+                    new LineSeries {
+                        Title = CartesianChart.Series[0].Title,
+                        Values = array.AsChartValues() }
+                };
+                DataContext = this;
+                AddToCash(CartesianChart.Series[0].Title,CartesianChart);
+            }
+            catch (Exception e) {
+                MessageBox.Show(e.ToString(), "error", MessageBoxButton.OK, MessageBoxImage.Error); }
+        }
+        private readonly Dictionary<string, IChartValues> _cartesianCharts = new();
+        private void AddToCash(string name, IChartView cartesianChart)
+        {
+            if (!_cartesianCharts.ContainsKey(name))
+            {
+                _cartesianCharts.Add(name, cartesianChart.Series[0].Values);
+                SavedCharts.Children.Add(new Image
+                {
+                    Name = name,
+                        Margin = new Thickness(1200,_cartesianCharts.Count * 60 + 500,0,0),
+                            Source = new BitmapImage(new Uri(@"/IMG/Graph_inactive_tab.png", UriKind.Relative)),
+                                Cursor = Cursors.Hand
+                });
+                SavedCharts.Children[^1].MouseDown += delegate { GetSaved(name); };
+                SavedCharts.Children.Add(new Label
+                {
+                    Content = name,
+                        Margin = new Thickness(1200,_cartesianCharts.Count * 60 + 500,0,0),
+                });
+            }
+            else
+            {
+                _cartesianCharts[name] = cartesianChart.Series[0].Values;
+            }
+        }
+        private void GetSaved(string buttonName)
+        {
+            try
+            {
                 CartesianChart.Series = new SeriesCollection
                 {
                     new LineSeries
-                    {
-                        Title = CartesianChart.Series[0].Title,
-                        Values = array.AsChartValues()
-                    }
+                    { Title = buttonName,
+                        Values = _cartesianCharts[buttonName]}
                 };
-                DataContext = this;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.ToString(), "error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+                DataContext = this; }
+            catch (Exception e) {
+                MessageBox.Show(e.ToString(), "error", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
     }
 }

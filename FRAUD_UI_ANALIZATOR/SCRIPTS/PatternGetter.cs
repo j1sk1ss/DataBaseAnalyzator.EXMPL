@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Threading.Tasks;
+
 namespace FRAUD_UI_ANALIZATOR.SCRIPTS
 {
     public class PatternGetter : PatternHandler
