@@ -36,7 +36,7 @@ namespace FRAUD_UI_ANALIZATOR
             { MessageBox.Show("Load Json before start!", "Pattern getting error!", MessageBoxButton.OK,
                     MessageBoxImage.Error);
                 return; }
-            
+            _excel.Clear();
             PatternInit(_excel);
             Chart.Series.Clear();
             foreach (var t in _excel)
