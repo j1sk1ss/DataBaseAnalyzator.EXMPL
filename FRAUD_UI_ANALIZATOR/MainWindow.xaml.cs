@@ -258,9 +258,16 @@ namespace FRAUD_UI_ANALIZATOR
                 CheckPathExists = true,
                 Filter = "txt files (*.txt)|*.txt",
                 FileName = $"Local_Report_{(int)chartPoint.X}_{chartPoint.SeriesView.Title}" };
-            if (folderBrowser.ShowDialog() == true)
+            if (folderBrowser.ShowDialog() != true) return;
+            try
             {
-                File.WriteAllText(folderBrowser.FileName, PatternHandler.GlAr[(int)chartPoint.X]);
+                File.WriteAllText(folderBrowser.FileName, PatternHandler.ExtendedData[oneParamPatternsByName[chartPoint.SeriesView.Title]][(int)chartPoint.X]);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"{e}", "Error with saving local file!", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                throw;
             }
 
         }

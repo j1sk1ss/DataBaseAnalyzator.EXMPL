@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Windows;
 
 namespace FRAUD_UI_ANALIZATOR.SCRIPTS
 {
     public class PatternHandler
     {
-        public static readonly List<string> GlAr = new List<string>();
+        public static readonly Dictionary<string, List<string>> ExtendedData = new();
         public static int[] GenerateFewPatternScales(MethodInfo action,int startStreak, int streaks, int step, Dictionary<string, TransactiondData> data, List<string> keys)
         {
-            GlAr.Clear();
+            List<string> GlAr = new();
             var strArray = new int[streaks];
-            var strDoubleArray = new int[streaks, streaks];
             for (var i = 0; i < streaks; i += 1)
             {
                 GlAr.Add((string)action.Invoke(typeof(PatternGetter), new object[] { data, keys, (i * step) + startStreak }));
                 strArray[i] = GlAr[i].Split(" ").Length;
             }
-
+            if (!ExtendedData.ContainsKey(action.Name)) ExtendedData.Add(action.Name, GlAr);
+            else { ExtendedData[action.Name] = GlAr; }
             return strArray;
         }
         protected static string PrintArray(IEnumerable<int> array)
