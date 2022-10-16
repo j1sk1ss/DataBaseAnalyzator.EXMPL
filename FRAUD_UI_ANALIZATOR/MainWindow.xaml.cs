@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -32,13 +30,11 @@ namespace FRAUD_UI_ANALIZATOR
                 DbPathLabel.Content = System.IO.Path.GetFileName(fileName);
                 _transactionsData = _jsonParser.StartParse(fileName); }
             catch (Exception exception) { DbPathLabel.Content = "";
-                MessageBox.Show($"Error with: {exception}", "Error with Parsing!", MessageBoxButton.OK, MessageBoxImage.Error); } 
-        }
+                MessageBox.Show($"Error with: {exception}", "Error with Parsing!", MessageBoxButton.OK, MessageBoxImage.Error); } }
         private readonly List<string> _excel = new();
         [SuppressMessage("ReSharper.DPA", "DPA0003: Excessive memory allocations in LOH", MessageId = "type: System.String")]
         private void PatternGet(object sender, RoutedEventArgs routedEventArgs)
-        {    
-            if (_transactionsData.Count < 1)
+        { if (_transactionsData.Count < 1)
             { MessageBox.Show("Load Json before start!", "Pattern getting error!", MessageBoxButton.OK,
                     MessageBoxImage.Error);
                 return; }
@@ -47,16 +43,11 @@ namespace FRAUD_UI_ANALIZATOR
             Chart.Series.Clear();
             foreach (var t in _excel)
                 Chart.Series.Add(new PieSeries
-                {
-                    Title = $"{t.Split(" ")[0]}",
-                    Values = new ChartValues<int> { t.Split(" ").Length - 1 }
-                });
-            DataContext = this;
-            
-        }
+                { Title = $"{t.Split(" ")[0]}",
+                    Values = new ChartValues<int> { t.Split(" ").Length - 1 } });
+            DataContext = this; }
         private void SaveToExcel(object sender, RoutedEventArgs routedEventArgs)
-        {
-            var folderBrowser = new OpenFileDialog
+        { var folderBrowser = new OpenFileDialog
             { ValidateNames = false,
                 CheckFileExists = false,
                 CheckPathExists = true,
@@ -64,16 +55,12 @@ namespace FRAUD_UI_ANALIZATOR
             if (folderBrowser.ShowDialog() != true) return;
             var directoryName = System.IO.Path.GetDirectoryName(folderBrowser.FileName);
             try
-            {
-                using var excelPackage = new ExcelPackage();
+            { using var excelPackage = new ExcelPackage();
                 ExelConstructor.ExcelWrite(excelPackage, _transactionsData, _excel);
                 excelPackage.SaveAs(directoryName + @"\Report.xlsx");
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show($"Error with: {e}", "Error with analysing!", MessageBoxButton.OK, MessageBoxImage.Error);
-                throw;
-            }
+            } catch (Exception e)
+            { MessageBox.Show($"Error with: {e}", "Error with analysing!", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw; }
         }
         private const string Path = "pack://application:,,,";
         private void ValueChanger(object sender, RoutedEventArgs routedEventArgs)
@@ -91,8 +78,7 @@ namespace FRAUD_UI_ANALIZATOR
                 {"b_10", TooManyPassports},
                 {"b_11", Older},
                 {"b_12", CancelledStreak},
-                {"b_13", ManyTransactions}
-            };
+                {"b_13", ManyTransactions} };
             if (obj == null) return;
             var img = checkers[$"{obj.Name}"];
             img.Source = img.Source.ToString() == $"{Path}/IMG/patterninactive_button.png" ?
@@ -103,19 +89,19 @@ namespace FRAUD_UI_ANALIZATOR
                 new BitmapImage(new Uri(@"/IMG/checked_checkbox_1.png", UriKind.Relative)) : 
                 new BitmapImage(new Uri(@"/IMG/unchecked_checkbox.png", UriKind.Relative)); }
         private void OpenCharts(object sender, RoutedEventArgs routedEventArgs)
-        {
+        {   foreach (var obj in _buttons)
+            { obj.Source =
+                new BitmapImage(new Uri($@"IMG/Graph_inactive_tab.png", UriKind.Relative)); }
             Tabs.Source = new BitmapImage(new Uri(@"/IMG/tabs2.png", UriKind.Relative));
             Charts.Visibility = Visibility.Visible;
             MoreAboutChart.Visibility = Visibility.Hidden;
-            SavedCharts.Visibility = Visibility.Visible;
-        }
+            SavedCharts.Visibility = Visibility.Visible; }
         private void OpenMenu(object sender, RoutedEventArgs routedEventArgs)
         {
             Tabs.Source = new BitmapImage(new Uri(@"/IMG/tabs.png", UriKind.Relative));
             Charts.Visibility = Visibility.Hidden;
             MoreAboutChart.Visibility = Visibility.Hidden;
-            SavedCharts.Visibility = Visibility.Hidden;
-        }
+            SavedCharts.Visibility = Visibility.Hidden; }
         private void PatternInit(ICollection<string> lst) 
         { try
             { if (StrangeTime.Source.ToString() == $"{Path}/IMG/pattern_button.png") 
@@ -161,18 +147,14 @@ namespace FRAUD_UI_ANALIZATOR
                 MessageBox.Show($"Error with: {e}", "Pattern getting error!", MessageBoxButton.OK); }
         }
         private void InformationAboutOnePPattern(object sender, ChartPoint chartPoint)
-        {
-            if (_cartesianCharts.Keys.Contains(chartPoint.SeriesView.Title))
-            {
-                MoreAboutChart.Visibility = Visibility.Visible;
+        { if (_cartesianCharts.Keys.Contains(chartPoint.SeriesView.Title))
+            { MoreAboutChart.Visibility = Visibility.Visible;
                 GetSaved(chartPoint.SeriesView.Title);
-                return;
-            }
+                return; }
             const string str = "SAP . BAP . PVP . AVP . DCP . MCP . MPP . MPC . CSP";
             if (!str.Contains(chartPoint.SeriesView.Title)) return;
             Dictionary<string, string> patternsByName = new()
-            {
-                {"SAP", "GetSmallAmountPattern"},
+            { {"SAP", "GetSmallAmountPattern"},
                 {"BAP", "GetBigAmountPattern"},
                 {"PVP", "GetPassportValidPattern"},
                 {"AVP", "GetAccountValidPattern"},
@@ -180,33 +162,23 @@ namespace FRAUD_UI_ANALIZATOR
                 {"MCP", "GetMultiCardPattern"},
                 {"MPP", "GetMultiPosPatter"},
                 {"MPC", "GetMultiPassportAccount"},
-                {"CSP", "GetCancelledStreakPattern"}
-            };
+                {"CSP", "GetCancelledStreakPattern"} };
             try
-            {
-                var array = PatternHandler.GenerateFewPatternScales(typeof(PatternGetter).GetMethod(patternsByName[chartPoint.SeriesView.Title]), 
+            { var array = PatternHandler.GenerateFewPatternScales(typeof(PatternGetter).GetMethod(patternsByName[chartPoint.SeriesView.Title]), 
                     int.Parse(StartValue.Text), int.Parse(StreakCount.Text), int.Parse(Step.Text), _transactionsData, _jsonParser.KeyList);
                 CartesianChart.Series = new SeriesCollection
-                {
-                    new LineSeries
-                    {
+                { new LineSeries {
                         Title = chartPoint.SeriesView.Title,
-                        Values = array.AsChartValues()
-                    }
+                        Values = array.AsChartValues() }
                 };
                 AddToCash(chartPoint.SeriesView.Title, CartesianChart);
-                DataContext = this;
-            }
-            catch (Exception e)
-            {
+                DataContext = this; }
+            catch (Exception e) {
                 MessageBox.Show(e.ToString(), "error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            MoreAboutChart.Visibility = Visibility.Visible;
-        }
-        Dictionary<string, string> patternsByName = new()
-        {
-            {"SAP", "GetSmallAmountPattern"},
+                return; }
+            MoreAboutChart.Visibility = Visibility.Visible; }
+        private readonly Dictionary<string, string> _patternsByName = new()
+        { {"SAP", "GetSmallAmountPattern"},
             {"BAP", "GetBigAmountPattern"},
             {"PVP", "GetPassportValidPattern"},
             {"AVP", "GetAccountValidPattern"},
@@ -218,7 +190,7 @@ namespace FRAUD_UI_ANALIZATOR
         private void Regenerate(object sender, RoutedEventArgs routedEventArgs)
         {
             try {
-                var array = PatternHandler.GenerateFewPatternScales(typeof(PatternGetter).GetMethod(patternsByName[CartesianChart.Series[0].Title]), 
+                var array = PatternHandler.GenerateFewPatternScales(typeof(PatternGetter).GetMethod(_patternsByName[CartesianChart.Series[0].Title]), 
                     int.Parse(StartValue.Text), int.Parse(CountStep.Text), int.Parse(Step.Text), _transactionsData, _jsonParser.KeyList);
                 CartesianChart.Series = new SeriesCollection {
                     new LineSeries {
@@ -232,40 +204,39 @@ namespace FRAUD_UI_ANALIZATOR
                 MessageBox.Show(e.ToString(), "error", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
         private readonly Dictionary<string, IChartValues> _cartesianCharts = new();
+        private readonly List<Image> _buttons = new List<Image>();
         private void AddToCash(string name, IChartView cartesianChart)
-        {
-            if (!_cartesianCharts.ContainsKey(name))
-            {
-                _cartesianCharts.Add(name, cartesianChart.Series[0].Values);
+        { if (!_cartesianCharts.ContainsKey(name)) { _cartesianCharts.Add(name, cartesianChart.Series[0].Values);
                 SavedCharts.Children.Add(new Image
-                {
-                    Name = name,
+                { Name = name,
                         Margin = new Thickness(1200,_cartesianCharts.Count * 60 + 500,0,0),
                             Source = new BitmapImage(new Uri(@"/IMG/Graph_inactive_tab.png", UriKind.Relative)),
-                                Cursor = Cursors.Hand
-                });
+                                Cursor = Cursors.Hand });
                 SavedCharts.Children[^1].MouseDown += delegate { GetSaved(name); };
-                SavedCharts.Children.Add(new Label
-                {
+                    _buttons.Add((Image)SavedCharts.Children[^1]);
+                SavedCharts.Children.Add(new Label {
                     Content = name,
-                        Margin = new Thickness(1200,_cartesianCharts.Count * 60 + 500,0,0),
-                });
-            }
-            else
-            {
-                _cartesianCharts[name] = cartesianChart.Series[0].Values;
-            }
+                        Margin = new Thickness(1200,_cartesianCharts.Count * 60 + 500,0,0) });
+        } else _cartesianCharts[name] = cartesianChart.Series[0].Values; foreach (var obj in _buttons) { 
+                if (obj.Source.ToString() == $"{Path}/IMG/Graph_tab.png")
+                    obj.Source =
+                        new BitmapImage(new Uri($@"IMG/Graph_inactive_tab.png", UriKind.Relative));
+                if (obj.Name == name) obj.Source =
+                    new BitmapImage(new Uri($@"IMG/Graph_tab.png", UriKind.Relative)); }
         }
         private void GetSaved(string buttonName)
-        {
-            try
-            {
-                if (MoreAboutChart.Visibility != Visibility.Visible) MoreAboutChart.Visibility = Visibility.Visible;
-                CartesianChart.Series = new SeriesCollection
-                {
+        { try
+            { foreach (var obj in _buttons)
+                { if (obj.Source.ToString() == $"{Path}/IMG/Graph_tab.png")
+                        obj.Source =
+                            new BitmapImage(new Uri($@"IMG/Graph_inactive_tab.png", UriKind.Relative));
+                    if (obj.Name == buttonName) obj.Source =
+                        new BitmapImage(new Uri($@"IMG/Graph_tab.png", UriKind.Relative));
+                } if (MoreAboutChart.Visibility != Visibility.Visible) MoreAboutChart.Visibility = Visibility.Visible;
+                CartesianChart.Series = new SeriesCollection {
                     new LineSeries
                     { Title = buttonName,
-                        Values = _cartesianCharts[buttonName]}
+                        Values = _cartesianCharts[buttonName]} 
                 };
                 DataContext = this; }
             catch (Exception e) {

@@ -217,6 +217,10 @@
       <Resource Include="IMG\Graph_inactive_tab.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
+      <None Remove="IMG\Graph_tab.png" />
+      <Resource Include="IMG\Graph_tab.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
     <ItemGroup>

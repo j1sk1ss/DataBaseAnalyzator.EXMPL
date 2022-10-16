@@ -111,12 +111,12 @@
 
             <Canvas x:Name = "Charts" Background="Azure" Visibility="Hidden" Grid.Row="0" Grid.RowSpan="2" Height="7200" Width="7200">
                 <Grid>
-                    <lvc:PieChart x:Name="Chart" LegendLocation="Bottom" Height="700" Width="700" Hoverable="True" InnerRadius="390" Margin="275" DataClick="InformationAboutOnePPattern">
+                    <lvc:PieChart x:Name="Chart" LegendLocation="Bottom" Height="700" Width="700" Hoverable="True" InnerRadius="390" Margin="300,400,0,0" DataClick="InformationAboutOnePPattern">
                         <lvc:PieChart.ChartLegend>
-                            <lvc:DefaultLegend BulletSize="15"></lvc:DefaultLegend>
+                            <lvc:DefaultLegend BulletSize="50" Margin="0,200,0,0" FontSize="20"></lvc:DefaultLegend>
                         </lvc:PieChart.ChartLegend>
                         <lvc:PieChart.DataTooltip>
-                            <lvc:DefaultTooltip BulletSize="20"></lvc:DefaultTooltip>
+                            <lvc:DefaultTooltip BulletSize="50" FontSize="20"></lvc:DefaultTooltip>
                         </lvc:PieChart.DataTooltip>
                     </lvc:PieChart>
                 </Grid>
@@ -150,7 +150,6 @@
             <Image Grid.Row="0" Margin="429,56,227,32" Source="/IMG/path_pic.png"/>
             <Label Grid.Row="0" x:Name = "DbPathLabel" FontSize = "25" Margin="437,60,-27,46">JSON DATA</Label>
             <Image Grid.Row="0" x:Name = "LoadJsonButton" Margin="1024,57,10,33" Source="/IMG/review_button.png" Cursor="Hand" MouseDown="LoadJson"/>
-            
             <Canvas Grid.Row="0" x:Name="SavedCharts"></Canvas>
         </Grid>
     </Viewbox>
