@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -35,7 +37,8 @@ namespace FRAUD_UI_ANALIZATOR
         private readonly List<string> _excel = new();
         [SuppressMessage("ReSharper.DPA", "DPA0003: Excessive memory allocations in LOH", MessageId = "type: System.String")]
         private void PatternGet(object sender, RoutedEventArgs routedEventArgs)
-        { if (_transactionsData.Count < 1)
+        {    
+            if (_transactionsData.Count < 1)
             { MessageBox.Show("Load Json before start!", "Pattern getting error!", MessageBoxButton.OK,
                     MessageBoxImage.Error);
                 return; }
@@ -257,6 +260,7 @@ namespace FRAUD_UI_ANALIZATOR
         {
             try
             {
+                if (MoreAboutChart.Visibility != Visibility.Visible) MoreAboutChart.Visibility = Visibility.Visible;
                 CartesianChart.Series = new SeriesCollection
                 {
                     new LineSeries
