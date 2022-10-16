@@ -146,6 +146,16 @@ namespace FRAUD_UI_ANALIZATOR
         }
 
         private int[] array_global;
+        Dictionary<string, string> oneParamPatternsByName = new()
+        { {"SAP", "GetSmallAmountPattern"},
+            {"BAP", "GetBigAmountPattern"},
+            {"PVP", "GetPassportValidPattern"},
+            {"AVP", "GetAccountValidPattern"},
+            {"DCP", "GetDifferentCityPattern"},
+            {"MCP", "GetMultiCardPattern"},
+            {"MPP", "GetMultiPosPatter"},
+            {"MPC", "GetMultiPassportAccount"},
+            {"CSP", "GetCancelledStreakPattern"} };
         private void InformationAboutOnePPattern(object sender, ChartPoint chartPoint)
         {
             if (SaveButton.Visibility == Visibility.Visible) SaveButton.Visibility = Visibility.Hidden;
@@ -161,16 +171,7 @@ namespace FRAUD_UI_ANALIZATOR
                     MessageBoxButton.OK);
                 return;
             }
-            Dictionary<string, string> oneParamPatternsByName = new()
-            { {"SAP", "GetSmallAmountPattern"},
-                {"BAP", "GetBigAmountPattern"},
-                {"PVP", "GetPassportValidPattern"},
-                {"AVP", "GetAccountValidPattern"},
-                {"DCP", "GetDifferentCityPattern"},
-                {"MCP", "GetMultiCardPattern"},
-                {"MPP", "GetMultiPosPatter"},
-                {"MPC", "GetMultiPassportAccount"},
-                {"CSP", "GetCancelledStreakPattern"} };
+
             try
             { var array = PatternHandler.GenerateFewPatternScales(typeof(PatternGetter).GetMethod(oneParamPatternsByName[chartPoint.SeriesView.Title]), 
                     int.Parse(StartValue.Text), int.Parse(StreakCount.Text), int.Parse(Step.Text), _transactionsData, _jsonParser.KeyList);
@@ -186,20 +187,10 @@ namespace FRAUD_UI_ANALIZATOR
                     MessageBox.Show(e.ToString(), "error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return; }
             MoreAboutChart.Visibility = Visibility.Visible; }
-        private readonly Dictionary<string, string> _patternsByName = new()
-        { {"SAP", "GetSmallAmountPattern"},
-            {"BAP", "GetBigAmountPattern"},
-            {"PVP", "GetPassportValidPattern"},
-            {"AVP", "GetAccountValidPattern"},
-            {"DCP", "GetDifferentCityPattern"},
-            {"MCP", "GetMultiCardPattern"},
-            {"MPP", "GetMultiPosPatter"},
-            {"MPC", "GetMultiPassportAccount"},
-            {"CSP", "GetCancelledStreakPattern"} };
         private void Regenerate(object sender, RoutedEventArgs routedEventArgs)
         {
             try {
-                var array = PatternHandler.GenerateFewPatternScales(typeof(PatternGetter).GetMethod(_patternsByName[CartesianChart.Series[0].Title]), 
+                var array = PatternHandler.GenerateFewPatternScales(typeof(PatternGetter).GetMethod(oneParamPatternsByName[CartesianChart.Series[0].Title]), 
                     int.Parse(StartValue.Text), int.Parse(CountStep.Text), int.Parse(Step.Text), _transactionsData, _jsonParser.KeyList);
                 CartesianChart.Series = new SeriesCollection {
                     new LineSeries {

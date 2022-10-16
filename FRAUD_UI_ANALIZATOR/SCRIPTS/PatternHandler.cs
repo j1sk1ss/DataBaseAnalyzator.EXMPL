@@ -10,6 +10,7 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
         public static readonly List<string> GlAr = new List<string>();
         public static int[] GenerateFewPatternScales(MethodInfo action,int startStreak, int streaks, int step, Dictionary<string, TransactiondData> data, List<string> keys)
         {
+            GlAr.Clear();
             var strArray = new int[streaks];
             var strDoubleArray = new int[streaks, streaks];
             for (var i = 0; i < streaks; i += 1)
