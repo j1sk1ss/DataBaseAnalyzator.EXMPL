@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using FRAUD_UI_ANALIZATOR.SCRIPTS;
 using LiveCharts;
@@ -164,8 +165,7 @@ namespace FRAUD_UI_ANALIZATOR
                 GetSaved(chartPoint.SeriesView.Title);
                 return; }
             const string oneParam = "SAP . BAP . PVP . AVP . DCP . MCP . MPP . MPC . CSP";
-            const string twoParams = "TDP . GOP . MTP . TIT";
-            if (!oneParam.Contains(chartPoint.SeriesView.Title) && !twoParams.Contains(chartPoint.SeriesView.Title))
+            if (!oneParam.Contains(chartPoint.SeriesView.Title))
             {
                 MessageBox.Show("Данный паттерн не подлежит детальному перебору!", "Ошибка перебора!",
                     MessageBoxButton.OK);
@@ -211,7 +211,9 @@ namespace FRAUD_UI_ANALIZATOR
                 { Name = name,
                         Margin = new Thickness(1200,_cartesianCharts.Count * 60 + 500,3,0),
                             Source = new BitmapImage(new Uri(@"/IMG/Graph_inactive_tab.png", UriKind.Relative)),
-                                Cursor = Cursors.Hand });
+                                Cursor = Cursors.Hand,
+                                ToolTip = oneParamPatternsByName[name]
+                });
                 SavedCharts.Children[^1].MouseDown += delegate { GetSaved(name); };
                     _buttons.Add((Image)SavedCharts.Children[^1]);
                 SavedCharts.Children.Add(new Label
@@ -220,7 +222,8 @@ namespace FRAUD_UI_ANALIZATOR
                     Margin = new Thickness(1200, _cartesianCharts.Count * 60 + 510, 0, 0),
                     FontSize = 24,
                     FontFamily = new System.Windows.Media.FontFamily("Bahnschrift"),
-                    IsHitTestVisible = false
+                    IsHitTestVisible = false,
+                    Foreground = Brushes.White,
                 });
         } else _cartesianCharts[name] = cartesianChart.Series[0].Values; foreach (var obj in _buttons) { 
                 if (obj.Source.ToString() == $"{Path}/IMG/Graph_tab.png")
