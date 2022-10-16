@@ -204,14 +204,19 @@ namespace FRAUD_UI_ANALIZATOR
         { if (!_cartesianCharts.ContainsKey(name)) { _cartesianCharts.Add(name, cartesianChart.Series[0].Values);
                 SavedCharts.Children.Add(new Image
                 { Name = name,
-                        Margin = new Thickness(1200,_cartesianCharts.Count * 60 + 500,0,0),
+                        Margin = new Thickness(1200,_cartesianCharts.Count * 60 + 500,3,0),
                             Source = new BitmapImage(new Uri(@"/IMG/Graph_inactive_tab.png", UriKind.Relative)),
                                 Cursor = Cursors.Hand });
                 SavedCharts.Children[^1].MouseDown += delegate { GetSaved(name); };
                     _buttons.Add((Image)SavedCharts.Children[^1]);
-                SavedCharts.Children.Add(new Label {
+                SavedCharts.Children.Add(new Label
+                {
                     Content = name,
-                        Margin = new Thickness(1200,_cartesianCharts.Count * 60 + 500,0,0) });
+                    Margin = new Thickness(1200, _cartesianCharts.Count * 60 + 510, 0, 0),
+                    FontSize = 24,
+                    FontFamily = new System.Windows.Media.FontFamily("Bahnschrift"),
+                    IsHitTestVisible = false
+                });
         } else _cartesianCharts[name] = cartesianChart.Series[0].Values; foreach (var obj in _buttons) { 
                 if (obj.Source.ToString() == $"{Path}/IMG/Graph_tab.png")
                     obj.Source =

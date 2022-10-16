@@ -121,9 +121,9 @@
 
             <Canvas x:Name = "Charts" Background="Azure" Visibility="Hidden" Grid.Row="0" Grid.RowSpan="2" Height="7200" Width="7200">
                 <Grid>
-                    <lvc:PieChart x:Name="Chart" LegendLocation="Bottom" Height="700" Width="700" Hoverable="True" InnerRadius="390" Margin="300,400,0,0" DataClick="InformationAboutOnePPattern">
+                    <lvc:PieChart x:Name="Chart" LegendLocation="Bottom" Height="700" Width="700" Hoverable="True" InnerRadius="350" Margin="300,461,0,-61" DataClick="InformationAboutOnePPattern">
                         <lvc:PieChart.ChartLegend>
-                            <lvc:DefaultLegend BulletSize="50" Margin="0,200,0,0" FontSize="20"></lvc:DefaultLegend>
+                            <lvc:DefaultLegend BulletSize="50" Margin="0,300,0,0" FontSize="20"></lvc:DefaultLegend>
                         </lvc:PieChart.ChartLegend>
                         <lvc:PieChart.DataTooltip>
                             <lvc:DefaultTooltip BulletSize="50" FontSize="20"></lvc:DefaultTooltip>
