@@ -34,7 +34,7 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
         public static string GetAccountValidPattern(Dictionary<string, TransactiondData> data,List<string> keys, int days) {
             var answer = string.Empty; 
             for (var i = 0; i < data.Count; i++)
-                if (data[$"{keys[i]}"].AccountValidTo < data[$"{keys[i]}"].Date - new TimeSpan(days))
+                if (data[$"{keys[i]}"].AccountValidTo < data[$"{keys[i]}"].Date - new TimeSpan(days, 0,0,0))
                     answer += keys[i] + " ";
             return answer; 
         }
