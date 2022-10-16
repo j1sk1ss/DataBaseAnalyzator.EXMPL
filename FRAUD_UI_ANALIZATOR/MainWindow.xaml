@@ -59,6 +59,7 @@
             <Image Margin="443,812,289,249" Source="/IMG/pat12_1_text.png" Stretch="Fill" Grid.Row="1"/>
             <Image Margin="443,622,239,439" Source="/IMG/pat9_1_text.png" Stretch="Fill" Grid.Row="1"/>
             <Image Margin="443,557,322,503" Source="/IMG/pat8_1_text.png" Stretch="Fill" Grid.Row="1"/>
+            <Image Margin="848,109,205,953" Grid.Row="1" Source="/IMG/pat1_2_text.png" Stretch="Fill"/>
             <Image Margin="443,237,540,823" Source="/IMG/pat3_1_text.png" Stretch="Fill" Grid.Row="1"/>
             <Image Margin="443,173,550,887" Source="/IMG/pat2_1_text.png" Stretch="Fill" Grid.Row="1"/>
             <Image Margin="443,303,195,759" Source="/IMG/pat4_1_text.png" Stretch="Fill" Grid.Row="1"/>
@@ -104,10 +105,10 @@
             <Image Margin="1058,866,26,170" Source="/IMG/gray_textbox.png" Stretch="Fill" Grid.Row="1"/>
             <TextBox x:Name = "TransactionsCount" HorizontalAlignment="Left" Margin="717,874,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" Grid.Row="1" />
             <TextBox x:Name = "TimeTransaction" HorizontalAlignment="Left" Margin="1066,873,0,0" TextWrapping="Wrap" Text="1.00:00:00" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" Grid.Row="1" />
-            
-            
-            
-            
+
+
+
+
             <Canvas x:Name = "Charts" Background="Azure" Visibility="Hidden" Grid.Row="0" Grid.RowSpan="2" Height="7200" Width="7200">
                 <Grid>
                     <lvc:PieChart x:Name="Chart" LegendLocation="Bottom" Height="700" Width="700" Hoverable="True" InnerRadius="390" Margin="275" DataClick="InformationAboutOnePPattern">
@@ -120,20 +121,23 @@
                     </lvc:PieChart>
                 </Grid>
             </Canvas>
-            
+
             <Canvas x:Name = "MoreAboutChart" Background="Azure" Visibility="Hidden" Height="7200" Width="7200" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Grid>
-                    <lvc:CartesianChart x:Name = "CartesianChart" LegendLocation="Bottom" Height="1000" Width="1000" Hoverable="True" Margin="150">
+                    <lvc:CartesianChart x:Name = "CartesianChart" LegendLocation="Bottom" Height="1000" Width="1000" Hoverable="True" Margin="77,252,223,48">
                     </lvc:CartesianChart>
                 </Grid>
-                <Button Height="100" Width="100" Margin="1150,200,0,0" Click="Regenerate" Cursor="Hand"> Перерасчитать </Button>
-                <TextBox x:Name="Step" Height="50" Width="100" Margin="1150,300,0,0"> 1000 </TextBox>
-                <TextBox x:Name="StartValue" Height="50" Width="100" Margin="1150,350,0,0"> 2000 </TextBox>
-                <TextBox x:Name="CountStep" Height="50" Width="100" Margin="1150,400,0,0"> 5 </TextBox>
+                <Button Height="100" Width="100" Click="Regenerate" Cursor="Hand" Canvas.Left="1285" Canvas.Top="140">Перерасчитать</Button>
+                <Image Height="206" Canvas.Left="1131" Source="IMG/info2_settings_textbox.png" Stretch="Fill" Canvas.Top="277" Width="138" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBox x:Name="Step" Height="43" Width="128" Canvas.Left="1136" Canvas.Top="300" VerticalAlignment="Center" SelectionOpacity="0" Background="Transparent" FontFamily="Bahnschrift" FontSize="16" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">1000</TextBox>
+                <TextBox x:Name="StartValue" Height="42" Width="128" Canvas.Left="1136" Canvas.Top="369" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" FontFamily="Bahnschrift" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">2000</TextBox>
+                <TextBox x:Name="CountStep" Height="45" Width="127" Canvas.Left="1137" Canvas.Top="436" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" FontFamily="Bahnschrift" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">5</TextBox>
+                <Image Height="87" Canvas.Left="1131" Source="IMG/Recalculate_button.png" Stretch="Fill" Canvas.Top="185" Width="137"/>
+                <Image Height="24" Canvas.Left="1144" Source="IMG/Recalculate_text.png" Stretch="Fill" Canvas.Top="216" Width="110"/>
             </Canvas>
-            
-            
-            
+
+
+
             <Image x:Name="Tabs" Margin="-90,138,483,184" Height="45" Source="/IMG/tabs.png" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top"/>
             <Grid Grid.Row="1" Background="Transparent" Grid.Column="0" MouseDown="OpenCharts" Margin="335,0,760,1070" Cursor="Hand">
                 <Image Focusable="True" IsEnabled="True" Stretch="Fill" />
@@ -146,7 +150,7 @@
             <Image Grid.Row="0" Margin="429,56,227,32" Source="/IMG/path_pic.png"/>
             <Label Grid.Row="0" x:Name = "DbPathLabel" FontSize = "25" Margin="437,60,-27,46">JSON DATA</Label>
             <Image Grid.Row="0" x:Name = "LoadJsonButton" Margin="1024,57,10,33" Source="/IMG/review_button.png" Cursor="Hand" MouseDown="LoadJson"/>
-            
+
         </Grid>
     </Viewbox>
 </Window>
