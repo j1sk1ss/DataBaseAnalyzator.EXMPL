@@ -7,7 +7,7 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
     public class PatternGetter : PatternHandler
     {
          public static string GetTimePattern(Dictionary<string, TransactiondData> data,List<string> keys, TimeSpan endTime, TimeSpan startTime) { 
-            var answer = string.Empty; 
+            var answer = string.Empty;
             for (var i = 0; i < data.Count; i++)
                 if (data[$"{keys[i]}"].Date.TimeOfDay < endTime && data[$"{keys[i]}"].Date.TimeOfDay > startTime)
                     answer += keys[i] + " ";
@@ -42,17 +42,16 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
             var answer = string.Empty;
             for (var i = 0; i < data.Count; i++)
             { var times = Array.Empty<DateTime>();
-                for (var j = 0; j < data.Count; j++) if (data[$"{keys[i]}"].Date.Day == data[$"{keys[j]}"].Date.Day
-                                                         && data[$"{keys[i]}"].Date.Hour == data[$"{keys[j]}"].Date.Hour
+                for (var j = 0; j < data.Count; j++) if (data[$"{keys[i]}"].Date.DayOfYear == data[$"{keys[j]}"].Date.DayOfYear
                                                          && data[$"{keys[i]}"].Passport == data[$"{keys[j]}"].Passport) 
                     times = AddTime(times, data[$"{keys[j]}"].Date);
                 if (times.Length <= 1) continue;
-                var check = new double[times.Length - 1];
+                var check = new TimeSpan[times.Length - 1];
                     for (var j = 0; j < check.Length; j++)
-                        if (j + 1 < times.Length) check[j] = (times[j + 1] - times[j]).Duration().TotalMinutes;
+                        if (j + 1 < times.Length) check[j] = (times[j + 1] - times[j]).Duration();
                     var count = 0;
                     for (var j = 1; j < check.Length; j++)
-                    { if (!(Math.Abs(check[j] - check[j - 1]) < duration.Minutes) ) continue;
+                    { if (check[j] - check[j - 1] < duration) continue;
                         if (++count <= copyCount) continue;
                         answer += keys[i] + " ";
                         break; }
@@ -61,10 +60,10 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
         public static string GetDifferentCityPattern(Dictionary<string, TransactiondData> data,List<string> keys, int cities) {
             var answer = string.Empty;
             for (var i = 0; i < data.Count; i++) {
-                var tmp = data.Where((t, j) => i != j && data[$"{keys[i]}"].Passport == data
+                if (data.Where((t, j) => i != j && data[$"{keys[i]}"].Passport == data
                     [$"{keys[j]}"].Passport && data[$"{keys[i]}"].City != data[$"{keys[j]}"].City).Aggregate(string.Empty, 
-                    (current, t) => current + keys[i] + " ");
-                if (tmp.Split(" ").Length >= cities) answer += keys[i] + " "; } 
+                    (current, t) => current + keys[i] + " ").Split(" ").Length >= cities)
+                    answer += keys[i] + " "; } 
             return answer; }
         public static string GetMultiCardPattern(Dictionary<string, TransactiondData> data, List<string> keys, int copyCount) 
         {
@@ -78,33 +77,27 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
                     answer += keys[i] + " ";
                     break; }
             }
-            return answer; 
-        }
+            return answer; }
         public static string GetMultiPosPatter(Dictionary<string, TransactiondData> data, List<string> keys, int copyCount)
-        { var answer = string.Empty; 
-            var posCount = 0;
+        { var answer = string.Empty;
             for (var i = 0; i < data.Count; i++)
-            { if (!data.Where((t, j) => i != j && (data[$"{keys[i]}"].Address ==
+            {   var posCount = 0;
+                if (!data.Where((t, j) => i != j && (data[$"{keys[i]}"].Address ==
                                                    data[$"{keys[j]}"].Address && data[$"{keys[i]}"].Terminal != data[$"" +
-                                                       $"{keys[j]}"].Terminal &&
-                                                   data[$"{keys[i]}"].TerminalType == "POS" && data[$"{keys[i]}"].Passport
-                                                   != data[$"{keys[j]}"].Passport))
+                                                       $"{keys[j]}"].Terminal && data[$"{keys[i]}"].TerminalType == "POS"))
                       .Any(t => ++posCount >= copyCount)) continue;
-                answer += keys[i] + " ";
-                posCount = 0; }
-            return answer; 
-        }
-        public static string GetMultiPassportCard(Dictionary<string, TransactiondData> data, List<string> keys, int copyCount)
+                answer += keys[i] + " "; }
+            return answer; }
+        public static string GetMultiPassportAccount(Dictionary<string, TransactiondData> data, List<string> keys, int copyCount)
         { var answer = string.Empty;
             for (var i = 0; i < data.Count; i++) {
                 var count = 0;
-                answer = data.Where((t, j) => i != j && (data[$"{keys[i]}"].Card == 
-                        data[$"{keys[j]}"].Card && data[$"{keys[i]}"].Passport != data[$"{keys[j]}"].Passport)).
+                answer = data.Where((t, j) => i != j && (data[$"{keys[i]}"].Account == 
+                        data[$"{keys[j]}"].Account && data[$"{keys[i]}"].Passport != data[$"{keys[j]}"].Passport)).
                     Where(t => ++count > copyCount).Aggregate(answer, (current, 
-                        t) => current + (keys[i] + " "));
-                count = 0; }
+                        t) => current + (keys[i] + " ")); }
             return answer; }
-        public static string GetOldersPattern(Dictionary<string, TransactiondData> data, List<string> keys, int age, bool type)
+        public static string GetOldersPattern(Dictionary<string, TransactiondData> data, List<string> keys, double age, bool type)
         { var answer = string.Empty; 
             for (var i = 0; i < data.Count; i++)
                 switch (type)
@@ -148,6 +141,6 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
                         Duration() <= duration).Any(t => ++count > time)) {
                     answer += keys[i] + " "; }
                 count = 0; }
-            return answer; }  
+            return answer; } 
     }
 }

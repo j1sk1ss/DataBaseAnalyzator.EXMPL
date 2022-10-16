@@ -34,39 +34,41 @@ namespace FRAUD_UI_ANALIZATOR
             { MessageBox.Show("Load Json before start!", "Pattern getting error!", MessageBoxButton.OK,
                     MessageBoxImage.Error);
                 return; }
+            
+            Excel = ExelConstructor.InitList(_transactionsData, _jsonParser.KeyList);
+            PatternInit(Excel);
+            Chart.Series.Clear();
+            foreach (var t in Excel)
+                Chart.Series.Add(new PieSeries
+                {
+                    Title = $"{t.Split(" ")[0]}",
+                    Values = new ChartValues<int> { t.Split(" ").Length - 1 }
+                });
+            DataContext = this;
+        }
+
+        private List<string> Excel;
+        private void SaveToExcel(object sender, RoutedEventArgs routedEventArgs)
+        {
             var folderBrowser = new OpenFileDialog
             { ValidateNames = false,
                 CheckFileExists = false,
                 CheckPathExists = true,
                 FileName = "Report" };
-                var directoryName = string.Empty;
-                    if (folderBrowser.ShowDialog() == true) {
-                        directoryName = Path.GetDirectoryName(folderBrowser.FileName);
-                try
-                {
-                    var lst = ExelConstructor.InitList(_transactionsData, _jsonParser.KeyList);
-                    PatternInit(lst);
-                    using var excelPackage = new ExcelPackage();
-                    ExelConstructor.ExcelWrite(excelPackage, _transactionsData, lst);
-                    excelPackage.SaveAs(directoryName + @"\Report.xlsx");
-                    OpenChartsBut.Visibility = Visibility.Visible;
-                    Chart.Series.Clear();
-                    foreach (var t in lst)
-                        Chart.Series.Add(new PieSeries
-                        {
-                            Title = $"{t.Split(" ")[0]}",
-                            Values = new ChartValues<int> { t.Split(" ").Length - 1 }
-                        });
-                    DataContext = this;
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show($"Error with: {e}", "Error with analysing!", MessageBoxButton.OK, MessageBoxImage.Error);
-                    throw;
-                }
+            if (folderBrowser.ShowDialog() != true) return;
+            var directoryName = Path.GetDirectoryName(folderBrowser.FileName);
+            try
+            {
+                using var excelPackage = new ExcelPackage();
+                ExelConstructor.ExcelWrite(excelPackage, _transactionsData, Excel);
+                excelPackage.SaveAs(directoryName + @"\Report.xlsx");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Error with: {e}", "Error with analysing!", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
             }
         }
-
         private const string path = "pack://application:,,,";
         private void ValueChanger(object sender, RoutedEventArgs routedEventArgs)
         { var obj = sender as FrameworkElement;
@@ -82,7 +84,9 @@ namespace FRAUD_UI_ANALIZATOR
                 {"b_9", TooManyPos},
                 {"b_10", TooManyPassports},
                 {"b_11", Older},
-                {"b_12", CancelledStreak} };
+                {"b_12", CancelledStreak},
+                {"b_13", ManyTransactions}
+            };
             if (obj == null) return;
             var img = checkers[$"{obj.Name}"];
             img.Source = img.Source.ToString() == $"{path}/IMG/patterninactive_button.png" ?
@@ -92,12 +96,16 @@ namespace FRAUD_UI_ANALIZATOR
             Type.Source = Type.Source.ToString() == $"{path}/IMG/unchecked_checkbox.png" ?
                 new BitmapImage(new Uri(@"/IMG/checked_checkbox_1.png", UriKind.Relative)) : 
                 new BitmapImage(new Uri(@"/IMG/unchecked_checkbox.png", UriKind.Relative)); }
-        private void OpenCharts(object sender, RoutedEventArgs routedEventArgs) {
-            Charts.Visibility = Visibility.Visible; }
-        private void OpenMenu(object sender, RoutedEventArgs routedEventArgs) {
-            Charts.Visibility = Visibility.Hidden; }
-        [SuppressMessage("ReSharper.DPA", "DPA0003: Excessive memory allocations in LOH", MessageId = "type: System.String")]
-        [SuppressMessage("ReSharper.DPA", "DPA0002: Excessive memory allocations in SOH", MessageId = "type: System.String")]
+        private void OpenCharts(object sender, RoutedEventArgs routedEventArgs)
+        {
+            Tabs.Source = new BitmapImage(new Uri(@"/IMG/tabs2.png", UriKind.Relative));
+            Charts.Visibility = Visibility.Visible;
+        }
+        private void OpenMenu(object sender, RoutedEventArgs routedEventArgs)
+        {
+            Tabs.Source = new BitmapImage(new Uri(@"/IMG/tabs.png", UriKind.Relative));
+            Charts.Visibility = Visibility.Hidden;
+        }
         private void PatternInit(ICollection<string> lst)
         { try
             { if (StrangeTime.Source.ToString() == $"{path}/IMG/pattern_button.png") 
@@ -128,26 +136,27 @@ namespace FRAUD_UI_ANALIZATOR
                     lst.Add("MPP " + PatternGetter.GetMultiPosPatter(_transactionsData, _jsonParser.KeyList, 
                         int.Parse(PosCount.Text)));
                 if (TooManyPassports.Source.ToString() == $"{path}/IMG/pattern_button.png") 
-                    lst.Add("MPC " + PatternGetter.GetMultiPassportCard(_transactionsData, _jsonParser.KeyList, 
+                    lst.Add("MPC " + PatternGetter.GetMultiPassportAccount(_transactionsData, _jsonParser.KeyList, 
                         int.Parse(PassportCount.Text)));
                 if (Older.Source.ToString() == $"{path}/IMG/pattern_button.png") 
                     lst.Add("GOP " + PatternGetter.GetOldersPattern(_transactionsData, _jsonParser.KeyList, 
                         int.Parse(Age.Text), Type.Source.ToString() == $"{path}/IMG/unchecked_checkbox.png"));
                 if (CancelledStreak.Source.ToString() == $"{path}/IMG/pattern_button.png") 
                     lst.Add("GCP " + PatternGetter.GetCancelledStreakPattern(_transactionsData, _jsonParser.KeyList, 
-                        int.Parse(StreakCount.Text))); }
+                        int.Parse(StreakCount.Text))); 
+                if (ManyTransactions.Source.ToString() == $"{path}/IMG/pattern_button.png") 
+                    lst.Add("MTP " + PatternGetter.GetManyTransactionsPattern(_transactionsData, _jsonParser.KeyList, 
+                        int.Parse(DurationStreak.Text), TimeSpan.Parse(TimeTransaction.Text)));}
             catch (Exception e) {
                 MessageBox.Show($"Error with: {e}", "Pattern getting error!", MessageBoxButton.OK); }
         }
 
-        private void StreakCount_Copy_TextChanged(object sender, TextChangedEventArgs e)
+        private void InformationAboutPattern(object sender, ChartPoint chartPoint)
         {
-
-        }
-
-        private void StreakCount_Copy1_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
+            switch (chartPoint.SeriesView.Title)
+            {
+                
+            }
         }
     }
 }
