@@ -197,6 +197,22 @@
       <Resource Include="IMG\pattern13_text.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
+      <None Remove="IMG\info2_settings_textbox.png" />
+      <Resource Include="IMG\info2_settings_textbox.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\Recalculate_button.png" />
+      <Resource Include="IMG\Recalculate_button.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\Recalculate_inactive_button.png" />
+      <Resource Include="IMG\Recalculate_inactive_button.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="IMG\Recalculate_text.png" />
+      <Resource Include="IMG\Recalculate_text.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
     <ItemGroup>
