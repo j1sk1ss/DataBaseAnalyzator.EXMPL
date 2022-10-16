@@ -128,12 +128,12 @@
                     </lvc:CartesianChart>
                 </Grid>
                 <Button Height="100" Width="100" Click="Regenerate" Cursor="Hand" Canvas.Left="1285" Canvas.Top="140">Перерасчитать</Button>
-                <Image Height="206" Canvas.Left="1131" Source="IMG/info2_settings_textbox.png" Stretch="Fill" Canvas.Top="277" Width="138" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <TextBox x:Name="Step" Height="43" Width="128" Canvas.Left="1136" Canvas.Top="300" VerticalAlignment="Center" SelectionOpacity="0" Background="Transparent" FontFamily="Bahnschrift" FontSize="16" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">1000</TextBox>
-                <TextBox x:Name="StartValue" Height="42" Width="128" Canvas.Left="1136" Canvas.Top="369" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" FontFamily="Bahnschrift" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">2000</TextBox>
-                <TextBox x:Name="CountStep" Height="45" Width="127" Canvas.Left="1137" Canvas.Top="436" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" FontFamily="Bahnschrift" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">5</TextBox>
-                <Image Height="87" Canvas.Left="1131" Source="IMG/Recalculate_button.png" Stretch="Fill" Canvas.Top="185" Width="137"/>
-                <Image Height="24" Canvas.Left="1144" Source="IMG/Recalculate_text.png" Stretch="Fill" Canvas.Top="216" Width="110"/>
+                <Image Height="206" Canvas.Left="1093" Source="IMG/info2_settings_textbox.png" Stretch="Fill" Canvas.Top="303" Width="138" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBox x:Name="Step" Height="43" Width="128" Canvas.Left="1098" Canvas.Top="326" VerticalAlignment="Top" SelectionOpacity="0" Background="Transparent" FontFamily="Bahnschrift" FontSize="16" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">1000</TextBox>
+                <TextBox x:Name="StartValue" Height="42" Width="128" Canvas.Left="1098" Canvas.Top="395" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent" FontFamily="Bahnschrift" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">2000</TextBox>
+                <TextBox x:Name="CountStep" Height="45" Width="127" Canvas.Left="1099" Canvas.Top="462" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent" FontFamily="Bahnschrift" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">5</TextBox>
+                <Image Height="87" Canvas.Left="1093" Source="IMG/Recalculate_button.png" Cursor="Hand" Stretch="Fill" Canvas.Top="211" Width="137"/>
+                <Image Height="24" Canvas.Left="1106" Source="IMG/Recalculate_text.png" Cursor="Hand" Stretch="Fill" Canvas.Top="242" Width="110"/>
             </Canvas>
 
 
