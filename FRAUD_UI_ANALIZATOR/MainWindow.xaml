@@ -108,7 +108,7 @@
             <TextBox x:Name = "TransactionsCount" HorizontalAlignment="Left" Margin="717,874,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" Grid.Row="1" />
             <TextBox x:Name = "TimeTransaction" HorizontalAlignment="Left" Margin="1064,873,0,0" TextWrapping="Wrap" Text="1.00:00:00" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" Grid.Row="1" />
             <Image x:Name = "ManyTerminalsInTime" Margin="61,929,849,106" Source="/IMG/patterninactive_button.png" Grid.Row="1"/>
-            <Image x:Name = "b_14" Margin="91,937,880,115" Grid.Row="1" Source="/IMG/pattern14_text.png" Stretch="Fill"/>
+            <Image x:Name = "b_14" Margin="91,937,880,115" Grid.Row="1" Source="/IMG/pattern14_text.png" Stretch="Fill" MouseDown="ValueChanger"/>
             <Image Margin="402,943,812,121" Source="/IMG/info_logo.png" ToolTip="Человек воспользовался большим количеством терминалов за указаный промежуток времени" Grid.Row="1"/>
             <Image Margin="875,942,187,120" Source="/IMG/pat13_2_text.png" Stretch="Fill" Grid.Row="1"/>
             <Image Margin="1060,930,24,106" Source="/IMG/gray_textbox.png" Stretch="Fill" Grid.Row="1"/>
