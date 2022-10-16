@@ -41,11 +41,17 @@ namespace FRAUD_UI_ANALIZATOR
             _excel.Clear();
             PatternInit(_excel);
             Chart.Series.Clear();
+            SaveButton.Visibility = Visibility.Visible;
             foreach (var t in _excel)
                 Chart.Series.Add(new PieSeries
                 { Title = $"{t.Split(" ")[0]}",
                     Values = new ChartValues<int> { t.Split(" ").Length - 1 } });
             DataContext = this; }
+
+        private void SaveExcel(object sender, RoutedEventArgs routedEventArgs)
+        {
+            ExelConstructor.SaveToExcel(_transactionsData, _excel);
+        }
         private const string Path = "pack://application:,,,";
         private void ValueChanger(object sender, RoutedEventArgs routedEventArgs)
         { var obj = sender as FrameworkElement;
@@ -62,7 +68,8 @@ namespace FRAUD_UI_ANALIZATOR
                 {"b_10", TooManyPassports},
                 {"b_11", Older},
                 {"b_12", CancelledStreak},
-                {"b_13", ManyTransactions} };
+                {"b_13", ManyTransactions}, 
+                {"b_14", ManyTerminalsInTime} };
             if (obj == null) return;
             var img = checkers[$"{obj.Name}"];
             img.Source = img.Source.ToString() == $"{Path}/IMG/patterninactive_button.png" ?
@@ -126,7 +133,11 @@ namespace FRAUD_UI_ANALIZATOR
                         int.Parse(StreakCount.Text))); 
                 if (ManyTransactions.Source.ToString() == $"{Path}/IMG/pattern_button.png") 
                     lst.Add("MTP " + PatternGetter.GetManyTransactionsPattern(_transactionsData, _jsonParser.KeyList, 
-                        int.Parse(DurationStreak.Text), TimeSpan.Parse(TimeTransaction.Text)));}
+                        int.Parse(DurationStreak.Text), TimeSpan.Parse(TimeTransaction.Text)));
+                if (ManyTerminalsInTime.Source.ToString() == $"{Path}/IMG/pattern_button.png") 
+                    lst.Add("MTP " + PatternGetter.GetManyTransactionsPattern(_transactionsData, _jsonParser.KeyList, 
+                        int.Parse(TransactionsTimeCount.Text), TimeSpan.Parse(TimeTransactionTime.Text)));
+            }
             catch (Exception e) {
                 MessageBox.Show($"Error with: {e}", "Pattern getting error!", MessageBoxButton.OK); }
         }
