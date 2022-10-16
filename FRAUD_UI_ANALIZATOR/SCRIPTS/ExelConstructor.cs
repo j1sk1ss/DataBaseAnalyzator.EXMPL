@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
+using Microsoft.Win32;
 using OfficeOpenXml;
 
 namespace FRAUD_UI_ANALIZATOR.SCRIPTS
@@ -26,6 +29,23 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
             { infoSheet.Cells[$"A{j}:B{j}"].Merge = true;
                 if (j + 1 < countOfPatterns + 3) infoSheet.Cells[j + 1, 1].Value = j - 1;
                 infoSheet.Cells[$"C{j}:D{j}"].Merge = true; }
+        }
+        private static void SaveToExcel(Dictionary<string, TransactiondData> _transactionsData, IList<string> _excel)
+        { var folderBrowser = new OpenFileDialog
+            { ValidateNames = false,
+                CheckFileExists = false,
+                CheckPathExists = true,
+                Filter = ".xls",
+                FileName = "Report" };
+            if (folderBrowser.ShowDialog() != true) return;
+            var directoryName = System.IO.Path.GetDirectoryName(folderBrowser.FileName);
+            try
+            { using var excelPackage = new ExcelPackage();
+                ExcelWrite(excelPackage, _transactionsData, _excel);
+                excelPackage.SaveAs(directoryName + @"\Report.xlsx");
+            } catch (Exception e)
+            { MessageBox.Show($"Error with: {e}", "Error with analysing!", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw; }
         }
     }
 }

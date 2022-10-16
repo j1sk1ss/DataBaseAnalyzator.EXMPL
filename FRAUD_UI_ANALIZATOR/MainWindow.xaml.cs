@@ -46,22 +46,6 @@ namespace FRAUD_UI_ANALIZATOR
                 { Title = $"{t.Split(" ")[0]}",
                     Values = new ChartValues<int> { t.Split(" ").Length - 1 } });
             DataContext = this; }
-        private void SaveToExcel(object sender, RoutedEventArgs routedEventArgs)
-        { var folderBrowser = new OpenFileDialog
-            { ValidateNames = false,
-                CheckFileExists = false,
-                CheckPathExists = true,
-                FileName = "Report" };
-            if (folderBrowser.ShowDialog() != true) return;
-            var directoryName = System.IO.Path.GetDirectoryName(folderBrowser.FileName);
-            try
-            { using var excelPackage = new ExcelPackage();
-                ExelConstructor.ExcelWrite(excelPackage, _transactionsData, _excel);
-                excelPackage.SaveAs(directoryName + @"\Report.xlsx");
-            } catch (Exception e)
-            { MessageBox.Show($"Error with: {e}", "Error with analysing!", MessageBoxButton.OK, MessageBoxImage.Error);
-                throw; }
-        }
         private const string Path = "pack://application:,,,";
         private void ValueChanger(object sender, RoutedEventArgs routedEventArgs)
         { var obj = sender as FrameworkElement;
