@@ -104,9 +104,13 @@
             <Image Margin="1058,866,26,170" Source="/IMG/gray_textbox.png" Stretch="Fill" Grid.Row="1"/>
             <TextBox x:Name = "TransactionsCount" HorizontalAlignment="Left" Margin="717,874,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" Grid.Row="1" />
             <TextBox x:Name = "TimeTransaction" HorizontalAlignment="Left" Margin="1066,873,0,0" TextWrapping="Wrap" Text="1.00:00:00" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" Grid.Row="1" />
-            <Canvas x:Name = "Charts" Background="Azure" Visibility="Hidden" Grid.Row="0" Grid.RowSpan="2">
+            
+            
+            
+            
+            <Canvas x:Name = "Charts" Background="Azure" Visibility="Hidden" Grid.Row="0" Grid.RowSpan="2" Height="7200" Width="7200">
                 <Grid>
-                    <lvc:PieChart x:Name="Chart" LegendLocation="Bottom" Height="700" Width="700" Hoverable="True" InnerRadius="390" Margin="275" DataClick="InformationAboutPattern">
+                    <lvc:PieChart x:Name="Chart" LegendLocation="Bottom" Height="700" Width="700" Hoverable="True" InnerRadius="390" Margin="275" DataClick="InformationAboutOnePPattern">
                         <lvc:PieChart.ChartLegend>
                             <lvc:DefaultLegend BulletSize="15"></lvc:DefaultLegend>
                         </lvc:PieChart.ChartLegend>
@@ -116,6 +120,20 @@
                     </lvc:PieChart>
                 </Grid>
             </Canvas>
+            
+            <Canvas x:Name = "MoreAboutChart" Background="Azure" Visibility="Hidden" Height="7200" Width="7200" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Grid>
+                    <lvc:CartesianChart x:Name = "CartesianChart" LegendLocation="Bottom" Height="1000" Width="1000" Hoverable="True" Margin="150">
+                    </lvc:CartesianChart>
+                </Grid>
+                <Button Height="100" Width="100" Margin="1150,200,0,0" Click="Regenerate" Cursor="Hand"> Перерасчитать </Button>
+                <TextBox x:Name="Step" Height="50" Width="100" Margin="1150,300,0,0"> 1000 </TextBox>
+                <TextBox x:Name="StartValue" Height="50" Width="100" Margin="1150,350,0,0"> 2000 </TextBox>
+                <TextBox x:Name="CountStep" Height="50" Width="100" Margin="1150,400,0,0"> 5 </TextBox>
+            </Canvas>
+            
+            
+            
             <Image x:Name="Tabs" Margin="-90,138,483,184" Height="45" Source="/IMG/tabs.png" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top"/>
             <Grid Grid.Row="1" Background="Transparent" Grid.Column="0" MouseDown="OpenCharts" Margin="335,0,760,1070" Cursor="Hand">
                 <Image Focusable="True" IsEnabled="True" Stretch="Fill" />

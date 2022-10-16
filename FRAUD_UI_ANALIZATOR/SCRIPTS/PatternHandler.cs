@@ -7,23 +7,22 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
 {
     public class PatternHandler
     {
-        protected static string GenerateFewPatternScales(MethodInfo action,int startStreak, int streaks, int step, Dictionary<string, TransactiondData> data, List<string> keys)
+        public static int[] GenerateFewPatternScales(MethodInfo action,int startStreak, int streaks, int step, Dictionary<string, TransactiondData> data, List<string> keys)
         {
-            var strArray = new int[startStreak + streaks];
-            var strDoubleArray = new int[startStreak + streaks,startStreak + streaks];
+            var strArray = new int[streaks];
+            var strDoubleArray = new int[streaks, streaks];
             switch (action.GetParameters().Length)
             {
                 case 3:
-                    for (var i = 0; i < startStreak + streaks; i += step)
-                        strArray[i] = (((string)action.Invoke(typeof(PatternGetter), new object[] { data, keys, i + startStreak }))!)
-                            .Split(" ").Length;
-                    return PrintArray(strArray);
+                    for (var i = 0; i < streaks; i += 1)
+                        strArray[i] = ((string)action.Invoke(typeof(PatternGetter), new object[] { data, keys, (i * step) + startStreak }))!.Split(" ").Length;
+                    return strArray;
                 case 4:
-                    for (var i = 0; i < startStreak + streaks; i += step)
-                    for (var j = 0; j < startStreak + streaks; j += step)
-                        strDoubleArray[i,j] = (((string)action.Invoke(typeof(PatternGetter), new object[] { data, keys, i + startStreak, new TimeSpan(0,j+ startStreak,0) }))!)
+                    for (var i = 0; i < startStreak + streaks; i += 1)
+                    for (var j = 0; j < startStreak + streaks; j += 1)
+                        strDoubleArray[i,j] = (((string)action.Invoke(typeof(PatternGetter), new object[] { data, keys, (i * step) + startStreak, new TimeSpan(0,j+ startStreak,0) }))!)
                             .Split(" ").Length;
-                    return PrintDoubleArray(strDoubleArray);
+                    return null;
                 default:
                     return null;
             }
