@@ -85,9 +85,10 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
             for (var i = 0; i < data.Count; i++)
             {   var posCount = 0;
                 if (!data.Where((t, j) => i != j && (data[$"{keys[i]}"].Address ==
-                                                   data[$"{keys[j]}"].Address && data[$"{keys[i]}"].Terminal != data[$"" +
-                                                       $"{keys[j]}"].Terminal && data[$"{keys[i]}"].TerminalType == "POS"))
-                      .Any(t => ++posCount >= copyCount)) continue;
+                            data[$"{keys[j]}"].Address && data[$"{keys[i]}"].Terminal != data[$"" +
+                                $"{keys[j]}"].Terminal && data[$"{keys[i]}"].TerminalType == "POS" && data[$"{keys[j]}"].TerminalType
+                             == "POS"))
+                        .Any(t => ++posCount >= copyCount)) continue;
                 answer += keys[i] + " "; }
             return answer; }
         public static string GetMultiPassportAccount(Dictionary<string, TransactiondData> data, List<string> keys, int copyCount)
