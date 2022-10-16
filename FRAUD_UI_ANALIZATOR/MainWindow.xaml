@@ -162,8 +162,7 @@
             <Image Margin="711,929,373,107" Source="/IMG/gray_textbox.png" Stretch="Fill" Grid.Row="1"/>
             <TextBox x:Name = "TransactionsCount_Copy" HorizontalAlignment="Left" Margin="717,937,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" Width="144" Background="{x:Null}" Height="42" SelectionOpacity="0.1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" FontFamily="Bahnschrift" Grid.Row="1" />
             <Image Margin="446,942,534,119" Grid.Row="1" Source="/IMG/pat14_1_text.png" Stretch="Fill"/>
-            <Image Margin="960,1017,22,0" Grid.Row="1" Source="/IMG/Save_button.png" Stretch="Fill"/>
-            <Image Margin="964,1017,22,1" Grid.Row="1" Source="/IMG/Save_button.png" Stretch="Fill"/>
+            <Image Margin="964,1017,23,1" Grid.Row="1" Source="/IMG/Save_button.png" Stretch="Fill"/>
         </Grid>
     </Viewbox>
 </Window>

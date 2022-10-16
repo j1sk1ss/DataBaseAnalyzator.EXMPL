@@ -21,6 +21,7 @@
       <None Remove="IMG\pattern14_text.png" />
       <None Remove="IMG\pattern9_text.png" />
       <None Remove="IMG\pattern_button.png" />
+      <None Remove="IMG\Save_button.png" />
       <Resource Include="IMG\Cordell_icon.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
@@ -38,6 +39,9 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <Resource Include="IMG\pattern_button.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="IMG\Save_button.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <Resource Include="IMG\Web-Blue-Button-PNG-Photos.png">
