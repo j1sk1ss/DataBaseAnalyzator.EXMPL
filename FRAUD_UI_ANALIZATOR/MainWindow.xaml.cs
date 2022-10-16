@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,7 +13,6 @@ using LiveCharts.Definitions.Charts;
 using LiveCharts.Helpers;
 using LiveCharts.Wpf;
 using Microsoft.Win32;
-using OfficeOpenXml;
 namespace FRAUD_UI_ANALIZATOR
 { public partial class MainWindow
     {         private readonly List<string> _excel = new();
@@ -100,7 +100,7 @@ namespace FRAUD_UI_ANALIZATOR
         { try
             { if (StrangeTime.Source.ToString() == $"{Path}/IMG/pattern_button.png") 
                     lst.Add("GTP " + PatternGetter.GetTimePattern(_transactionsData, _jsonParser.KeyList, 
-                        TimeSpan.Parse(EndTimeTp.Text), TimeSpan.Parse(StartTimeTp.Text)));
+                        TimeSpan.Parse(EndTimeTp.Text), TimeSpan.Parse(StartTimeTp.Text))); // GTP . TDP . GOP . MTP . TIT
                 if (SmallTransaction.Source.ToString() == $"{Path}/IMG/pattern_button.png") 
                     lst.Add("SAP " + PatternGetter.GetSmallAmountPattern(_transactionsData, _jsonParser.KeyList, 
                         int.Parse(SmallAmount.Text)));
@@ -138,12 +138,14 @@ namespace FRAUD_UI_ANALIZATOR
                     lst.Add("MTP " + PatternGetter.GetManyTransactionsPattern(_transactionsData, _jsonParser.KeyList, 
                         int.Parse(DurationStreak.Text), TimeSpan.Parse(TimeTransaction.Text)));
                 if (ManyTerminalsInTime.Source.ToString() == $"{Path}/IMG/pattern_button.png") 
-                    lst.Add("MTP " + PatternGetter.GetManyTransactionsPattern(_transactionsData, _jsonParser.KeyList, 
+                    lst.Add("TIT " + PatternGetter.GetManyTerminalsInTimePattern(_transactionsData, _jsonParser.KeyList, 
                         int.Parse(TransactionsTimeCount.Text), TimeSpan.Parse(TimeTransactionTime.Text)));
             }
             catch (Exception e) {
                 MessageBox.Show($"Error with: {e}", "Pattern getting error!", MessageBoxButton.OK); }
         }
+
+        private int[] array_global;
         private void InformationAboutOnePPattern(object sender, ChartPoint chartPoint)
         {
             if (SaveButton.Visibility == Visibility.Visible) SaveButton.Visibility = Visibility.Hidden;
@@ -151,9 +153,15 @@ namespace FRAUD_UI_ANALIZATOR
             { MoreAboutChart.Visibility = Visibility.Visible;
                 GetSaved(chartPoint.SeriesView.Title);
                 return; }
-            const string str = "SAP . BAP . PVP . AVP . DCP . MCP . MPP . MPC . CSP";
-            if (!str.Contains(chartPoint.SeriesView.Title)) return;
-            Dictionary<string, string> patternsByName = new()
+            const string oneParam = "SAP . BAP . PVP . AVP . DCP . MCP . MPP . MPC . CSP";
+            const string twoParams = "TDP . GOP . MTP . TIT";
+            if (!oneParam.Contains(chartPoint.SeriesView.Title) && !twoParams.Contains(chartPoint.SeriesView.Title))
+            {
+                MessageBox.Show("Данный паттерн не подлежит детальному перебору!", "Ошибка перебора!",
+                    MessageBoxButton.OK);
+                return;
+            }
+            Dictionary<string, string> oneParamPatternsByName = new()
             { {"SAP", "GetSmallAmountPattern"},
                 {"BAP", "GetBigAmountPattern"},
                 {"PVP", "GetPassportValidPattern"},
@@ -164,8 +172,9 @@ namespace FRAUD_UI_ANALIZATOR
                 {"MPC", "GetMultiPassportAccount"},
                 {"CSP", "GetCancelledStreakPattern"} };
             try
-            { var array = PatternHandler.GenerateFewPatternScales(typeof(PatternGetter).GetMethod(patternsByName[chartPoint.SeriesView.Title]), 
+            { var array = PatternHandler.GenerateFewPatternScales(typeof(PatternGetter).GetMethod(oneParamPatternsByName[chartPoint.SeriesView.Title]), 
                     int.Parse(StartValue.Text), int.Parse(StreakCount.Text), int.Parse(Step.Text), _transactionsData, _jsonParser.KeyList);
+                array_global = array;
                 CartesianChart.Series = new SeriesCollection
                 { new LineSeries {
                         Title = chartPoint.SeriesView.Title,
@@ -174,7 +183,7 @@ namespace FRAUD_UI_ANALIZATOR
                 AddToCash(chartPoint.SeriesView.Title, CartesianChart);
                 DataContext = this; }
             catch (Exception e) {
-                MessageBox.Show(e.ToString(), "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(e.ToString(), "error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return; }
             MoreAboutChart.Visibility = Visibility.Visible; }
         private readonly Dictionary<string, string> _patternsByName = new()
@@ -246,6 +255,23 @@ namespace FRAUD_UI_ANALIZATOR
                 DataContext = this; }
             catch (Exception e) {
                 MessageBox.Show(e.ToString(), "error", MessageBoxButton.OK, MessageBoxImage.Error); }
+        }
+
+        private void SaveChoose(object sender, ChartPoint chartPoint)
+        {
+            if (MessageBox.Show("Сохранить список транзакций в этой точке?", "Сохранение.", MessageBoxButton.OKCancel,
+                    MessageBoxImage.Question) != MessageBoxResult.OK) return;
+            var folderBrowser = new OpenFileDialog {
+                ValidateNames = false,
+                CheckFileExists = false,
+                CheckPathExists = true,
+                Filter = "txt files (*.txt)|*.txt",
+                FileName = $"Local_Report_{(int)chartPoint.X}_{chartPoint.SeriesView.Title}" };
+            if (folderBrowser.ShowDialog() == true)
+            {
+                File.WriteAllText(folderBrowser.FileName, PatternHandler.GlAr[(int)chartPoint.X]);
+            }
+
         }
     }
 }

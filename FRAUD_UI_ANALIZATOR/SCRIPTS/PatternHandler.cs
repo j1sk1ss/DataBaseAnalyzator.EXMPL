@@ -7,25 +7,18 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
 {
     public class PatternHandler
     {
+        public static readonly List<string> GlAr = new List<string>();
         public static int[] GenerateFewPatternScales(MethodInfo action,int startStreak, int streaks, int step, Dictionary<string, TransactiondData> data, List<string> keys)
         {
             var strArray = new int[streaks];
             var strDoubleArray = new int[streaks, streaks];
-            switch (action.GetParameters().Length)
+            for (var i = 0; i < streaks; i += 1)
             {
-                case 3:
-                    for (var i = 0; i < streaks; i += 1)
-                        strArray[i] = ((string)action.Invoke(typeof(PatternGetter), new object[] { data, keys, (i * step) + startStreak }))!.Split(" ").Length;
-                    return strArray;
-                case 4:
-                    for (var i = 0; i < startStreak + streaks; i += 1)
-                    for (var j = 0; j < startStreak + streaks; j += 1)
-                        strDoubleArray[i,j] = (((string)action.Invoke(typeof(PatternGetter), new object[] { data, keys, (i * step) + startStreak, new TimeSpan(0,j+ startStreak,0) }))!)
-                            .Split(" ").Length;
-                    return null;
-                default:
-                    return null;
+                GlAr.Add((string)action.Invoke(typeof(PatternGetter), new object[] { data, keys, (i * step) + startStreak }));
+                strArray[i] = GlAr[i].Split(" ").Length;
             }
+
+            return strArray;
         }
         protected static string PrintArray(IEnumerable<int> array)
         {

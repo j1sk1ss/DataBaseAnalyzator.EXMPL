@@ -144,6 +144,19 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
                         Duration() <= duration).Any(t => ++count > time)) {
                     answer += keys[i] + " "; }
                 count = 0; }
-            return answer; } 
+            return answer; }
+
+        public static string GetManyTerminalsInTimePattern(Dictionary<string, TransactiondData> data, List<string> keys, int time, TimeSpan duration)
+        {
+            var answer = string.Empty;
+            var count = 0;
+            for (var i = 0; i < data.Count; i++) {
+                if (data.Where((t, j) => data[$"{keys[i]}"].Passport == 
+                        data[$"{keys[j]}"].Passport && data[$"{keys[i]}"].Address != data[$"{keys[j]}"].Address &&
+                        (data[$"{keys[i]}"].Date - data[$"{keys[j]}"].Date).Duration() <= duration).Any(t => ++count > time)) {
+                    answer += keys[i] + " "; }
+                count = 0; }
+            return answer;
+        }
     }
 }
