@@ -15,7 +15,8 @@ using Microsoft.Win32;
 using OfficeOpenXml;
 namespace FRAUD_UI_ANALIZATOR
 { public partial class MainWindow
-    { public MainWindow()
+    {         private readonly List<string> _excel = new();
+        public MainWindow()
         { InitializeComponent(); }
         private readonly JsonParser _jsonParser = new();
         private Dictionary<string, TransactiondData> _transactionsData = new();
@@ -31,7 +32,7 @@ namespace FRAUD_UI_ANALIZATOR
                 _transactionsData = _jsonParser.StartParse(fileName); }
             catch (Exception exception) { DbPathLabel.Content = "";
                 MessageBox.Show($"Error with: {exception}", "Error with Parsing!", MessageBoxButton.OK, MessageBoxImage.Error); } }
-        private readonly List<string> _excel = new();
+
         [SuppressMessage("ReSharper.DPA", "DPA0003: Excessive memory allocations in LOH", MessageId = "type: System.String")]
         private void PatternGet(object sender, RoutedEventArgs routedEventArgs)
         { if (_transactionsData.Count < 1)
@@ -80,7 +81,8 @@ namespace FRAUD_UI_ANALIZATOR
                 new BitmapImage(new Uri(@"/IMG/checked_checkbox_1.png", UriKind.Relative)) : 
                 new BitmapImage(new Uri(@"/IMG/unchecked_checkbox.png", UriKind.Relative)); }
         private void OpenCharts(object sender, RoutedEventArgs routedEventArgs)
-        {   foreach (var obj in _buttons)
+        {   if (_excel.Count >= 1) SaveButton.Visibility = Visibility.Hidden;
+            foreach (var obj in _buttons)
             { obj.Source =
                 new BitmapImage(new Uri($@"IMG/Graph_inactive_tab.png", UriKind.Relative)); }
             Tabs.Source = new BitmapImage(new Uri(@"/IMG/tabs2.png", UriKind.Relative));
@@ -89,6 +91,7 @@ namespace FRAUD_UI_ANALIZATOR
             SavedCharts.Visibility = Visibility.Visible; }
         private void OpenMenu(object sender, RoutedEventArgs routedEventArgs)
         {
+            if (_excel.Count >= 1) SaveButton.Visibility = Visibility.Visible;
             Tabs.Source = new BitmapImage(new Uri(@"/IMG/tabs.png", UriKind.Relative));
             Charts.Visibility = Visibility.Hidden;
             MoreAboutChart.Visibility = Visibility.Hidden;
@@ -142,7 +145,9 @@ namespace FRAUD_UI_ANALIZATOR
                 MessageBox.Show($"Error with: {e}", "Pattern getting error!", MessageBoxButton.OK); }
         }
         private void InformationAboutOnePPattern(object sender, ChartPoint chartPoint)
-        { if (_cartesianCharts.Keys.Contains(chartPoint.SeriesView.Title))
+        {
+            if (SaveButton.Visibility == Visibility.Visible) SaveButton.Visibility = Visibility.Hidden;
+            if (_cartesianCharts.Keys.Contains(chartPoint.SeriesView.Title))
             { MoreAboutChart.Visibility = Visibility.Visible;
                 GetSaved(chartPoint.SeriesView.Title);
                 return; }
