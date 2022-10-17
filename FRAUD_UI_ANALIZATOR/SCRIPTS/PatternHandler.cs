@@ -54,14 +54,19 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
         public static string PatternMultiply(List<string> patterns)
         {
             var answer = "";
-            for (var i = 0; i < patterns.Count; i++)
+            foreach (var t1 in patterns)
             {
-                var line = patterns[i].Split(" ");
+                var line = t1.Split(" ");
+                if (line.Length <= 2)
+                {
+                    MessageBox.Show("Некоторые паттерны не выявили подозрительные транзакции из-за чего учитываться не будут!", "Предупреждение!",
+                        MessageBoxButton.OK);
+                    continue;
+                }
                 foreach (var t in line)
                 {
                     for (var k = 0; k < patterns.Count; k++)
                     {
-                        if (k == i) continue;
                         if (!patterns[k].Contains(t)) break;
                         if (k == patterns.Count - 1) answer += t + " ";
                     }

@@ -97,7 +97,7 @@ namespace FRAUD_UI_ANALIZATOR
         { try
             { if (StrangeTime.Source.ToString() == $"{Path}/IMG/pattern_button.png") 
                     lst.Add("GTP " + PatternGetter.GetTimePattern(_transactionsData, _jsonParser.KeyList, 
-                        TimeSpan.Parse(EndTimeTp.Text), TimeSpan.Parse(StartTimeTp.Text))); // GTP . TDP . GOP . MTP . TIT
+                        TimeSpan.Parse(EndTimeTp.Text), TimeSpan.Parse(StartTimeTp.Text))); 
                 if (SmallTransaction.Source.ToString() == $"{Path}/IMG/pattern_button.png") 
                     lst.Add("SAP " + PatternGetter.GetSmallAmountPattern(_transactionsData, _jsonParser.KeyList, 
                         int.Parse(SmallAmount.Text)));
