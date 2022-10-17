@@ -17,7 +17,7 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
             var countOfPatterns = patterns.Count;
             for (var i = 3; i < countOfPatterns + 3; i++)
             { fraudSheet.Cells[i, 1].Value = i - 2;
-                fraudSheet.Cells[i, 2].Value = "[" + patterns[i - 3].Replace(" ", ", ")[3..] + "]"; }
+                fraudSheet.Cells[i, 2].Value = "[" + patterns[i - 3].Replace(" ", ", ")[4..] + "]"; }
             var infoSheet = excelPackage.Workbook.Worksheets.Add("Фрод паттерны");
             infoSheet.Cells[1, 1].Value = "Выявленные фрод паттерны";
             infoSheet.Cells[2, 1].Value = "№ паттерна"; 

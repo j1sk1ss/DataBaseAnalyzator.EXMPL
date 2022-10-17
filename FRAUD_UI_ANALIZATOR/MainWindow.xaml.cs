@@ -33,8 +33,6 @@ namespace FRAUD_UI_ANALIZATOR
                 _transactionsData = _jsonParser.StartParse(fileName); }
             catch (Exception exception) { DbPathLabel.Content = "";
                 MessageBox.Show($"Error with: {exception}", "Error with Parsing!", MessageBoxButton.OK, MessageBoxImage.Error); } }
-
-        [SuppressMessage("ReSharper.DPA", "DPA0003: Excessive memory allocations in LOH", MessageId = "type: System.String")]
         private void PatternGet(object sender, RoutedEventArgs routedEventArgs)
         { if (_transactionsData.Count < 1)
             { MessageBox.Show("Load Json before start!", "Pattern getting error!", MessageBoxButton.OK,
@@ -49,11 +47,8 @@ namespace FRAUD_UI_ANALIZATOR
                 { Title = $"{t.Split(" ")[0]}",
                     Values = new ChartValues<int> { t.Split(" ").Length - 1 } });
             DataContext = this; }
-
         private void SaveExcel(object sender, RoutedEventArgs routedEventArgs)
-        {
-            ExelConstructor.SaveToExcel(_transactionsData, _excel);
-        }
+        { ExelConstructor.SaveToExcel(_transactionsData, _excel); }
         private const string Path = "pack://application:,,,";
         private void ValueChanger(object sender, RoutedEventArgs routedEventArgs)
         { var obj = sender as FrameworkElement;
@@ -163,20 +158,8 @@ namespace FRAUD_UI_ANALIZATOR
 
         private void DownloadFraud(object sender, RoutedEventArgs routedEventArgs)
         {
-            var folderBrowser = new OpenFileDialog {
-                ValidateNames = false,
-                CheckFileExists = false,
-                CheckPathExists = true,
-                Filter = "txt files (*.txt)|*.txt",
-                FileName = $"Fraud" };
-            if (folderBrowser.ShowDialog() != true) return;
-            try
-            { File.WriteAllText(folderBrowser.FileName, PatternHandler.PatternMultiply(_excel));
-            }
-            catch (Exception e)
-            { MessageBox.Show($"{e}", "Error with saving local file!", MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-                throw; }
+            var tmp = PatternHandler.PatternMultiply(_excel);
+            ExelConstructor.SaveToExcel(_transactionsData, new List<string> { tmp });
         }
         private void InformationAboutOnePPattern(object sender, ChartPoint chartPoint)
         {
@@ -281,12 +264,7 @@ namespace FRAUD_UI_ANALIZATOR
         { try
             { 
                 const string oneParam = "SAP . BAP . PVP . AVP . DCP . MCP . MPP . MPC . CSP";
-                const string twoParam = "TIT . MTP . TDP";
-                if (oneParam.Contains(buttonName))
-                {
-                    DurationTime.Visibility = Visibility.Hidden;
-                } else DurationTime.Visibility = Visibility.Visible;
-
+                DurationTime.Visibility = oneParam.Contains(buttonName) ? Visibility.Hidden : Visibility.Visible;
                 foreach (var obj in _buttons)
                 { if (obj.Source.ToString() == $"{Path}/IMG/Graph_tab.png")
                         obj.Source =
@@ -303,11 +281,9 @@ namespace FRAUD_UI_ANALIZATOR
             catch (Exception e) {
                 MessageBox.Show(e.ToString(), "error", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
-
         private void SaveChoose(object sender, ChartPoint chartPoint)
-        {
-            if (MessageBox.Show("Сохранить список транзакций в этой точке?", "Сохранение.", MessageBoxButton.YesNo,
-                    MessageBoxImage.Question) != MessageBoxResult.Yes) return;
+        { if (MessageBox.Show("Сохранить список транзакций в этой точке?", "Сохранение.", MessageBoxButton.YesNo,
+                  MessageBoxImage.Question) != MessageBoxResult.Yes) return;
             var folderBrowser = new OpenFileDialog {
                 ValidateNames = false,
                 CheckFileExists = false,
@@ -315,17 +291,12 @@ namespace FRAUD_UI_ANALIZATOR
                 Filter = "txt files (*.txt)|*.txt",
                 FileName = $"Local_Report_{(int)chartPoint.X}_{chartPoint.SeriesView.Title}" };
             if (folderBrowser.ShowDialog() != true) return;
-            try
-            {
+            try {
                 File.WriteAllText(folderBrowser.FileName, PatternHandler.ExtendedData[_patternsByName[chartPoint.SeriesView.Title]][(int)chartPoint.X]);
-            }
-            catch (Exception e)
-            {
+            }catch (Exception e) {
                 MessageBox.Show($"{e}", "Error with saving local file!", MessageBoxButton.OK,
                     MessageBoxImage.Error);
-                throw;
-            }
-
+                throw;}
         }
     }
 }
