@@ -40,6 +40,7 @@ namespace FRAUD_UI_ANALIZATOR
                 return; }
             _excel.Clear();
             PatternInit(_excel);
+            SaveFrButton.Visibility = Visibility.Visible;
             Chart.Series.Clear();
             SaveButton.Visibility = Visibility.Visible;
             foreach (var t in _excel)
@@ -237,7 +238,7 @@ namespace FRAUD_UI_ANALIZATOR
         { if (!_cartesianCharts.ContainsKey(name)) { _cartesianCharts.Add(name, cartesianChart.Series[0].Values);
                 SavedCharts.Children.Add(new Image
                 { Name = name,
-                        Margin = new Thickness(1200,_cartesianCharts.Count * 60 + 500,3,0),
+                        Margin = new Thickness(1200,_cartesianCharts.Count * 60 + 540,3,0),
                             Source = new BitmapImage(new Uri(@"/IMG/Graph_inactive_tab.png", UriKind.Relative)),
                                 Cursor = Cursors.Hand,
                                 ToolTip = _patternsByName[name]
@@ -247,7 +248,7 @@ namespace FRAUD_UI_ANALIZATOR
                 SavedCharts.Children.Add(new Label
                 {
                     Content = name,
-                    Margin = new Thickness(1200, _cartesianCharts.Count * 60 + 510, 0, 0),
+                    Margin = new Thickness(1200, _cartesianCharts.Count * 60 + 550, 0, 0),
                     FontSize = 24,
                     FontFamily = new System.Windows.Media.FontFamily("Bahnschrift"),
                     IsHitTestVisible = false,
