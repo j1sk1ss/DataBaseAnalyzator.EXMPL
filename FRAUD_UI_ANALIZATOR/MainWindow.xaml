@@ -130,7 +130,7 @@
                         </lvc:PieChart.DataTooltip>
                     </lvc:PieChart>
                 </Grid>
-                <Image x:Name="SaveFrButton" Height="290" Canvas.Left="507" Source="/IMG/Save_Multiply_Button.png" Visibility="Hidden" Stretch="Fill" Canvas.Top="491" Width="290" HorizontalAlignment="Left" VerticalAlignment="Top" MouseDown="DownloadFraud" Cursor="Hand"/>
+                <Image x:Name="SaveFrButton" Height="206" Canvas.Left="1005" Source="/IMG/Save_Multiply_Button.png" Visibility="Hidden" Stretch="Fill" Canvas.Top="894" Width="206" HorizontalAlignment="Left" VerticalAlignment="Top" MouseDown="DownloadFraud" Cursor="Hand"/>
             </Canvas>
 
             <Canvas Grid.Row="0" x:Name = "MoreAboutChart" Background="Azure" Visibility="Hidden" Height="7200" Width="7200" HorizontalAlignment="Left" VerticalAlignment="Top">
