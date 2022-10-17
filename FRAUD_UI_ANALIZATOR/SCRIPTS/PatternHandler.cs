@@ -37,18 +37,8 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
                 answer = line.Aggregate(answer, (current1, t) => patterns.TakeWhile(t2 => t2.Contains(t)).
                     Where((t2, k) => k == patterns.Count - 1).Aggregate(current1, (current, t2) => current + (t + " "))); }
             return answer; }
-        protected static int[] AddInt(IReadOnlyList<int> ar, int elem)
-        { var array = new int[ar.Count + 1];
-            for (var j = 0; j < ar.Count; j++) array[j] = ar[j];
-            array[^1] = elem;
-            return array; }
         protected static DateTime[] AddTime(IReadOnlyList<DateTime> ar, DateTime elem)
         { var array = new DateTime[ar.Count + 1];
-            for (var j = 0; j < ar.Count; j++) array[j] = ar[j];
-            array[^1] = elem;
-            return array; }
-        protected static string[] AddString(IReadOnlyList<string> ar, string elem)
-        { var array = new string[ar.Count + 1];
             for (var j = 0; j < ar.Count; j++) array[j] = ar[j];
             array[^1] = elem;
             return array; }
