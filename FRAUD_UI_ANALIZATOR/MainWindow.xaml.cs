@@ -15,7 +15,7 @@ using LiveCharts.Wpf;
 using Microsoft.Win32;
 namespace FRAUD_UI_ANALIZATOR
 { public partial class MainWindow
-    {         private readonly List<string> _excel = new();
+    {   private readonly List<string> _excel = new();
         public MainWindow()
         { InitializeComponent(); }
         private readonly JsonParser _jsonParser = new();
@@ -35,10 +35,16 @@ namespace FRAUD_UI_ANALIZATOR
         private void PatternGet(object sender, RoutedEventArgs routedEventArgs)
         { if (_transactionsData.Count < 1)
             { MessageBox.Show("Load Json before start!", "Pattern getting error!", MessageBoxButton.OK,
+                    MessageBoxImage.Error); return; }
+            _excel.Clear();
+            try { PatternInit(_excel); }
+            catch (Exception e)
+            { MessageBox.Show($"Error with {e}", "Error with getting transactions!", MessageBoxButton.OK,
+                    MessageBoxImage.Error); return; }
+            if (_excel.Count == 0)
+            { MessageBox.Show("Выберите патерны из списка!", "Ошибка обработки!", MessageBoxButton.OK,
                     MessageBoxImage.Error);
                 return; }
-            _excel.Clear();
-            PatternInit(_excel);
             SaveFrButton.Visibility = Visibility.Visible;
             Chart.Series.Clear();
             SaveButton.Visibility = Visibility.Visible;
