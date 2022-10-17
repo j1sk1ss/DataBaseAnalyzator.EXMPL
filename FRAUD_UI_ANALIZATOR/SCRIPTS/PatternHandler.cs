@@ -51,14 +51,23 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
 
             return answer;
         }
-        protected string PatternMultiply(string firstPattern, string secondPattern) 
+        public static string PatternMultiply(List<string> patterns)
         {
-            var ar1 = firstPattern.Split(" ");
-            var ar2 = secondPattern.Split(" ");
-            const string answer = "";
-            return (ar1.Length > ar2.Length) switch
-            { true => ar1.Where(t => ar2.Any(t1 => t == t1)).Aggregate(answer, (current, t) => current + (t + " ")),
-                false => ar2.Where(t => ar1.Any(t1 => t == t1)).Aggregate(answer, (current, t) => current + (t + " ")) };
+            var answer = "";
+            for (var i = 0; i < patterns.Count; i++)
+            {
+                var line = patterns[i].Split(" ");
+                foreach (var t in line)
+                {
+                    for (var k = 0; k < patterns.Count; k++)
+                    {
+                        if (k == i) continue;
+                        if (!patterns[k].Contains(t)) break;
+                        if (k == patterns.Count - 1) answer += t + " ";
+                    }
+                }
+            }
+            return answer;
         }
         protected static int[] AddInt(IReadOnlyList<int> ar, int elem)
         { var array = new int[ar.Count + 1];

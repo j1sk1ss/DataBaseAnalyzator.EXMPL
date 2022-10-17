@@ -129,6 +129,7 @@
                             <lvc:DefaultTooltip BulletSize="50" FontSize="20"></lvc:DefaultTooltip>
                         </lvc:PieChart.DataTooltip>
                     </lvc:PieChart>
+                    <Button Height="50" Width="200" Margin="-400,-500,0,0" Click="DownloadFraud">Скачать подходящие ко всем</Button>
                 </Grid>
             </Canvas>
 

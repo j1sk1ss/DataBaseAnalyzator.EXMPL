@@ -145,7 +145,7 @@ namespace FRAUD_UI_ANALIZATOR
             catch (Exception e) {
                 MessageBox.Show($"Error with: {e}", "Pattern getting error!", MessageBoxButton.OK); }
         }
-
+        
         private int[] _arrayGlobal;
         private readonly Dictionary<string, string> _patternsByName = new()
         { {"SAP", "GetSmallAmountPattern"},
@@ -160,6 +160,24 @@ namespace FRAUD_UI_ANALIZATOR
             {"MTP", "GetManyTransactionsPattern"},
             {"TDP", "GetTimeDurationPattern"},
             {"TIT", "GetManyTerminalsInTimePattern"} };
+
+        private void DownloadFraud(object sender, RoutedEventArgs routedEventArgs)
+        {
+            var folderBrowser = new OpenFileDialog {
+                ValidateNames = false,
+                CheckFileExists = false,
+                CheckPathExists = true,
+                Filter = "txt files (*.txt)|*.txt",
+                FileName = $"Fraud" };
+            if (folderBrowser.ShowDialog() != true) return;
+            try
+            { File.WriteAllText(folderBrowser.FileName, PatternHandler.PatternMultiply(_excel));
+            }
+            catch (Exception e)
+            { MessageBox.Show($"{e}", "Error with saving local file!", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                throw; }
+        }
         private void InformationAboutOnePPattern(object sender, ChartPoint chartPoint)
         {
             if (SaveButton.Visibility == Visibility.Visible) SaveButton.Visibility = Visibility.Hidden;
@@ -281,8 +299,8 @@ namespace FRAUD_UI_ANALIZATOR
 
         private void SaveChoose(object sender, ChartPoint chartPoint)
         {
-            if (MessageBox.Show("Сохранить список транзакций в этой точке?", "Сохранение.", MessageBoxButton.OKCancel,
-                    MessageBoxImage.Question) != MessageBoxResult.OK) return;
+            if (MessageBox.Show("Сохранить список транзакций в этой точке?", "Сохранение.", MessageBoxButton.YesNo,
+                    MessageBoxImage.Question) != MessageBoxResult.Yes) return;
             var folderBrowser = new OpenFileDialog {
                 ValidateNames = false,
                 CheckFileExists = false,

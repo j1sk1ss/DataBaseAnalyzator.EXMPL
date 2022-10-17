@@ -53,8 +53,11 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
                         if (j + 1 < times.Length) check[j] = (times[j + 1] - times[j]).Duration();
                     var count = 0;
                     for (var j = 1; j < check.Length; j++)
-                    { if (check[j] - check[j - 1] < duration) continue;
-                        if (++count <= copyCount) continue;
+                    {
+                        if ((check[j] - check[j - 1]).Duration() < duration)
+                        {
+                            if (++count < copyCount) continue;
+                        } else count = 0;
                         answer += keys[i] + " ";
                         break; }
             }
