@@ -31,15 +31,13 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
             for (var i = 0; i < data.Count; i++)
                 if (data[$"{keys[i]}"].PassportValidTo < data[$"{keys[i]}"].Date - new TimeSpan(days, 0,0,0))
                     answer += keys[i] + " ";
-            return answer; 
-        }
+            return answer; }
         public static string GetAccountValidPattern(Dictionary<string, TransactiondData> data,List<string> keys, int days) {
             var answer = string.Empty; 
             for (var i = 0; i < data.Count; i++)
                 if (data[$"{keys[i]}"].AccountValidTo < data[$"{keys[i]}"].Date - new TimeSpan(days, 0,0,0))
                     answer += keys[i] + " ";
-            return answer; 
-        }
+            return answer; }
         public static string GetTimeDurationPattern(Dictionary<string, TransactiondData> data,List<string> keys, int copyCount, TimeSpan duration) { 
             var answer = string.Empty;
             for (var i = 0; i < data.Count; i++)
@@ -53,10 +51,8 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
                         if (j + 1 < times.Length) check[j] = (times[j + 1] - times[j]).Duration();
                     var count = 0;
                     for (var j = 1; j < check.Length; j++)
-                    {
-                        if ((check[j] - check[j - 1]).Duration() < duration)
-                        {
-                            if (++count < copyCount) continue;
+                    { if ((check[j] - check[j - 1]).Duration() < duration)
+                        { if (++count < copyCount) continue;
                         } else count = 0;
                         answer += keys[i] + " ";
                         break; }
@@ -107,12 +103,10 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
         { var answer = string.Empty; 
             for (var i = 0; i < data.Count; i++)
                 switch (type)
-                { case false:
-                        if (data[$"{keys[i]}"].Date.Year - data[$"{keys[i]}"].DateOfBirth.Year > age && data[$"{keys[i]}"].OperType == "Снятие")
+                { case false: if (data[$"{keys[i]}"].Date.Year - data[$"{keys[i]}"].DateOfBirth.Year > age && data[$"{keys[i]}"].OperType == "Снятие")
                             answer += keys[i] + " ";
                         break;
-                    default:
-                        if (data[$"{keys[i]}"].Date.Year - data[$"{keys[i]}"].DateOfBirth.Year > age)
+                    default: if (data[$"{keys[i]}"].Date.Year - data[$"{keys[i]}"].DateOfBirth.Year > age)
                             answer += keys[i] + " ";
                         break; }
             return answer; }

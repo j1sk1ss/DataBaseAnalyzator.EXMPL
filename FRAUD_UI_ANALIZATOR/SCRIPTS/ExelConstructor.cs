@@ -37,15 +37,13 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
                 FileName = "Report" };
             if (folderBrowser.ShowDialog() != true) return;
             if (folderBrowser.FilterIndex == 2)
-            { try
-                { using var excelPackage = new ExcelPackage();
+            { try { using var excelPackage = new ExcelPackage();
                     ExcelWrite(excelPackage, transactionsData, excel, folderBrowser);
                      excelPackage.SaveAs(folderBrowser.FileName);
                 } catch (Exception e)
                 { MessageBox.Show($"Error with: {e}", "Error with analysing!", MessageBoxButton.OK, MessageBoxImage.Error);
                     throw; }
-            }else {
-                File.WriteAllLines(folderBrowser.FileName,excel); }
+            }else { File.WriteAllLines(folderBrowser.FileName,excel); }
         }
     }
 }

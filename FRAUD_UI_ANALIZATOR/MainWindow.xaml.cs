@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -78,7 +77,7 @@ namespace FRAUD_UI_ANALIZATOR
                 new BitmapImage(new Uri(@"/IMG/checked_checkbox_1.png", UriKind.Relative)) : 
                 new BitmapImage(new Uri(@"/IMG/unchecked_checkbox.png", UriKind.Relative)); }
         private void OpenCharts(object sender, RoutedEventArgs routedEventArgs)
-        {   if (_excel.Count >= 1) SaveButton.Visibility = Visibility.Hidden;
+        { if (_excel.Count >= 1) SaveButton.Visibility = Visibility.Hidden;
             foreach (var obj in _buttons)
             { obj.Source =
                 new BitmapImage(new Uri($@"IMG/Graph_inactive_tab.png", UriKind.Relative)); }
@@ -87,8 +86,7 @@ namespace FRAUD_UI_ANALIZATOR
             MoreAboutChart.Visibility = Visibility.Hidden;
             SavedCharts.Visibility = Visibility.Visible; }
         private void OpenMenu(object sender, RoutedEventArgs routedEventArgs)
-        {
-            if (_excel.Count >= 1) SaveButton.Visibility = Visibility.Visible;
+        { if (_excel.Count >= 1) SaveButton.Visibility = Visibility.Visible;
             Tabs.Source = new BitmapImage(new Uri(@"/IMG/tabs.png", UriKind.Relative));
             Charts.Visibility = Visibility.Hidden;
             MoreAboutChart.Visibility = Visibility.Hidden;
@@ -136,12 +134,10 @@ namespace FRAUD_UI_ANALIZATOR
                         int.Parse(DurationStreak.Text), TimeSpan.Parse(TimeTransaction.Text)));
                 if (ManyTerminalsInTime.Source.ToString() == $"{Path}/IMG/pattern_button.png") 
                     lst.Add("TIT " + PatternGetter.GetManyTerminalsInTimePattern(_transactionsData, _jsonParser.KeyList, 
-                        int.Parse(TransactionsTimeCount.Text), TimeSpan.Parse(TimeTransactionTime.Text)));
-            }
+                        int.Parse(TransactionsTimeCount.Text), TimeSpan.Parse(TimeTransactionTime.Text))); }
             catch (Exception e) {
                 MessageBox.Show($"Error with: {e}", "Pattern getting error!", MessageBoxButton.OK); }
         }
-        
         private int[] _arrayGlobal;
         private readonly Dictionary<string, string> _patternsByName = new()
         { {"SAP", "GetSmallAmountPattern"},
@@ -156,15 +152,11 @@ namespace FRAUD_UI_ANALIZATOR
             {"MTP", "GetManyTransactionsPattern"},
             {"TDP", "GetTimeDurationPattern"},
             {"TIT", "GetManyTerminalsInTimePattern"} };
-
         private void DownloadFraud(object sender, RoutedEventArgs routedEventArgs)
-        {
-            var tmp = PatternHandler.PatternMultiply(_excel);
-            ExelConstructor.SaveToExcel(_transactionsData, new List<string> { tmp });
-        }
+        { var tmp = PatternHandler.PatternMultiply(_excel);
+            ExelConstructor.SaveToExcel(_transactionsData, new List<string> { tmp }); }
         private void InformationAboutOnePPattern(object sender, ChartPoint chartPoint)
-        {
-            if (SaveButton.Visibility == Visibility.Visible) SaveButton.Visibility = Visibility.Hidden;
+        { if (SaveButton.Visibility == Visibility.Visible) SaveButton.Visibility = Visibility.Hidden;
             if (_cartesianCharts.Keys.Contains(chartPoint.SeriesView.Title))
             { MoreAboutChart.Visibility = Visibility.Visible;
                 GetSaved(chartPoint.SeriesView.Title);
@@ -172,31 +164,23 @@ namespace FRAUD_UI_ANALIZATOR
             const string oneParam = "SAP . BAP . PVP . AVP . DCP . MCP . MPP . MPC . CSP";
             const string twoParam = "TIT . MTP . TDP";
             if (!oneParam.Contains(chartPoint.SeriesView.Title) && !twoParam.Contains(chartPoint.SeriesView.Title))
-            {
-                MessageBox.Show("Данный паттерн не подлежит детальному перебору!", "Ошибка перебора!",
+            { MessageBox.Show("Данный паттерн не подлежит детальному перебору!", "Ошибка перебора!",
                     MessageBoxButton.OK);
-                return;
-            } try
-            {
-                var array = Array.Empty<int>();
+                return; } try
+            { var array = Array.Empty<int>();
                 if (oneParam.Contains(chartPoint.SeriesView.Title))
-                {
-                    DurationTime.Visibility = Visibility.Hidden;
+                { DurationTime.Visibility = Visibility.Hidden;
                     array = PatternHandler.GenerateFewPatternScalesOneParam(typeof(PatternGetter).GetMethod(_patternsByName[chartPoint.SeriesView.Title]), 
                         int.Parse(StartValue.Text), int.Parse(CountStep.Text), int.Parse(Step.Text), _transactionsData, _jsonParser.KeyList);
-                }
-                else
-                {
-                    DurationTime.Visibility = Visibility.Visible;
+                } else
+                { DurationTime.Visibility = Visibility.Visible;
                     array = PatternHandler.GenerateFewPatternScalesTwoParam(typeof(PatternGetter).GetMethod(_patternsByName[chartPoint.SeriesView.Title]), 
                         int.Parse(StartValue.Text), int.Parse(CountStep.Text), int.Parse(Step.Text),TimeSpan.Parse(DurationTime.Text), _transactionsData, _jsonParser.KeyList);
-                }
-                _arrayGlobal = array;
+                } _arrayGlobal = array;
                 CartesianChart.Series = new SeriesCollection
                 { new LineSeries {
                         Title = chartPoint.SeriesView.Title,
-                        Values = array.AsChartValues() }
-                };
+                        Values = array.AsChartValues() } };
                 AddToCash(chartPoint.SeriesView.Title, CartesianChart);
                 DataContext = this; }
             catch (Exception e) {
@@ -241,19 +225,16 @@ namespace FRAUD_UI_ANALIZATOR
                         Margin = new Thickness(1200,_cartesianCharts.Count * 60 + 540,3,0),
                             Source = new BitmapImage(new Uri(@"/IMG/Graph_inactive_tab.png", UriKind.Relative)),
                                 Cursor = Cursors.Hand,
-                                ToolTip = _patternsByName[name]
-                });
+                                ToolTip = _patternsByName[name] });
                 SavedCharts.Children[^1].MouseDown += delegate { GetSaved(name); };
                     _buttons.Add((Image)SavedCharts.Children[^1]);
                 SavedCharts.Children.Add(new Label
-                {
-                    Content = name,
+                { Content = name,
                     Margin = new Thickness(1200, _cartesianCharts.Count * 60 + 550, 0, 0),
                     FontSize = 24,
                     FontFamily = new System.Windows.Media.FontFamily("Bahnschrift"),
                     IsHitTestVisible = false,
-                    Foreground = Brushes.White,
-                }); 
+                    Foreground = Brushes.White}); 
             } else _cartesianCharts[name] = cartesianChart.Series[0].Values; foreach (var obj in _buttons) { 
                 if (obj.Source.ToString() == $"{Path}/IMG/Graph_tab.png")
                     obj.Source =
@@ -262,8 +243,7 @@ namespace FRAUD_UI_ANALIZATOR
                     new BitmapImage(new Uri($@"IMG/Graph_tab.png", UriKind.Relative)); }
         }
         private void GetSaved(string buttonName)
-        { try
-            { 
+        { try { 
                 const string oneParam = "SAP . BAP . PVP . AVP . DCP . MCP . MPP . MPC . CSP";
                 DurationTime.Visibility = oneParam.Contains(buttonName) ? Visibility.Hidden : Visibility.Visible;
                 foreach (var obj in _buttons)
@@ -276,8 +256,7 @@ namespace FRAUD_UI_ANALIZATOR
                 CartesianChart.Series = new SeriesCollection {
                     new LineSeries
                     { Title = buttonName,
-                        Values = _cartesianCharts[buttonName]} 
-                };
+                        Values = _cartesianCharts[buttonName]} };
                 DataContext = this; }
             catch (Exception e) {
                 MessageBox.Show(e.ToString(), "error", MessageBoxButton.OK, MessageBoxImage.Error); }
