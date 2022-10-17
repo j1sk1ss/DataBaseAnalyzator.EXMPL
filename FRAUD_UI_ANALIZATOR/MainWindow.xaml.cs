@@ -146,8 +146,8 @@ namespace FRAUD_UI_ANALIZATOR
                 MessageBox.Show($"Error with: {e}", "Pattern getting error!", MessageBoxButton.OK); }
         }
 
-        private int[] array_global;
-        Dictionary<string, string> oneParamPatternsByName = new()
+        private int[] _arrayGlobal;
+        private readonly Dictionary<string, string> _patternsByName = new()
         { {"SAP", "GetSmallAmountPattern"},
             {"BAP", "GetBigAmountPattern"},
             {"PVP", "GetPassportValidPattern"},
@@ -156,7 +156,10 @@ namespace FRAUD_UI_ANALIZATOR
             {"MCP", "GetMultiCardPattern"},
             {"MPP", "GetMultiPosPatter"},
             {"MPC", "GetMultiPassportAccount"},
-            {"CSP", "GetCancelledStreakPattern"} };
+            {"CSP", "GetCancelledStreakPattern"},
+            {"MTP", "GetManyTransactionsPattern"},
+            {"TDP", "GetTimeDurationPattern"},
+            {"TIT", "GetManyTerminalsInTimePattern"} };
         private void InformationAboutOnePPattern(object sender, ChartPoint chartPoint)
         {
             if (SaveButton.Visibility == Visibility.Visible) SaveButton.Visibility = Visibility.Hidden;
@@ -165,17 +168,28 @@ namespace FRAUD_UI_ANALIZATOR
                 GetSaved(chartPoint.SeriesView.Title);
                 return; }
             const string oneParam = "SAP . BAP . PVP . AVP . DCP . MCP . MPP . MPC . CSP";
-            if (!oneParam.Contains(chartPoint.SeriesView.Title))
+            const string twoParam = "TIT . MTP . TDP";
+            if (!oneParam.Contains(chartPoint.SeriesView.Title) && !twoParam.Contains(chartPoint.SeriesView.Title))
             {
                 MessageBox.Show("Данный паттерн не подлежит детальному перебору!", "Ошибка перебора!",
                     MessageBoxButton.OK);
                 return;
-            }
-
-            try
-            { var array = PatternHandler.GenerateFewPatternScales(typeof(PatternGetter).GetMethod(oneParamPatternsByName[chartPoint.SeriesView.Title]), 
-                    int.Parse(StartValue.Text), int.Parse(StreakCount.Text), int.Parse(Step.Text), _transactionsData, _jsonParser.KeyList);
-                array_global = array;
+            } try
+            {
+                var array = Array.Empty<int>();
+                if (oneParam.Contains(chartPoint.SeriesView.Title))
+                {
+                    DurationTime.Visibility = Visibility.Hidden;
+                    array = PatternHandler.GenerateFewPatternScalesOneParam(typeof(PatternGetter).GetMethod(_patternsByName[chartPoint.SeriesView.Title]), 
+                        int.Parse(StartValue.Text), int.Parse(StreakCount.Text), int.Parse(Step.Text), _transactionsData, _jsonParser.KeyList);
+                }
+                else
+                {
+                    DurationTime.Visibility = Visibility.Visible;
+                    array = PatternHandler.GenerateFewPatternScalesTwoParam(typeof(PatternGetter).GetMethod(_patternsByName[chartPoint.SeriesView.Title]), 
+                        int.Parse(StartValue.Text), int.Parse(StreakCount.Text), int.Parse(Step.Text),TimeSpan.Parse(DurationTime.Text), _transactionsData, _jsonParser.KeyList);
+                }
+                _arrayGlobal = array;
                 CartesianChart.Series = new SeriesCollection
                 { new LineSeries {
                         Title = chartPoint.SeriesView.Title,
@@ -188,10 +202,24 @@ namespace FRAUD_UI_ANALIZATOR
                 return; }
             MoreAboutChart.Visibility = Visibility.Visible; }
         private void Regenerate(object sender, RoutedEventArgs routedEventArgs)
-        {
+        { // _patternsByName[CartesianChart.Series[0].Title]
             try {
-                var array = PatternHandler.GenerateFewPatternScales(typeof(PatternGetter).GetMethod(oneParamPatternsByName[CartesianChart.Series[0].Title]), 
-                    int.Parse(StartValue.Text), int.Parse(CountStep.Text), int.Parse(Step.Text), _transactionsData, _jsonParser.KeyList);
+                const string oneParam = "SAP . BAP . PVP . AVP . DCP . MCP . MPP . MPC . CSP";
+                const string twoParam = "TIT . MTP . TDP";
+                var array = Array.Empty<int>();
+                if (oneParam.Contains(_patternsByName[CartesianChart.Series[0].Title]))
+                {
+                    DurationTime.Visibility = Visibility.Hidden;
+                    array = PatternHandler.GenerateFewPatternScalesOneParam(typeof(PatternGetter).GetMethod(_patternsByName[CartesianChart.Series[0].Title]), 
+                        int.Parse(StartValue.Text), int.Parse(StreakCount.Text), int.Parse(Step.Text), _transactionsData, _jsonParser.KeyList);
+                }
+                else
+                {
+                    DurationTime.Visibility = Visibility.Visible;
+                    array = PatternHandler.GenerateFewPatternScalesTwoParam(typeof(PatternGetter).GetMethod(_patternsByName[CartesianChart.Series[0].Title]), 
+                        int.Parse(StartValue.Text), int.Parse(StreakCount.Text), int.Parse(Step.Text),TimeSpan.Parse(DurationTime.Text), _transactionsData, _jsonParser.KeyList);
+                }
+                _arrayGlobal = array;
                 CartesianChart.Series = new SeriesCollection {
                     new LineSeries {
                         Title = CartesianChart.Series[0].Title,
@@ -212,7 +240,7 @@ namespace FRAUD_UI_ANALIZATOR
                         Margin = new Thickness(1200,_cartesianCharts.Count * 60 + 500,3,0),
                             Source = new BitmapImage(new Uri(@"/IMG/Graph_inactive_tab.png", UriKind.Relative)),
                                 Cursor = Cursors.Hand,
-                                ToolTip = oneParamPatternsByName[name]
+                                ToolTip = _patternsByName[name]
                 });
                 SavedCharts.Children[^1].MouseDown += delegate { GetSaved(name); };
                     _buttons.Add((Image)SavedCharts.Children[^1]);
@@ -224,8 +252,8 @@ namespace FRAUD_UI_ANALIZATOR
                     FontFamily = new System.Windows.Media.FontFamily("Bahnschrift"),
                     IsHitTestVisible = false,
                     Foreground = Brushes.White,
-                });
-        } else _cartesianCharts[name] = cartesianChart.Series[0].Values; foreach (var obj in _buttons) { 
+                }); 
+            } else _cartesianCharts[name] = cartesianChart.Series[0].Values; foreach (var obj in _buttons) { 
                 if (obj.Source.ToString() == $"{Path}/IMG/Graph_tab.png")
                     obj.Source =
                         new BitmapImage(new Uri($@"IMG/Graph_inactive_tab.png", UriKind.Relative));
@@ -264,7 +292,7 @@ namespace FRAUD_UI_ANALIZATOR
             if (folderBrowser.ShowDialog() != true) return;
             try
             {
-                File.WriteAllText(folderBrowser.FileName, PatternHandler.ExtendedData[oneParamPatternsByName[chartPoint.SeriesView.Title]][(int)chartPoint.X]);
+                File.WriteAllText(folderBrowser.FileName, PatternHandler.ExtendedData[_patternsByName[chartPoint.SeriesView.Title]][(int)chartPoint.X]);
             }
             catch (Exception e)
             {

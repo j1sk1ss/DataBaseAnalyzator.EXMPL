@@ -9,17 +9,30 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
     public class PatternHandler
     {
         public static readonly Dictionary<string, List<string>> ExtendedData = new();
-        public static int[] GenerateFewPatternScales(MethodInfo action,int startStreak, int streaks, int step, Dictionary<string, TransactiondData> data, List<string> keys)
+        public static int[] GenerateFewPatternScalesOneParam(MethodInfo action,int startStreak, int streaks, int step, Dictionary<string, TransactiondData> data, List<string> keys)
         {
-            List<string> GlAr = new();
+            List<string> glAr = new();
             var strArray = new int[streaks];
             for (var i = 0; i < streaks; i += 1)
             {
-                GlAr.Add((string)action.Invoke(typeof(PatternGetter), new object[] { data, keys, (i * step) + startStreak }));
-                strArray[i] = GlAr[i].Split(" ").Length;
+                glAr.Add((string)action.Invoke(typeof(PatternGetter), new object[] { data, keys, (i * step) + startStreak }));
+                strArray[i] = glAr[i].Split(" ").Length;
             }
-            if (!ExtendedData.ContainsKey(action.Name)) ExtendedData.Add(action.Name, GlAr);
-            else { ExtendedData[action.Name] = GlAr; }
+            if (!ExtendedData.ContainsKey(action.Name)) ExtendedData.Add(action.Name, glAr);
+            else { ExtendedData[action.Name] = glAr; }
+            return strArray;
+        }
+        public static int[] GenerateFewPatternScalesTwoParam(MethodInfo action,int startStreak, int streaks, int step, TimeSpan duration, Dictionary<string, TransactiondData> data, List<string> keys)
+        {
+            List<string> glAr = new();
+            var strArray = new int[streaks];
+            for (var i = 0; i < streaks; i += 1)
+            {
+                glAr.Add((string)action.Invoke(typeof(PatternGetter), new object[] { data, keys, (i * step) + startStreak, duration }));
+                strArray[i] = glAr[i].Split(" ").Length;
+            }
+            if (!ExtendedData.ContainsKey(action.Name)) ExtendedData.Add(action.Name, glAr);
+            else { ExtendedData[action.Name] = glAr; }
             return strArray;
         }
         protected static string PrintArray(IEnumerable<int> array)
