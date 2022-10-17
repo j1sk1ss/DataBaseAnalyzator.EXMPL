@@ -129,8 +129,8 @@
                             <lvc:DefaultTooltip BulletSize="50" FontSize="20"></lvc:DefaultTooltip>
                         </lvc:PieChart.DataTooltip>
                     </lvc:PieChart>
-                    <Button Height="50" Width="200" Margin="-400,-500,0,0" Click="DownloadFraud">Скачать подходящие ко всем</Button>
                 </Grid>
+                <Image Height="332" Canvas.Left="484" Source="/IMG/Save_Multiply_Button.png" Stretch="Fill" Canvas.Top="468" Width="332" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Canvas>
 
             <Canvas Grid.Row="0" x:Name = "MoreAboutChart" Background="Azure" Visibility="Hidden" Height="7200" Width="7200" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -139,11 +139,11 @@
                     </lvc:CartesianChart>
                 </Grid>
                 <Button Height="100" Width="100" Click="Regenerate" Cursor="Hand" Canvas.Left="1285" Canvas.Top="140">Перерасчитать</Button>
-                <Image Height="206" Canvas.Left="1093" Source="IMG/info2_settings_textbox.png" Stretch="Fill" Canvas.Top="303" Width="138" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Image Height="279" Canvas.Left="1093" Source="IMG/info2_settings_textbox_2.png" Stretch="Fill" Canvas.Top="303" Width="138" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <TextBox x:Name="Step" Height="43" Width="128" Canvas.Left="1098" Canvas.Top="326" VerticalAlignment="Top" SelectionOpacity="0" Background="Transparent" FontFamily="Bahnschrift" FontSize="16" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">500</TextBox>
                 <TextBox x:Name="StartValue" Height="42" Width="128" Canvas.Left="1098" Canvas.Top="395" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent" FontFamily="Bahnschrift" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">2000</TextBox>
-                <TextBox x:Name="CountStep" Height="45" Width="127" Canvas.Left="1099" Canvas.Top="462" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent" FontFamily="Bahnschrift" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">10</TextBox>
-                <TextBox x:Name="DurationTime" Height="45" Width="127" Canvas.Left="1099" Canvas.Top="528" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent" FontFamily="Bahnschrift" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">1.00:00:00</TextBox>
+                <TextBox x:Name="CountStep" Height="45" Width="127" Canvas.Left="1099" Canvas.Top="464" HorizontalAlignment="Center" VerticalAlignment="Top" Background="Transparent" FontFamily="Bahnschrift" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">10</TextBox>
+                <TextBox x:Name="DurationTime" Height="45" Width="127" Canvas.Left="1099" Canvas.Top="534" HorizontalAlignment="Center" VerticalAlignment="Top" Background="Transparent" FontFamily="Bahnschrift" FontSize="16" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">1.00:00:00</TextBox>
                 <Image Height="87" Canvas.Left="1093" Source="IMG/Recalculate_button.png" Cursor="Hand" Stretch="Fill" Canvas.Top="211" Width="137" MouseDown="Regenerate"/>
                 <Image Height="24" Canvas.Left="1106" Source="IMG/Recalculate_text.png" Cursor="Hand" Stretch="Fill" Canvas.Top="242" Width="110"/>
             </Canvas>
@@ -163,7 +163,7 @@
             <Label Grid.Row="0" x:Name = "DbPathLabel" FontSize = "25" Margin="437,60,-27,46">JSON DATA</Label>
             <Image Grid.Row="0" x:Name = "LoadJsonButton" Margin="1024,57,10,33" Source="/IMG/review_button.png" Cursor="Hand" MouseDown="LoadJson"/>
             <Canvas Grid.Row="0" x:Name="SavedCharts"></Canvas>
-            
+
             <Image x:Name="SaveButton" Margin="964,1017,23,1" Grid.Row="1" Source="/IMG/Save_button.png" Stretch="Fill" Cursor="Hand" Visibility="Hidden" MouseDown="SaveExcel"/>
         </Grid>
     </Viewbox>
