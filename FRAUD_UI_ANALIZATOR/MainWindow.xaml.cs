@@ -199,13 +199,13 @@ namespace FRAUD_UI_ANALIZATOR
                 {
                     DurationTime.Visibility = Visibility.Hidden;
                     array = PatternHandler.GenerateFewPatternScalesOneParam(typeof(PatternGetter).GetMethod(_patternsByName[chartPoint.SeriesView.Title]), 
-                        int.Parse(StartValue.Text), int.Parse(StreakCount.Text), int.Parse(Step.Text), _transactionsData, _jsonParser.KeyList);
+                        int.Parse(StartValue.Text), int.Parse(CountStep.Text), int.Parse(Step.Text), _transactionsData, _jsonParser.KeyList);
                 }
                 else
                 {
                     DurationTime.Visibility = Visibility.Visible;
                     array = PatternHandler.GenerateFewPatternScalesTwoParam(typeof(PatternGetter).GetMethod(_patternsByName[chartPoint.SeriesView.Title]), 
-                        int.Parse(StartValue.Text), int.Parse(StreakCount.Text), int.Parse(Step.Text),TimeSpan.Parse(DurationTime.Text), _transactionsData, _jsonParser.KeyList);
+                        int.Parse(StartValue.Text), int.Parse(CountStep.Text), int.Parse(Step.Text),TimeSpan.Parse(DurationTime.Text), _transactionsData, _jsonParser.KeyList);
                 }
                 _arrayGlobal = array;
                 CartesianChart.Series = new SeriesCollection
@@ -220,22 +220,21 @@ namespace FRAUD_UI_ANALIZATOR
                 return; }
             MoreAboutChart.Visibility = Visibility.Visible; }
         private void Regenerate(object sender, RoutedEventArgs routedEventArgs)
-        { // _patternsByName[CartesianChart.Series[0].Title]
+        { 
             try {
                 const string oneParam = "SAP . BAP . PVP . AVP . DCP . MCP . MPP . MPC . CSP";
-                const string twoParam = "TIT . MTP . TDP";
                 var array = Array.Empty<int>();
-                if (oneParam.Contains(_patternsByName[CartesianChart.Series[0].Title]))
+                if (oneParam.Contains(CartesianChart.Series[0].Title))
                 {
                     DurationTime.Visibility = Visibility.Hidden;
                     array = PatternHandler.GenerateFewPatternScalesOneParam(typeof(PatternGetter).GetMethod(_patternsByName[CartesianChart.Series[0].Title]), 
-                        int.Parse(StartValue.Text), int.Parse(StreakCount.Text), int.Parse(Step.Text), _transactionsData, _jsonParser.KeyList);
+                        int.Parse(StartValue.Text), int.Parse(CountStep.Text), int.Parse(Step.Text), _transactionsData, _jsonParser.KeyList);
                 }
                 else
                 {
                     DurationTime.Visibility = Visibility.Visible;
                     array = PatternHandler.GenerateFewPatternScalesTwoParam(typeof(PatternGetter).GetMethod(_patternsByName[CartesianChart.Series[0].Title]), 
-                        int.Parse(StartValue.Text), int.Parse(StreakCount.Text), int.Parse(Step.Text),TimeSpan.Parse(DurationTime.Text), _transactionsData, _jsonParser.KeyList);
+                        int.Parse(StartValue.Text), int.Parse(CountStep.Text), int.Parse(Step.Text),TimeSpan.Parse(DurationTime.Text), _transactionsData, _jsonParser.KeyList);
                 }
                 _arrayGlobal = array;
                 CartesianChart.Series = new SeriesCollection {
@@ -280,7 +279,15 @@ namespace FRAUD_UI_ANALIZATOR
         }
         private void GetSaved(string buttonName)
         { try
-            { foreach (var obj in _buttons)
+            { 
+                const string oneParam = "SAP . BAP . PVP . AVP . DCP . MCP . MPP . MPC . CSP";
+                const string twoParam = "TIT . MTP . TDP";
+                if (oneParam.Contains(buttonName))
+                {
+                    DurationTime.Visibility = Visibility.Hidden;
+                } else DurationTime.Visibility = Visibility.Visible;
+
+                foreach (var obj in _buttons)
                 { if (obj.Source.ToString() == $"{Path}/IMG/Graph_tab.png")
                         obj.Source =
                             new BitmapImage(new Uri($@"IMG/Graph_inactive_tab.png", UriKind.Relative));
