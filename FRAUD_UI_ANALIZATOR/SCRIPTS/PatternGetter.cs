@@ -155,8 +155,8 @@ namespace FRAUD_UI_ANALIZATOR.SCRIPTS
             var count = 0;
             for (var i = 0; i < data.Count; i++) {
                 if (data.Where((t, j) => data[$"{keys[i]}"].Passport == 
-                        data[$"{keys[j]}"].Passport && data[$"{keys[i]}"].Address != data[$"{keys[j]}"].Address &&
-                        (data[$"{keys[i]}"].Date - data[$"{keys[j]}"].Date).Duration() <= duration).Any(t => ++count > time)) {
+                        data[$"{keys[j]}"].Passport && (data[$"{keys[i]}"].Date - data[$"{keys[j]}"].Date ).Duration() <= duration 
+                        && data[$"{keys[i]}"].Terminal != data[$"{keys[j]}"].Terminal).Any(t => ++count > time)) {
                     answer += keys[i] + " "; }
                 count = 0; }
             return answer;
